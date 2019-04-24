@@ -1,0 +1,22 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "env": {
+    "es6": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "space-before-function-paren": 0,
+    "react/jsx-boolean-value": 0,
+    "semi": ["error", "always"],
+    "comma-dangle": ["error", "always-multiline"]
+  }
+}
