@@ -7,7 +7,7 @@ import { Page01, Page02, Page03 } from './pages';
 class App extends Component{
   static get routes() {
     return [
-      { name: 'Some page 01', to: '/', component: Page01 },
+      { name: 'Main', to: '/', component: Page01 },
       { name: 'Some page 02', to: '/page02', component: Page02 },
       { name: 'Some page 03', to: '/page03', component: Page03 },
     ];

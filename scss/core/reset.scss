@@ -20,7 +20,6 @@
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
     font: inherit;
     vertical-align: baseline;
   }
@@ -33,7 +32,7 @@
     font-size: $f-primary-size;
   }
   body {
-    line-height: 1;
+    line-height: 1.30rem;
     font-family: $f-primary;
 
     * {
@@ -48,7 +47,6 @@
   }
   blockquote:before, blockquote:after,
   q:before, q:after {
-    content: '';
     content: none;
   }
   table {

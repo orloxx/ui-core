@@ -29,6 +29,7 @@
 
   &__button {
     padding: 10px;
+    display: inline-block;
 
     &:hover {
       background: darken($c-action, 10);

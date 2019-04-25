@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faHome, faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,6 +11,12 @@ class Navigation extends Component {
     this.state = {
       isMenuOpen: false,
     };
+  }
+
+  get currentRoute() {
+    const { routes, location } = this.props;
+    const route = routes.find(item => item.to === location.pathname);
+    return route ? route.name : 'Home';
   }
 
   toggleMenu() {
@@ -61,7 +67,7 @@ class Navigation extends Component {
               <FA icon={faHome} />
             </Link>
           </div>
-          <div className='navigation__title'>{this.props.title || 'Home'}</div>
+          <div className='navigation__title'>{this.currentRoute}</div>
           <div className='navigation__sides'>
             {this.renderMenuButton()}
           </div>
@@ -75,8 +81,8 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  title: PropTypes.string,
-  routes: PropTypes.array,
+  location: PropTypes.object,
+  routes: PropTypes.array.isRequired,
 };
 
-export default Navigation;
+export default withRouter(Navigation);
