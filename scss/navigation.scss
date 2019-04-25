@@ -1,0 +1,63 @@
+.navigation {
+  background: $c-action;
+  color: $c-action-text;
+  position: relative;
+  margin-bottom: 10px;
+
+  &__top {
+    display: flex;
+    flex-direction: row;
+    max-width: $b-l;
+    margin: 0 auto;
+  }
+
+  &__title {
+    flex: 1 1 auto;
+    align-self: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__sides {
+    flex: 0 0 auto;
+    align-self: center;
+  }
+
+  &__button {
+    padding: 10px;
+
+    &:hover {
+      background: darken($c-action, 10);
+    }
+  }
+
+  &__menu {
+    &List {
+      background: darken($c-action, 10);
+    }
+
+    &Item {
+      border-bottom: 1px solid $c-action;
+      max-width: $b-l;
+      margin: 0 auto;
+
+
+      &:last-child {
+        border: 0;
+      }
+    }
+
+    &Link {
+      display: block;
+      padding: 10px;
+
+      &:hover {
+        background: $c-action;
+      }
+    }
+  }
+}

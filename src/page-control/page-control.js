@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Navigation from '../navigation/navigation';
 
 class PageControl extends Component {
   renderRoutes() {
@@ -15,6 +16,7 @@ class PageControl extends Component {
   render() {
     return (
       <Router basename={this.props.base}>
+        <Navigation routes={this.props.routes} />
         {this.renderRoutes()}
       </Router>
     );

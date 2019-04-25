@@ -1,3 +1,5 @@
+import './App.scss';
+
 import React, { Component } from 'react';
 import { PageControl } from '@orloxx/ui-core';
 import { Page01, Page02, Page03 } from './pages';
