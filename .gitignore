@@ -5,8 +5,7 @@ node_modules/
 
 # builds
 build/
-lib/index.js*
-lib/index.es.js*
+dist/
 .rpt2_cache
 
 # testing

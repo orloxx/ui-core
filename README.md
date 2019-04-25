@@ -45,11 +45,11 @@ export default App;
 App.scss
 
 ```scss
-@import "~@orloxx/ui-core/lib/index";
+@import "~@orloxx/ui-core/scss/index";
 
 @include reset();
 
-@import "~@orloxx/ui-core/lib/page-control";
+@import "~@orloxx/ui-core/scss/page-control";
 ```
 
 ## License
