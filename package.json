@@ -1,13 +1,13 @@
 {
   "name": "@orloxx/ui-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UI Core Components for React",
   "author": "orloxx",
   "license": "MIT",
   "repository": "github:orloxx/ui-core",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
+  "main": "lib/index.js",
+  "module": "lib/index.es.js",
+  "jsnext:main": "lib/index.es.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
