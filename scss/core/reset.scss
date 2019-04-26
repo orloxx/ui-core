@@ -29,11 +29,15 @@
     display: block;
   }
   html {
+    height: 100%;
     font-size: $f-primary-size;
   }
   body {
+    min-height: 100%;
     line-height: 1.30rem;
     font-family: $f-primary;
+    background: $c-primary-bg;
+    color: $c-primary;
 
     * {
       box-sizing: border-box;
