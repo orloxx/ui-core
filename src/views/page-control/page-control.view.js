@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Navigation from '../navigation/navigation';
+import Navigation from '../navigation/navigation.view';
 
 class PageControl extends Component {
   renderRoutes() {

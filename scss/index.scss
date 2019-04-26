@@ -1,2 +1,8 @@
-@import "core/theme";
+@import "core/button";
 @import "core/reset";
+@import "core/theme";
+
+@mixin all() {
+  @include reset;
+  @include button;
+}

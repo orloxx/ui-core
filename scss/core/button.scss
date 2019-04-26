@@ -1,0 +1,31 @@
+@mixin button() {
+  .button {
+    padding: 10px;
+    margin: 0;
+    border: 0;
+    background: $c-action;
+    font-size: inherit;
+    color: $c-action-text;
+    display: inline-block;
+
+    &--isPressed,
+    &:active,
+    &:hover,
+    &:focus {
+      background: darken($c-action, 10);
+    }
+
+    &Group {
+      text-align: right;
+      margin-bottom: 20px;
+
+      .button {
+        margin-right: 2px;
+      }
+    }
+
+    .svg-inline--fa {
+      padding-right: 5px;
+    }
+  }
+}
