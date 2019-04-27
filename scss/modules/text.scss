@@ -1,5 +1,5 @@
 @mixin text() {
-  h1, h2, h3, h4, h5, h6, p {
+  h1, h2, h3, h4, h5, h6, ul, ol {
     margin-bottom: 20px;
   }
 
@@ -25,5 +25,9 @@
 
   h6 {
     @include font($f-h6);
+  }
+
+  p {
+    margin-bottom: 10px;
   }
 }

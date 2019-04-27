@@ -1,0 +1,14 @@
+@mixin container() {
+  .container, .containerText {
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+
+  .container {
+    max-width: $b-container;
+  }
+
+  .containerText {
+    max-width: $b-container-text;
+  }
+}
