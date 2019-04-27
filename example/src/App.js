@@ -2,14 +2,12 @@ import './App.scss';
 
 import React, { Component } from 'react';
 import { PageControl } from '@orloxx/ui-core';
-import { Page01, Page02, Page03 } from './pages';
+import { Home } from './views';
 
 class App extends Component{
   static get routes() {
     return [
-      { name: 'Main', to: '/', component: Page01 },
-      { name: 'Some page 02', to: '/page02', component: Page02 },
-      { name: 'Some page 03', to: '/page03', component: Page03 },
+      { name: 'Home', to: '/', component: Home },
     ];
   }
 
