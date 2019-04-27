@@ -1,9 +1,13 @@
+// Variables
+@import "core/variables/theme";
+
+// Functions
 @import "core/func/zindex";
 
-@import "core/button";
-@import "core/input";
-@import "core/reset";
-@import "core/theme";
+// Mixins
+@import "core/mixins/button";
+@import "core/mixins/input";
+@import "core/mixins/reset";
 
 @mixin all() {
   @include reset;
