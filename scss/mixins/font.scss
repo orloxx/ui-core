@@ -1,0 +1,19 @@
+@mixin fontWrite($values) {
+  @each $propertyName, $propertyValue in $values {
+    #{$propertyName}: $propertyValue;
+  }
+}
+
+@mixin font($font-type) {
+  @each $breakpoint, $values in $font-type {
+    @if ($breakpoint == 'default') {
+      @include fontWrite($values);
+    }
+
+    @else {
+      @media (min-width: $breakpoint) {
+        @include fontWrite($values);
+      }
+    }
+  }
+}

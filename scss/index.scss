@@ -1,16 +1,23 @@
 // Variables
-@import "core/variables/theme";
+@import "variables/breakpoints";
+@import "variables/font-definitions";
+@import "variables/theme";
 
 // Functions
-@import "core/func/zindex";
+@import "func/zindex";
 
 // Mixins
-@import "core/mixins/button";
-@import "core/mixins/input";
-@import "core/mixins/reset";
+@import "mixins/font";
+
+// Modules
+@import "modules/button";
+@import "modules/input";
+@import "modules/reset";
+@import "modules/text";
 
 @mixin all() {
   @include reset;
   @include button;
   @include input;
+  @include text;
 }
