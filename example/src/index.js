@@ -11,5 +11,5 @@ const routes = [
   { name: 'Text example', to: '/some-text', component: Text },
 ];
 
-ReactDOM.render(<PageControl base='/' routes={routes} />,
+ReactDOM.render(<PageControl base='/ui-core' routes={routes} />,
   document.getElementById('root'));
