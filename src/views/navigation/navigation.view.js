@@ -29,8 +29,9 @@ class Navigation extends Component {
   }
 
   renderMenuButton() {
+    const { isMenuOpen } = this.state;
     const { routes } = this.props;
-    if (routes && routes.length) {
+    if (isMenuOpen && routes && routes.length) {
       return (
         <button
           className='navigation__button'

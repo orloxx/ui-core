@@ -1,9 +1,9 @@
+@import "core/func/zindex";
+
 @import "core/button";
 @import "core/input";
 @import "core/reset";
 @import "core/theme";
-
-@import "core/func/zindex";
 
 @mixin all() {
   @include reset;
