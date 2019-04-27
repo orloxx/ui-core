@@ -14,43 +14,7 @@ npm install --save @orloxx/ui-core
 
 ## Usage
 
-App.js
-
-```js
-import './App.scss';
-
-import React, { Component } from 'react';
-import { PageControl } from '@orloxx/ui-core';
-import { Page01, Page02, Page03 } from './pages';
-
-class App extends Component{
-  static get routes() {
-    return [
-      { name: 'Main', to: '/', component: Page01 },
-      { name: 'Some page 02', to: '/page02', component: Page02 },
-      { name: 'Some page 03', to: '/page03', component: Page03 },
-    ];
-  }
-
-  render() {
-    return (
-      <PageControl base='/' routes={App.routes} />
-    );
-  }
-}
-
-export default App;
-```
-
-App.scss
-
-```scss
-@import "~@orloxx/ui-core/scss/index";
-
-@include reset();
-
-@import "~@orloxx/ui-core/scss/page-control";
-```
+This is a work in progress, you can check out the **example** folder which is deployed [**here**](http://orloxx.github.io/ui-core)
 
 ## License
 

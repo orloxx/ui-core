@@ -1,0 +1,40 @@
+.imageUploader {
+  text-align: center;
+
+  &__image {
+    width: 100%;
+    margin-bottom: 10px;
+    display: none;
+  }
+
+  &--hasImage &__image {
+    display: block;
+  }
+
+  &__input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  &__label {
+    display: inline-block;
+  }
+
+  &__noImageIcon {
+    display: block;
+    margin: 0 auto 10px;
+    font-size: 50px;
+
+    .button & {
+      padding: 0;
+    }
+  }
+
+  &--hasImage &__noImageIcon {
+    display: none;
+  }
+}

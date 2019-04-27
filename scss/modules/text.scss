@@ -1,0 +1,33 @@
+@mixin text() {
+  h1, h2, h3, h4, h5, h6, ul, ol {
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    @include font($f-h1);
+  }
+
+  h2 {
+    @include font($f-h2);
+  }
+
+  h3 {
+    @include font($f-h3);
+  }
+
+  h4 {
+    @include font($f-h4);
+  }
+
+  h5 {
+    @include font($f-h5);
+  }
+
+  h6 {
+    @include font($f-h6);
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+}

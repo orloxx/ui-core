@@ -1,0 +1,40 @@
+$zindex: content, fixedTop;
+$zindex-fixed-top: statusbar, navigation;
+
+@function zindex($element, $list: $zindex) {
+  $min: 0;
+  $index: index($list, $element);
+  $index-cq-toolbar: index($list, 'cq-toolbar');
+  $index-cq-editor: index($list, 'cq-editor');
+
+  @if $index {
+
+    // If the element comes after the cq-toolbar
+    // it gets a higher z-index than the toolbar has
+    @if $index-cq-toolbar {
+      @if $index-cq-toolbar < $index {
+        $min: 8010;
+      }
+    }
+
+    // If the element comes after the cq-editor
+    // it gets a higher z-index than the editor has
+    @if $index-cq-editor {
+      @if $index-cq-editor < $index {
+        $min: 20010;
+      }
+    }
+
+    @if (0 < $min) {
+      @if type-of($min) == number {
+        $index: $index + $min;
+      }
+    }
+
+    @return $index;
+  }
+
+  @warn 'There is no item "#{$element}" in this list; choose one of: #{$list}';
+
+  @return null;
+}

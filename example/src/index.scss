@@ -1,5 +1,6 @@
 @import "~@orloxx/ui-core/scss/index";
 
-@include reset();
+@include all;
 
+@import "~@orloxx/ui-core/scss/image-uploader";
 @import "~@orloxx/ui-core/scss/page-control";

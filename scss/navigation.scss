@@ -7,7 +7,7 @@
   &__top {
     display: flex;
     flex-direction: row;
-    max-width: $b-l;
+    max-width: $b-container;
     margin: 0 auto;
   }
 
@@ -25,6 +25,7 @@
   &__sides {
     flex: 0 0 auto;
     align-self: center;
+    min-width: 40px;
   }
 
   &__button {
@@ -39,11 +40,12 @@
   &__menu {
     &List {
       background: darken($c-action, 10);
+      margin-bottom: 0;
     }
 
     &Item {
       border-bottom: 1px solid $c-action;
-      max-width: $b-l;
+      max-width: $b-container;
       margin: 0 auto;
 
 

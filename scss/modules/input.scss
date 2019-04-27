@@ -1,0 +1,25 @@
+@mixin input() {
+  .input {
+    width: 100%;
+    background: $c-primary-bg;
+    padding: 10px;
+    font-size: inherit;
+    border: 1px solid $c-border;
+    appearance: none;
+    border-radius: 0;
+
+    &--hasError {
+      border-color: $c-error;
+      background: lighten($c-error, 50);
+    }
+
+    &:focus {
+      border-color: darken($c-action, 10);
+    }
+
+    &.textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+}

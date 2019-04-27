@@ -19,6 +19,11 @@ class Navigation extends Component {
     return route ? route.name : 'Home';
   }
 
+  get routes() {
+    const { routes } = this.props;
+    return routes.filter(route => route.to && route.to !== '/');
+  }
+
   toggleMenu() {
     const { isMenuOpen } = this.state;
     this.setState({ isMenuOpen: !isMenuOpen });
@@ -29,7 +34,7 @@ class Navigation extends Component {
   }
 
   renderMenuButton() {
-    const { routes } = this.props;
+    const routes = this.routes;
     if (routes && routes.length) {
       return (
         <button
@@ -43,16 +48,14 @@ class Navigation extends Component {
 
   renderMenu() {
     const { isMenuOpen } = this.state;
-    const { routes } = this.props;
-    if (isMenuOpen && routes && routes.length) {
-      return routes.filter(route => route.to && route.to !== '/')
-        .map(route => (
-          <li key={route.to} className='navigation__menuItem'>
-            <Link
-              className='navigation__menuLink' to={route.to}
-              onClick={() => this.closeMenu()}>{route.name}</Link>
-          </li>
-        ));
+    if (isMenuOpen) {
+      return this.routes.map(route => (
+        <li key={route.to} className='navigation__menuItem'>
+          <Link
+            className='navigation__menuLink' to={route.to}
+            onClick={() => this.closeMenu()}>{route.name}</Link>
+        </li>
+      ));
     }
   }
 
