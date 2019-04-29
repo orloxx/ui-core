@@ -1,3 +1,5 @@
+$nav-size: 50px;
+
 .navigation {
   background: $c-action;
   color: $c-action-text;
@@ -12,7 +14,7 @@
   }
 
   &__title {
-    flex: 1 1 auto;
+    flex: 1;
     align-self: center;
     padding-left: 10px;
     padding-right: 10px;
@@ -23,14 +25,17 @@
   }
 
   &__sides {
-    flex: 0 0 auto;
+    display: flex;
+    flex: 0;
     align-self: center;
-    min-width: 40px;
+    width: $nav-size;
+    height: $nav-size;
   }
 
   &__button {
-    padding: 10px;
     display: inline-block;
+    line-height: $nav-size;
+    padding: 0 18px;
 
     &:hover {
       background: darken($c-action, 10);
