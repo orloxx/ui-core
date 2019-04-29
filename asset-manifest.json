@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/ui-core/static/css/main.b0ad32b8.chunk.css",
+    "main.css": "/ui-core/static/css/main.9a59fb0e.chunk.css",
     "main.js": "/ui-core/static/js/main.85e63e6c.chunk.js",
     "main.js.map": "/ui-core/static/js/main.85e63e6c.chunk.js.map",
     "runtime~main.js": "/ui-core/static/js/runtime~main.af5faabe.js",
@@ -8,8 +8,8 @@
     "static/js/2.48d84852.chunk.js": "/ui-core/static/js/2.48d84852.chunk.js",
     "static/js/2.48d84852.chunk.js.map": "/ui-core/static/js/2.48d84852.chunk.js.map",
     "index.html": "/ui-core/index.html",
-    "precache-manifest.c84d51b25ba6dc0c048ec97dc19cdf37.js": "/ui-core/precache-manifest.c84d51b25ba6dc0c048ec97dc19cdf37.js",
+    "precache-manifest.41546aba704d282b5bf6b79d6a1f5acb.js": "/ui-core/precache-manifest.41546aba704d282b5bf6b79d6a1f5acb.js",
     "service-worker.js": "/ui-core/service-worker.js",
-    "static/css/main.b0ad32b8.chunk.css.map": "/ui-core/static/css/main.b0ad32b8.chunk.css.map"
+    "static/css/main.9a59fb0e.chunk.css.map": "/ui-core/static/css/main.9a59fb0e.chunk.css.map"
   }
 }
