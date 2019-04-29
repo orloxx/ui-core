@@ -1,0 +1,85 @@
+{
+  "coverage": "0%",
+  "expectCount": 36,
+  "actualCount": 0,
+  "files": {
+    "src/utils/geolocation.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        4,
+        7,
+        9,
+        11,
+        18
+      ]
+    },
+    "src/utils/image.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        1
+      ]
+    },
+    "src/utils/string.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        1
+      ]
+    },
+    "src/views/image-file/image-file.view.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        6,
+        9,
+        14,
+        21,
+        26,
+        31
+      ]
+    },
+    "src/views/image-uploader/image-uploader.view.js": {
+      "expectCount": 8,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        8,
+        11,
+        16,
+        20,
+        26,
+        40,
+        46
+      ]
+    },
+    "src/views/navigation/navigation.view.js": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        8,
+        11,
+        16,
+        22,
+        27,
+        32,
+        36,
+        49,
+        62
+      ]
+    },
+    "src/views/page-control/page-control.view.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        7,
+        16
+      ]
+    }
+  }
+}
