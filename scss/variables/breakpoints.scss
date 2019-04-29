@@ -1,7 +1,7 @@
-$b-xs: 480px;
-$b-s: 768px;
-$b-m: 1024px;
-$b-l: 1280px;
+$b-xs: 480px !default;
+$b-s: 768px !default;
+$b-m: 1024px !default;
+$b-l: 1280px !default;
 
-$b-container: $b-l;
-$b-container-text: $b-s;
+$b-container: 1280px !default;
+$b-container-text: 768px !default;
