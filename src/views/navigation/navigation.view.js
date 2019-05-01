@@ -5,6 +5,11 @@ import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faHome, faBars } from '@fortawesome/free-solid-svg-icons';
 
 class Navigation extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+    routes: PropTypes.array.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -82,10 +87,5 @@ class Navigation extends Component {
     );
   }
 }
-
-Navigation.propTypes = {
-  location: PropTypes.object.isRequired,
-  routes: PropTypes.array.isRequired,
-};
 
 export default Navigation;

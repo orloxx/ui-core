@@ -5,6 +5,18 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import * as ImageUtils from '../../utils/image';
 
 class ImageUploader extends Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    caption: PropTypes.string,
+    src: PropTypes.string,
+    fileSize: PropTypes.number,
+  };
+
+  static defaultProps = {
+    src: '',
+  };
+
   constructor(props) {
     super(props);
 
@@ -69,17 +81,5 @@ class ImageUploader extends Component {
     );
   }
 }
-
-ImageUploader.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  caption: PropTypes.string,
-  src: PropTypes.string,
-  fileSize: PropTypes.number,
-};
-
-ImageUploader.defaultProps = {
-  src: '',
-};
 
 export default ImageUploader;
