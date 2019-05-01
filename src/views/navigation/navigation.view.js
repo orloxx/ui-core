@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faHome, faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -84,8 +84,8 @@ class Navigation extends Component {
 }
 
 Navigation.propTypes = {
-  location: PropTypes.object,
+  location: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired,
 };
 
-export default withRouter(Navigation);
+export default Navigation;

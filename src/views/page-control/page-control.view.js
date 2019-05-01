@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import Navigation from '../navigation/navigation.view';
 
 class PageControl extends Component {
@@ -14,9 +14,10 @@ class PageControl extends Component {
   }
 
   render() {
+    const Nav = withRouter(Navigation);
     return (
       <Router basename={this.props.base}>
-        <Navigation routes={this.props.routes} />
+        <Nav routes={this.props.routes} />
         {this.renderRoutes()}
       </Router>
     );
