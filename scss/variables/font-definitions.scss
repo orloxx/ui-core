@@ -1,5 +1,5 @@
-$f-primary: "Helvetica Neue", Arial, sans-serif;
-$f-primary-size: 16px;
+$f-primary: "Helvetica Neue", Arial, sans-serif !default;
+$f-primary-size: 16px !default;
 
 $f-h1: (
   default: (
@@ -9,7 +9,7 @@ $f-h1: (
   $b-m: (
     font-size: 34px,
   ),
-);
+) !default;
 
 $f-h2: (
   default: (
@@ -19,7 +19,7 @@ $f-h2: (
   $b-m: (
     font-size: 30px,
   ),
-);
+) !default;
 
 $f-h3: (
   default: (
@@ -29,7 +29,7 @@ $f-h3: (
   $b-m: (
     font-size: 26px,
   ),
-);
+) !default;
 
 $f-h4: (
   default: (
@@ -39,7 +39,7 @@ $f-h4: (
   $b-m: (
     font-size: 24px,
   ),
-);
+) !default;
 
 $f-h5: (
   default: (
@@ -49,7 +49,7 @@ $f-h5: (
   $b-m: (
     font-size: 22px,
   ),
-);
+) !default;
 
 $f-h6: (
   default: (
@@ -60,4 +60,4 @@ $f-h6: (
   $b-m: (
     font-size: 20px,
   ),
-);
+) !default;

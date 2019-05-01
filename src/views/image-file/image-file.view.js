@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as ImageUtils from '../../utils/image';
+import { ImageUtils } from '../../utils';
 
 class ImageFile extends Component {
+  static propTypes = {
+    alt: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
+    file: PropTypes.object.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -40,11 +46,5 @@ class ImageFile extends Component {
     ) : null;
   }
 }
-
-ImageFile.propTypes = {
-  alt: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
-  file: PropTypes.object.isRequired,
-};
 
 export default ImageFile;
