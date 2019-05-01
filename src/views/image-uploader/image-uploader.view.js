@@ -4,7 +4,21 @@ import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { ImageUtils } from '../../utils';
 
+/**
+ * Controls an input file element that shows a preview of the selected image
+ *
+ * @example
+ * <ImageUploader id='image' name='image' />
+ */
 class ImageUploader extends Component {
+  /**
+   * @type {Object}
+   * @property {String} id - The same `id` added to the input field
+   * @property {String} name - The same `name` added to the input field
+   * @property {String} [caption] - Caption text added at the bottom of the field
+   * @property {String} [src] - Default image path when nothing is selected
+   * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted
+   */
   static propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -13,31 +27,50 @@ class ImageUploader extends Component {
     fileSize: PropTypes.number,
   };
 
+  /**
+   * @ignore
+   */
   static defaultProps = {
     src: '',
+    fileSize: 256,
   };
 
+  /**
+   * @ignore
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * @ignore
+     */
     this.state = {
       imageData: null,
     };
   }
 
+  /**
+   * @ignore
+   */
   get hasImageClassName() {
     return this.imageSrc ? 'imageUploader--hasImage' : '';
   }
 
+  /**
+   * @ignore
+   */
   get imageSrc() {
     const { imageData } = this.state;
     const { src } = this.props;
     return imageData || src;
   }
 
+  /**
+   * @ignore
+   */
   setImage(e) {
     const file = e.target.files[0];
-    const maxKb = this.props.fileSize || 256;
+    const maxKb = this.props.fileSize;
     const maxSize = maxKb * 1024;
 
     if (file && file.size > maxSize) {
@@ -49,12 +82,18 @@ class ImageUploader extends Component {
     this.setImageData(file);
   }
 
+  /**
+   * @ignore
+   */
   setImageData(file) {
     if (file) {
       ImageUtils.getFileData(file).then(imageData => this.setState({ imageData }));
     }
   }
 
+  /**
+   * @ignore
+   */
   render() {
     const { id, name, caption } = this.props;
     return (
