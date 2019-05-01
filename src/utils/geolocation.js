@@ -1,14 +1,50 @@
-export default class GeolocationUtils {
+/**
+ * @external {Position} https://developer.mozilla.org/en-US/docs/Web/API/Position
+ * @external {PositionError} https://developer.mozilla.org/en-US/docs/Web/API/PositionError
+ */
+
+/**
+ * Geolocation utilities
+ */
+class GeolocationUtils {
+  /**
+   * Registers a handler function that will be called automatically each time
+   * the position of the device changes. You can also, optionally, specify an
+   * error handling callback function.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition
+   *
+   * @param {Function} callback - Takes a {@link Position} object as an input parameter.
+   * @param {Function} errorCallback - Takes a {@link PositionError} object as an input parameter.
+   * @return {number} - A watch ID value that then can be used to unregister
+   * the handler using {@link GeolocationUtils.disable}
+   */
   static enable(callback, errorCallback) {
     return navigator.geolocation.watchPosition(callback, errorCallback);
   }
 
+  /**
+   * Gets the current position of the device.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
+   *
+   * @param {Function} callback - Takes a {@link Position} object as an input parameter.
+   * @param {Function} errorCallback - Takes a {@link PositionError} object as an input parameter.
+   */
   static getCurrent(callback, errorCallback) {
-    return navigator.geolocation.getCurrentPosition(callback, errorCallback);
+    navigator.geolocation.getCurrentPosition(callback, errorCallback);
   }
 
+  /**
+   * unregister location/error monitoring handlers previously installed
+   * using {@link GeolocationUtils.enable}
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/clearWatch
+   *
+   * @param {number} watcher - Watch ID value returned by {@link GeolocationUtils.enable}
+   */
   static disable(watcher) {
-    return navigator.geolocation.clearWatch(watcher);
+    navigator.geolocation.clearWatch(watcher);
   }
 
   /**
@@ -28,6 +64,15 @@ export default class GeolocationUtils {
     return value;
   }
 
+  /**
+   * Calculates the distance between two points on Earth
+   *
+   * @param {number} lat1 - Point's A latitude
+   * @param {number} lng1 - Point's A longitude
+   * @param {number} lat2 - Point's B latitude
+   * @param {number} lng2 - Point's B longitude
+   * @return {number} - The distance in meters
+   */
   static distance(lat1, lng1, lat2, lng2) {
     const fLat1 = GeolocationUtils.forceFloat(lat1);
     const fLng1 = GeolocationUtils.forceFloat(lng1);
@@ -45,3 +90,5 @@ export default class GeolocationUtils {
     return Math.round(earthRadius * c);
   }
 }
+
+export default GeolocationUtils;
