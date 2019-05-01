@@ -1,81 +1,32 @@
 {
-  "coverage": "13.63%",
-  "expectCount": 44,
-  "actualCount": 6,
+  "coverage": "100%",
+  "expectCount": 36,
+  "actualCount": 36,
   "files": {
     "src/utils/geolocation.js": {
       "expectCount": 7,
-      "actualCount": 2,
-      "undocumentLines": [
-        1,
-        2,
-        6,
-        10,
-        31
-      ]
+      "actualCount": 7,
+      "undocumentLines": []
     },
     "src/utils/image.js": {
       "expectCount": 2,
-      "actualCount": 0,
-      "undocumentLines": [
-        1,
-        2
-      ]
+      "actualCount": 2,
+      "undocumentLines": []
     },
     "src/utils/string.js": {
       "expectCount": 2,
-      "actualCount": 0,
-      "undocumentLines": [
-        1,
-        2
-      ]
-    },
-    "src/views/image-file/image-file.view.js": {
-      "expectCount": 8,
-      "actualCount": 0,
-      "undocumentLines": [
-        5,
-        6,
-        12,
-        15,
-        20,
-        27,
-        32,
-        37
-      ]
+      "actualCount": 2,
+      "undocumentLines": []
     },
     "src/views/image-uploader/image-uploader.view.js": {
       "expectCount": 10,
-      "actualCount": 0,
-      "undocumentLines": [
-        7,
-        8,
-        16,
-        20,
-        23,
-        28,
-        32,
-        38,
-        52,
-        58
-      ]
+      "actualCount": 10,
+      "undocumentLines": []
     },
     "src/views/navigation/navigation.view.js": {
       "expectCount": 11,
-      "actualCount": 0,
-      "undocumentLines": [
-        7,
-        8,
-        13,
-        16,
-        21,
-        27,
-        32,
-        37,
-        41,
-        54,
-        67
-      ]
+      "actualCount": 11,
+      "undocumentLines": []
     },
     "src/views/page-control/page-control.view.js": {
       "expectCount": 4,

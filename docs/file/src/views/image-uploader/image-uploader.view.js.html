@@ -32,9 +32,12 @@
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/geolocation.js~GeolocationUtils.html">GeolocationUtils</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/image.js~ImageUtils.html">ImageUtils</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/string.js~StringUtils.html">StringUtils</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-file">views/image-file</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-file/image-file.view.js~ImageFile.html">ImageFile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Position">Position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/PositionError">PositionError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-uploader">views/image-uploader</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html">ImageUploader</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-navigation">views/navigation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html">Navigation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-page-control">views/page-control</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Route">Route</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span></span></li>
@@ -49,7 +52,21 @@ import { FontAwesomeIcon as FA } from &apos;@fortawesome/react-fontawesome&apos;
 import { faUpload } from &apos;@fortawesome/free-solid-svg-icons&apos;;
 import { ImageUtils } from &apos;../../utils&apos;;
 
+/**
+ * Controls an input file element that shows a preview of the selected image
+ *
+ * @example
+ * &lt;ImageUploader id=&apos;image&apos; name=&apos;image&apos; /&gt;
+ */
 class ImageUploader extends Component {
+  /**
+   * @type {Object}
+   * @property {String} id - The same `id` added to the input field
+   * @property {String} name - The same `name` added to the input field
+   * @property {String} [caption] - Caption text added at the bottom of the field
+   * @property {String} [src] - Default image path when nothing is selected
+   * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted
+   */
   static propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -58,31 +75,50 @@ class ImageUploader extends Component {
     fileSize: PropTypes.number,
   };
 
+  /**
+   * @ignore
+   */
   static defaultProps = {
     src: &apos;&apos;,
+    fileSize: 256,
   };
 
+  /**
+   * @ignore
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * @ignore
+     */
     this.state = {
       imageData: null,
     };
   }
 
+  /**
+   * @ignore
+   */
   get hasImageClassName() {
     return this.imageSrc ? &apos;imageUploader--hasImage&apos; : &apos;&apos;;
   }
 
+  /**
+   * @ignore
+   */
   get imageSrc() {
     const { imageData } = this.state;
     const { src } = this.props;
     return imageData || src;
   }
 
+  /**
+   * @ignore
+   */
   setImage(e) {
     const file = e.target.files[0];
-    const maxKb = this.props.fileSize || 256;
+    const maxKb = this.props.fileSize;
     const maxSize = maxKb * 1024;
 
     if (file &amp;&amp; file.size &gt; maxSize) {
@@ -94,12 +130,18 @@ class ImageUploader extends Component {
     this.setImageData(file);
   }
 
+  /**
+   * @ignore
+   */
   setImageData(file) {
     if (file) {
       ImageUtils.getFileData(file).then(imageData =&gt; this.setState({ imageData }));
     }
   }
 
+  /**
+   * @ignore
+   */
   render() {
     const { id, name, caption } = this.props;
     return (

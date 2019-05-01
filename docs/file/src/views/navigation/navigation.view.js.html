@@ -32,9 +32,12 @@
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/geolocation.js~GeolocationUtils.html">GeolocationUtils</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/image.js~ImageUtils.html">ImageUtils</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/string.js~StringUtils.html">StringUtils</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-file">views/image-file</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-file/image-file.view.js~ImageFile.html">ImageFile</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Position">Position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/PositionError">PositionError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-uploader">views/image-uploader</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html">ImageUploader</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-navigation">views/navigation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html">Navigation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-page-control">views/page-control</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Route">Route</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span></span></li>
@@ -49,40 +52,80 @@ import { Link } from &apos;react-router-dom&apos;;
 import { FontAwesomeIcon as FA } from &apos;@fortawesome/react-fontawesome&apos;;
 import { faHome, faBars } from &apos;@fortawesome/free-solid-svg-icons&apos;;
 
+/**
+ * @external {react-router-dom~withRouter} https://reacttraining.com/react-router/web/api/withRouter
+ */
+
+/**
+ * Controls the navigation bar.
+ * Uses the same routes object defined in {@link PageControl}
+ *
+ * @example
+ * const Nav = withRoute(Navigation);
+ *
+ * &lt;Nav routes={routes} /&gt;
+ */
 class Navigation extends Component {
+  /**
+   *
+   * @type {Object}
+   * @property {Object} location - Comes from the {@link react-router-dom~withRouter} function
+   * @property {Array&lt;Route&gt;} routes - Same {@link Route} object defined in {@link PageControl}
+   */
   static propTypes = {
     location: PropTypes.object.isRequired,
     routes: PropTypes.array.isRequired,
   };
 
+  /**
+   * @ignore
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * @ignore
+     */
     this.state = {
       isMenuOpen: false,
     };
   }
 
-  get currentRoute() {
+  /**
+   * @ignore
+   */
+  get currentTitle() {
     const { routes, location } = this.props;
     const route = routes.find(item =&gt; item.to === location.pathname);
     return route ? route.name : &apos;Home&apos;;
   }
 
+  /**
+   * @ignore
+   */
   get routes() {
     const { routes } = this.props;
     return routes.filter(route =&gt; route.to &amp;&amp; route.to !== &apos;/&apos;);
   }
 
+  /**
+   * @ignore
+   */
   toggleMenu() {
     const { isMenuOpen } = this.state;
     this.setState({ isMenuOpen: !isMenuOpen });
   }
 
+  /**
+   * @ignore
+   */
   closeMenu() {
     this.setState({ isMenuOpen: false });
   }
 
+  /**
+   * @ignore
+   */
   renderMenuButton() {
     const routes = this.routes;
     if (routes &amp;&amp; routes.length) {
@@ -96,6 +139,9 @@ class Navigation extends Component {
     }
   }
 
+  /**
+   * @ignore
+   */
   renderMenu() {
     const { isMenuOpen } = this.state;
     if (isMenuOpen) {
@@ -109,6 +155,9 @@ class Navigation extends Component {
     }
   }
 
+  /**
+   * @ignore
+   */
   render() {
     return (
       &lt;nav className=&apos;navigation&apos;&gt;
@@ -120,7 +169,7 @@ class Navigation extends Component {
               &lt;FA icon={faHome} /&gt;
             &lt;/Link&gt;
           &lt;/div&gt;
-          &lt;div className=&apos;navigation__title&apos;&gt;{this.currentRoute}&lt;/div&gt;
+          &lt;div className=&apos;navigation__title&apos;&gt;{this.currentTitle}&lt;/div&gt;
           &lt;div className=&apos;navigation__sides&apos;&gt;
             {this.renderMenuButton()}
           &lt;/div&gt;

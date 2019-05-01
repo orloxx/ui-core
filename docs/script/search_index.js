@@ -6,12 +6,6 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "@orloxx/ui-core/src/views/image-file/image-file.view.js~imagefile",
-    "class/src/views/image-file/image-file.view.js~ImageFile.html",
-    "<span>ImageFile</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/image-file/image-file.view.js</span>",
-    "class"
-  ],
-  [
     "@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js~imageuploader",
     "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html",
     "<span>ImageUploader</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js</span>",
@@ -360,10 +354,28 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/utils/geolocation.js~position",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Position",
+    "src/utils/geolocation.js~Position",
+    "external"
+  ],
+  [
+    "src/utils/geolocation.js~positionerror",
+    "https://developer.mozilla.org/en-US/docs/Web/API/PositionError",
+    "src/utils/geolocation.js~PositionError",
+    "external"
+  ],
+  [
     "src/utils/image.js",
     "file/src/utils/image.js.html",
     "src/utils/image.js",
     "file"
+  ],
+  [
+    "src/utils/image.js~file",
+    "https://developer.mozilla.org/en-US/docs/Web/API/File",
+    "src/utils/image.js~File",
+    "external"
   ],
   [
     "src/utils/image.js~imageutils.getfiledata",
@@ -390,106 +402,10 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/views/image-file/image-file.view.js",
-    "file/src/views/image-file/image-file.view.js.html",
-    "src/views/image-file/image-file.view.js",
-    "file"
-  ],
-  [
-    "src/views/image-file/image-file.view.js~imagefile#alt",
-    "class/src/views/image-file/image-file.view.js~ImageFile.html#instance-get-alt",
-    "src/views/image-file/image-file.view.js~ImageFile#alt",
-    "member"
-  ],
-  [
-    "src/views/image-file/image-file.view.js~imagefile#componentdidmount",
-    "class/src/views/image-file/image-file.view.js~ImageFile.html#instance-method-componentDidMount",
-    "src/views/image-file/image-file.view.js~ImageFile#componentDidMount",
-    "method"
-  ],
-  [
-    "src/views/image-file/image-file.view.js~imagefile#constructor",
-    "class/src/views/image-file/image-file.view.js~ImageFile.html#instance-constructor-constructor",
-    "src/views/image-file/image-file.view.js~ImageFile#constructor",
-    "method"
-  ],
-  [
-    "src/views/image-file/image-file.view.js~imagefile#render",
-    "class/src/views/image-file/image-file.view.js~ImageFile.html#instance-method-render",
-    "src/views/image-file/image-file.view.js~ImageFile#render",
-    "method"
-  ],
-  [
-    "src/views/image-file/image-file.view.js~imagefile#src",
-    "class/src/views/image-file/image-file.view.js~ImageFile.html#instance-get-src",
-    "src/views/image-file/image-file.view.js~ImageFile#src",
-    "member"
-  ],
-  [
-    "src/views/image-file/image-file.view.js~imagefile#state",
-    "class/src/views/image-file/image-file.view.js~ImageFile.html#instance-member-state",
-    "src/views/image-file/image-file.view.js~ImageFile#state",
-    "member"
-  ],
-  [
-    "src/views/image-file/image-file.view.js~imagefile.proptypes",
-    "class/src/views/image-file/image-file.view.js~ImageFile.html#static-member-propTypes",
-    "src/views/image-file/image-file.view.js~ImageFile.propTypes",
-    "member"
-  ],
-  [
     "src/views/image-uploader/image-uploader.view.js",
     "file/src/views/image-uploader/image-uploader.view.js.html",
     "src/views/image-uploader/image-uploader.view.js",
     "file"
-  ],
-  [
-    "src/views/image-uploader/image-uploader.view.js~imageuploader#constructor",
-    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#instance-constructor-constructor",
-    "src/views/image-uploader/image-uploader.view.js~ImageUploader#constructor",
-    "method"
-  ],
-  [
-    "src/views/image-uploader/image-uploader.view.js~imageuploader#hasimageclassname",
-    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#instance-get-hasImageClassName",
-    "src/views/image-uploader/image-uploader.view.js~ImageUploader#hasImageClassName",
-    "member"
-  ],
-  [
-    "src/views/image-uploader/image-uploader.view.js~imageuploader#imagesrc",
-    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#instance-get-imageSrc",
-    "src/views/image-uploader/image-uploader.view.js~ImageUploader#imageSrc",
-    "member"
-  ],
-  [
-    "src/views/image-uploader/image-uploader.view.js~imageuploader#render",
-    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#instance-method-render",
-    "src/views/image-uploader/image-uploader.view.js~ImageUploader#render",
-    "method"
-  ],
-  [
-    "src/views/image-uploader/image-uploader.view.js~imageuploader#setimage",
-    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#instance-method-setImage",
-    "src/views/image-uploader/image-uploader.view.js~ImageUploader#setImage",
-    "method"
-  ],
-  [
-    "src/views/image-uploader/image-uploader.view.js~imageuploader#setimagedata",
-    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#instance-method-setImageData",
-    "src/views/image-uploader/image-uploader.view.js~ImageUploader#setImageData",
-    "method"
-  ],
-  [
-    "src/views/image-uploader/image-uploader.view.js~imageuploader#state",
-    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#instance-member-state",
-    "src/views/image-uploader/image-uploader.view.js~ImageUploader#state",
-    "member"
-  ],
-  [
-    "src/views/image-uploader/image-uploader.view.js~imageuploader.defaultprops",
-    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#static-member-defaultProps",
-    "src/views/image-uploader/image-uploader.view.js~ImageUploader.defaultProps",
-    "member"
   ],
   [
     "src/views/image-uploader/image-uploader.view.js~imageuploader.proptypes",
@@ -510,64 +426,16 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/views/navigation/navigation.view.js~navigation#closemenu",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-closeMenu",
-    "src/views/navigation/navigation.view.js~Navigation#closeMenu",
-    "method"
-  ],
-  [
-    "src/views/navigation/navigation.view.js~navigation#constructor",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-constructor-constructor",
-    "src/views/navigation/navigation.view.js~Navigation#constructor",
-    "method"
-  ],
-  [
-    "src/views/navigation/navigation.view.js~navigation#currentroute",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-get-currentRoute",
-    "src/views/navigation/navigation.view.js~Navigation#currentRoute",
-    "member"
-  ],
-  [
-    "src/views/navigation/navigation.view.js~navigation#render",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-render",
-    "src/views/navigation/navigation.view.js~Navigation#render",
-    "method"
-  ],
-  [
-    "src/views/navigation/navigation.view.js~navigation#rendermenu",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-renderMenu",
-    "src/views/navigation/navigation.view.js~Navigation#renderMenu",
-    "method"
-  ],
-  [
-    "src/views/navigation/navigation.view.js~navigation#rendermenubutton",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-renderMenuButton",
-    "src/views/navigation/navigation.view.js~Navigation#renderMenuButton",
-    "method"
-  ],
-  [
-    "src/views/navigation/navigation.view.js~navigation#routes",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-get-routes",
-    "src/views/navigation/navigation.view.js~Navigation#routes",
-    "member"
-  ],
-  [
-    "src/views/navigation/navigation.view.js~navigation#state",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-member-state",
-    "src/views/navigation/navigation.view.js~Navigation#state",
-    "member"
-  ],
-  [
-    "src/views/navigation/navigation.view.js~navigation#togglemenu",
-    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-toggleMenu",
-    "src/views/navigation/navigation.view.js~Navigation#toggleMenu",
-    "method"
-  ],
-  [
     "src/views/navigation/navigation.view.js~navigation.proptypes",
     "class/src/views/navigation/navigation.view.js~Navigation.html#static-member-propTypes",
     "src/views/navigation/navigation.view.js~Navigation.propTypes",
     "member"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~react-router-dom~withrouter",
+    "https://reacttraining.com/react-router/web/api/withRouter",
+    "src/views/navigation/navigation.view.js~react-router-dom~withRouter",
+    "external"
   ],
   [
     "src/views/page-control/page-control.view.js",
