@@ -1,8 +1,9 @@
 /**
  * @external {Position} https://developer.mozilla.org/en-US/docs/Web/API/Position
+ */
+/**
  * @external {PositionError} https://developer.mozilla.org/en-US/docs/Web/API/PositionError
  */
-
 /**
  * Geolocation utilities
  */
