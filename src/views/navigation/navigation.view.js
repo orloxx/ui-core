@@ -4,40 +4,80 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faHome, faBars } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * @external {react-router-dom~withRouter} https://reacttraining.com/react-router/web/api/withRouter
+ */
+
+/**
+ * Controls the navigation bar.
+ * Uses the same routes object defined in {@link PageControl}
+ *
+ * @example
+ * const Nav = withRoute(Navigation);
+ *
+ * <Nav routes={routes} />
+ */
 class Navigation extends Component {
+  /**
+   *
+   * @type {Object}
+   * @property {Object} location - Comes from the {@link react-router-dom~withRouter} function
+   * @property {Array<Route>} routes - Same {@link Route} object defined in {@link PageControl}
+   */
   static propTypes = {
     location: PropTypes.object.isRequired,
     routes: PropTypes.array.isRequired,
   };
 
+  /**
+   * @ignore
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * @ignore
+     */
     this.state = {
       isMenuOpen: false,
     };
   }
 
-  get currentRoute() {
+  /**
+   * @ignore
+   */
+  get currentTitle() {
     const { routes, location } = this.props;
     const route = routes.find(item => item.to === location.pathname);
     return route ? route.name : 'Home';
   }
 
+  /**
+   * @ignore
+   */
   get routes() {
     const { routes } = this.props;
     return routes.filter(route => route.to && route.to !== '/');
   }
 
+  /**
+   * @ignore
+   */
   toggleMenu() {
     const { isMenuOpen } = this.state;
     this.setState({ isMenuOpen: !isMenuOpen });
   }
 
+  /**
+   * @ignore
+   */
   closeMenu() {
     this.setState({ isMenuOpen: false });
   }
 
+  /**
+   * @ignore
+   */
   renderMenuButton() {
     const routes = this.routes;
     if (routes && routes.length) {
@@ -51,6 +91,9 @@ class Navigation extends Component {
     }
   }
 
+  /**
+   * @ignore
+   */
   renderMenu() {
     const { isMenuOpen } = this.state;
     if (isMenuOpen) {
@@ -64,6 +107,9 @@ class Navigation extends Component {
     }
   }
 
+  /**
+   * @ignore
+   */
   render() {
     return (
       <nav className='navigation'>
@@ -75,7 +121,7 @@ class Navigation extends Component {
               <FA icon={faHome} />
             </Link>
           </div>
-          <div className='navigation__title'>{this.currentRoute}</div>
+          <div className='navigation__title'>{this.currentTitle}</div>
           <div className='navigation__sides'>
             {this.renderMenuButton()}
           </div>
