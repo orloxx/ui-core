@@ -1,85 +1,86 @@
 {
-  "coverage": "0%",
-  "expectCount": 36,
-  "actualCount": 0,
+  "coverage": "13.63%",
+  "expectCount": 44,
+  "actualCount": 6,
   "files": {
     "src/utils/geolocation.js": {
-      "expectCount": 6,
-      "actualCount": 0,
+      "expectCount": 7,
+      "actualCount": 2,
       "undocumentLines": [
         1,
-        4,
-        7,
-        9,
-        11,
-        18
+        2,
+        6,
+        10,
+        31
       ]
     },
     "src/utils/image.js": {
-      "expectCount": 1,
+      "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
-        1
+        1,
+        2
       ]
     },
     "src/utils/string.js": {
-      "expectCount": 1,
+      "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
-        1
+        1,
+        2
       ]
     },
     "src/views/image-file/image-file.view.js": {
-      "expectCount": 7,
+      "expectCount": 8,
       "actualCount": 0,
       "undocumentLines": [
         5,
         6,
-        9,
-        14,
-        21,
-        26,
-        31
+        12,
+        15,
+        20,
+        27,
+        32,
+        37
       ]
     },
     "src/views/image-uploader/image-uploader.view.js": {
-      "expectCount": 8,
-      "actualCount": 0,
-      "undocumentLines": [
-        7,
-        8,
-        11,
-        16,
-        20,
-        26,
-        40,
-        46
-      ]
-    },
-    "src/views/navigation/navigation.view.js": {
       "expectCount": 10,
       "actualCount": 0,
       "undocumentLines": [
         7,
         8,
-        11,
         16,
-        22,
+        20,
+        23,
+        28,
+        32,
+        38,
+        52,
+        58
+      ]
+    },
+    "src/views/navigation/navigation.view.js": {
+      "expectCount": 11,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        8,
+        13,
+        16,
+        21,
         27,
         32,
-        36,
-        49,
-        62
+        37,
+        41,
+        54,
+        67
       ]
     },
     "src/views/page-control/page-control.view.js": {
-      "expectCount": 3,
-      "actualCount": 0,
-      "undocumentLines": [
-        6,
-        7,
-        16
-      ]
+      "expectCount": 4,
+      "actualCount": 4,
+      "undocumentLines": []
     }
   }
 }

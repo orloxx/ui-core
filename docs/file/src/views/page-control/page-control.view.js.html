@@ -29,15 +29,15 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-disable">disable</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-enable">enable</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getCurrent">getCurrent</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getFileData">getFileData</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-serialize">serialize</a></span></span></li>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/geolocation.js~GeolocationUtils.html">GeolocationUtils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/image.js~ImageUtils.html">ImageUtils</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/utils/string.js~StringUtils.html">StringUtils</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-file">views/image-file</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-file/image-file.view.js~ImageFile.html">ImageFile</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-uploader">views/image-uploader</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html">ImageUploader</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-navigation">views/navigation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html">Navigation</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-page-control">views/page-control</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Route">Route</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -45,10 +45,49 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/views/page-control/page-control.view.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { Component } from &apos;react&apos;;
 import PropTypes from &apos;prop-types&apos;;
-import { BrowserRouter as Router, Route } from &apos;react-router-dom&apos;;
+import { BrowserRouter as Router, Route, withRouter } from &apos;react-router-dom&apos;;
 import Navigation from &apos;../navigation/navigation.view&apos;;
 
+/**
+ * @external {react~Component} https://reactjs.org/docs/react-component.html
+ */
+
+/**
+ * Controls navigations and routes
+ *
+ * @class PageControl
+ *
+ * @example
+ * const routes = [
+ *   { name: &apos;Home&apos;, to: &apos;/&apos;, component: HomeComponent },
+ *   { name: &apos;Text example&apos;, to: &apos;/some-text&apos;, component: TextComponent },
+ * ];
+ *
+ * &lt;PageRoutes base=&apos;/&apos; routes={routes} /&gt;
+ */
 class PageControl extends Component {
+  /**
+   * @typedef {Object} Route
+   * @property {String} name - The name of the section to load. It will appear in the header of navigation
+   * @property {String} to - The path to the page it will go to
+   * @property {react~Component} component - The component it will load below the {@link Navigation}
+   *
+   * @example
+   * { name: &apos;Some name&apos;, to: &apos;path/to/page&apos;, component: SomeComponent }
+   */
+  /**
+   * @type {Object}
+   * @property {String} base - The base URL used in `Router`&apos;s `basename` attribute: default is `/`
+   * @property {Array&lt;Route&gt;} routes - All possible routes available
+   */
+  static propTypes = {
+    base: PropTypes.string,
+    routes: PropTypes.array,
+  };
+
+  /**
+   * @ignore
+   */
   renderRoutes() {
     const { routes } = this.props;
     if (routes &amp;&amp; routes.length) {
@@ -58,20 +97,19 @@ class PageControl extends Component {
     }
   }
 
+  /**
+   * @ignore
+   */
   render() {
+    const Nav = withRouter(Navigation);
     return (
-      &lt;Router basename={this.props.base}&gt;
-        &lt;Navigation routes={this.props.routes} /&gt;
+      &lt;Router basename={this.props.base || &apos;/&apos;}&gt;
+        &lt;Nav routes={this.props.routes} /&gt;
         {this.renderRoutes()}
       &lt;/Router&gt;
     );
   }
 }
-
-PageControl.propTypes = {
-  base: PropTypes.string,
-  routes: PropTypes.array,
-};
 
 export default PageControl;
 </code></pre>

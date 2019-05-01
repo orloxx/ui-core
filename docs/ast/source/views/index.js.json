@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 50,
+  "end": 126,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 50,
+    "end": 126,
     "loc": {
       "start": {
         "line": 1,
@@ -29,9 +29,9 @@
     "sourceType": "module",
     "body": [
       {
-        "type": "ExportAllDeclaration",
+        "type": "ExportNamedDeclaration",
         "start": 0,
-        "end": 24,
+        "end": 65,
         "loc": {
           "start": {
             "line": 1,
@@ -39,34 +39,68 @@
           },
           "end": {
             "line": 1,
-            "column": 24
+            "column": 65
           }
         },
+        "specifiers": [
+          {
+            "type": "ExportDefaultSpecifier",
+            "start": 7,
+            "end": 20,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 20
+              }
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 7,
+              "end": 20,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 7
+                },
+                "end": {
+                  "line": 1,
+                  "column": 20
+                },
+                "identifierName": "ImageUploader"
+              },
+              "name": "ImageUploader"
+            }
+          }
+        ],
         "source": {
           "type": "StringLiteral",
-          "start": 14,
-          "end": 23,
+          "start": 26,
+          "end": 64,
           "loc": {
             "start": {
               "line": 1,
-              "column": 14
+              "column": 26
             },
             "end": {
               "line": 1,
-              "column": 23
+              "column": 64
             }
           },
           "extra": {
-            "rawValue": "./views",
-            "raw": "'./views'"
+            "rawValue": "./image-uploader/image-uploader.view",
+            "raw": "'./image-uploader/image-uploader.view'"
           },
-          "value": "./views"
+          "value": "./image-uploader/image-uploader.view"
         }
       },
       {
-        "type": "ExportAllDeclaration",
-        "start": 25,
-        "end": 49,
+        "type": "ExportNamedDeclaration",
+        "start": 66,
+        "end": 125,
         "loc": {
           "start": {
             "line": 2,
@@ -74,28 +108,62 @@
           },
           "end": {
             "line": 2,
-            "column": 24
+            "column": 59
           }
         },
+        "specifiers": [
+          {
+            "type": "ExportDefaultSpecifier",
+            "start": 73,
+            "end": 84,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 18
+              }
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 73,
+              "end": 84,
+              "loc": {
+                "start": {
+                  "line": 2,
+                  "column": 7
+                },
+                "end": {
+                  "line": 2,
+                  "column": 18
+                },
+                "identifierName": "PageControl"
+              },
+              "name": "PageControl"
+            }
+          }
+        ],
         "source": {
           "type": "StringLiteral",
-          "start": 39,
-          "end": 48,
+          "start": 90,
+          "end": 124,
           "loc": {
             "start": {
               "line": 2,
-              "column": 14
+              "column": 24
             },
             "end": {
               "line": 2,
-              "column": 23
+              "column": 58
             }
           },
           "extra": {
-            "rawValue": "./utils",
-            "raw": "'./utils'"
+            "rawValue": "./page-control/page-control.view",
+            "raw": "'./page-control/page-control.view'"
           },
-          "value": "./utils"
+          "value": "./page-control/page-control.view"
         }
       }
     ],
@@ -133,20 +201,19 @@
     },
     {
       "type": {
-        "label": "*",
-        "beforeExpr": true,
-        "startsExpr": false,
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": 10,
-        "updateContext": null
+        "binop": null
       },
-      "value": "*",
+      "value": "ImageUploader",
       "start": 7,
-      "end": 8,
+      "end": 20,
       "loc": {
         "start": {
           "line": 1,
@@ -154,7 +221,7 @@
         },
         "end": {
           "line": 1,
-          "column": 8
+          "column": 20
         }
       }
     },
@@ -171,16 +238,16 @@
         "binop": null
       },
       "value": "from",
-      "start": 9,
-      "end": 13,
+      "start": 21,
+      "end": 25,
       "loc": {
         "start": {
           "line": 1,
-          "column": 9
+          "column": 21
         },
         "end": {
           "line": 1,
-          "column": 13
+          "column": 25
         }
       }
     },
@@ -197,17 +264,17 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./views",
-      "start": 14,
-      "end": 23,
+      "value": "./image-uploader/image-uploader.view",
+      "start": 26,
+      "end": 64,
       "loc": {
         "start": {
           "line": 1,
-          "column": 14
+          "column": 26
         },
         "end": {
           "line": 1,
-          "column": 23
+          "column": 64
         }
       }
     },
@@ -224,16 +291,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 23,
-      "end": 24,
+      "start": 64,
+      "end": 65,
       "loc": {
         "start": {
           "line": 1,
-          "column": 23
+          "column": 64
         },
         "end": {
           "line": 1,
-          "column": 24
+          "column": 65
         }
       }
     },
@@ -252,8 +319,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 25,
-      "end": 31,
+      "start": 66,
+      "end": 72,
       "loc": {
         "start": {
           "line": 2,
@@ -267,20 +334,19 @@
     },
     {
       "type": {
-        "label": "*",
-        "beforeExpr": true,
-        "startsExpr": false,
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": 10,
-        "updateContext": null
+        "binop": null
       },
-      "value": "*",
-      "start": 32,
-      "end": 33,
+      "value": "PageControl",
+      "start": 73,
+      "end": 84,
       "loc": {
         "start": {
           "line": 2,
@@ -288,7 +354,7 @@
         },
         "end": {
           "line": 2,
-          "column": 8
+          "column": 18
         }
       }
     },
@@ -305,16 +371,16 @@
         "binop": null
       },
       "value": "from",
-      "start": 34,
-      "end": 38,
+      "start": 85,
+      "end": 89,
       "loc": {
         "start": {
           "line": 2,
-          "column": 9
+          "column": 19
         },
         "end": {
           "line": 2,
-          "column": 13
+          "column": 23
         }
       }
     },
@@ -331,17 +397,17 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./utils",
-      "start": 39,
-      "end": 48,
+      "value": "./page-control/page-control.view",
+      "start": 90,
+      "end": 124,
       "loc": {
         "start": {
           "line": 2,
-          "column": 14
+          "column": 24
         },
         "end": {
           "line": 2,
-          "column": 23
+          "column": 58
         }
       }
     },
@@ -358,16 +424,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 48,
-      "end": 49,
+      "start": 124,
+      "end": 125,
       "loc": {
         "start": {
           "line": 2,
-          "column": 23
+          "column": 58
         },
         "end": {
           "line": 2,
-          "column": 24
+          "column": 59
         }
       }
     },
@@ -384,8 +450,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 50,
-      "end": 50,
+      "start": 126,
+      "end": 126,
       "loc": {
         "start": {
           "line": 3,

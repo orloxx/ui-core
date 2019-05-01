@@ -1,5 +1,11 @@
 window.esdocSearchIndex = [
   [
+    "@orloxx/ui-core/src/utils/geolocation.js~geolocationutils",
+    "class/src/utils/geolocation.js~GeolocationUtils.html",
+    "<span>GeolocationUtils</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/geolocation.js</span>",
+    "class"
+  ],
+  [
     "@orloxx/ui-core/src/views/image-file/image-file.view.js~imagefile",
     "class/src/views/image-file/image-file.view.js~ImageFile.html",
     "<span>ImageFile</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/image-file/image-file.view.js</span>",
@@ -12,46 +18,28 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@orloxx/ui-core/src/utils/image.js~imageutils",
+    "class/src/utils/image.js~ImageUtils.html",
+    "<span>ImageUtils</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/image.js</span>",
+    "class"
+  ],
+  [
+    "@orloxx/ui-core/src/views/navigation/navigation.view.js~navigation",
+    "class/src/views/navigation/navigation.view.js~Navigation.html",
+    "<span>Navigation</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/navigation/navigation.view.js</span>",
+    "class"
+  ],
+  [
     "@orloxx/ui-core/src/views/page-control/page-control.view.js~pagecontrol",
     "class/src/views/page-control/page-control.view.js~PageControl.html",
     "<span>PageControl</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/page-control/page-control.view.js</span>",
     "class"
   ],
   [
-    "@orloxx/ui-core/src/utils/geolocation.js~disable",
-    "function/index.html#static-function-disable",
-    "<span>disable</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/geolocation.js</span>",
-    "function"
-  ],
-  [
-    "@orloxx/ui-core/src/utils/geolocation.js~distance",
-    "function/index.html#static-function-distance",
-    "<span>distance</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/geolocation.js</span>",
-    "function"
-  ],
-  [
-    "@orloxx/ui-core/src/utils/geolocation.js~enable",
-    "function/index.html#static-function-enable",
-    "<span>enable</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/geolocation.js</span>",
-    "function"
-  ],
-  [
-    "@orloxx/ui-core/src/utils/geolocation.js~getcurrent",
-    "function/index.html#static-function-getCurrent",
-    "<span>getCurrent</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/geolocation.js</span>",
-    "function"
-  ],
-  [
-    "@orloxx/ui-core/src/utils/image.js~getfiledata",
-    "function/index.html#static-function-getFileData",
-    "<span>getFileData</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/image.js</span>",
-    "function"
-  ],
-  [
-    "@orloxx/ui-core/src/utils/string.js~serialize",
-    "function/index.html#static-function-serialize",
-    "<span>serialize</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/string.js</span>",
-    "function"
+    "@orloxx/ui-core/src/utils/string.js~stringutils",
+    "class/src/utils/string.js~StringUtils.html",
+    "<span>StringUtils</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/string.js</span>",
+    "class"
   ],
   [
     "src/.external-ecmascript.js~array",
@@ -348,9 +336,45 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/utils/geolocation.js~geolocationutils.disable",
+    "class/src/utils/geolocation.js~GeolocationUtils.html#static-method-disable",
+    "src/utils/geolocation.js~GeolocationUtils.disable",
+    "method"
+  ],
+  [
+    "src/utils/geolocation.js~geolocationutils.distance",
+    "class/src/utils/geolocation.js~GeolocationUtils.html#static-method-distance",
+    "src/utils/geolocation.js~GeolocationUtils.distance",
+    "method"
+  ],
+  [
+    "src/utils/geolocation.js~geolocationutils.enable",
+    "class/src/utils/geolocation.js~GeolocationUtils.html#static-method-enable",
+    "src/utils/geolocation.js~GeolocationUtils.enable",
+    "method"
+  ],
+  [
+    "src/utils/geolocation.js~geolocationutils.getcurrent",
+    "class/src/utils/geolocation.js~GeolocationUtils.html#static-method-getCurrent",
+    "src/utils/geolocation.js~GeolocationUtils.getCurrent",
+    "method"
+  ],
+  [
     "src/utils/image.js",
     "file/src/utils/image.js.html",
     "src/utils/image.js",
+    "file"
+  ],
+  [
+    "src/utils/image.js~imageutils.getfiledata",
+    "class/src/utils/image.js~ImageUtils.html#static-method-getFileData",
+    "src/utils/image.js~ImageUtils.getFileData",
+    "method"
+  ],
+  [
+    "src/utils/index.js",
+    "file/src/utils/index.js.html",
+    "src/utils/index.js",
     "file"
   ],
   [
@@ -358,6 +382,12 @@ window.esdocSearchIndex = [
     "file/src/utils/string.js.html",
     "src/utils/string.js",
     "file"
+  ],
+  [
+    "src/utils/string.js~stringutils.serialize",
+    "class/src/utils/string.js~StringUtils.html#static-method-serialize",
+    "src/utils/string.js~StringUtils.serialize",
+    "method"
   ],
   [
     "src/views/image-file/image-file.view.js",
@@ -399,6 +429,12 @@ window.esdocSearchIndex = [
     "src/views/image-file/image-file.view.js~imagefile#state",
     "class/src/views/image-file/image-file.view.js~ImageFile.html#instance-member-state",
     "src/views/image-file/image-file.view.js~ImageFile#state",
+    "member"
+  ],
+  [
+    "src/views/image-file/image-file.view.js~imagefile.proptypes",
+    "class/src/views/image-file/image-file.view.js~ImageFile.html#static-member-propTypes",
+    "src/views/image-file/image-file.view.js~ImageFile.propTypes",
     "member"
   ],
   [
@@ -450,10 +486,88 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/views/image-uploader/image-uploader.view.js~imageuploader.defaultprops",
+    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#static-member-defaultProps",
+    "src/views/image-uploader/image-uploader.view.js~ImageUploader.defaultProps",
+    "member"
+  ],
+  [
+    "src/views/image-uploader/image-uploader.view.js~imageuploader.proptypes",
+    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#static-member-propTypes",
+    "src/views/image-uploader/image-uploader.view.js~ImageUploader.propTypes",
+    "member"
+  ],
+  [
+    "src/views/index.js",
+    "file/src/views/index.js.html",
+    "src/views/index.js",
+    "file"
+  ],
+  [
     "src/views/navigation/navigation.view.js",
     "file/src/views/navigation/navigation.view.js.html",
     "src/views/navigation/navigation.view.js",
     "file"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#closemenu",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-closeMenu",
+    "src/views/navigation/navigation.view.js~Navigation#closeMenu",
+    "method"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#constructor",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-constructor-constructor",
+    "src/views/navigation/navigation.view.js~Navigation#constructor",
+    "method"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#currentroute",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-get-currentRoute",
+    "src/views/navigation/navigation.view.js~Navigation#currentRoute",
+    "member"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#render",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-render",
+    "src/views/navigation/navigation.view.js~Navigation#render",
+    "method"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#rendermenu",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-renderMenu",
+    "src/views/navigation/navigation.view.js~Navigation#renderMenu",
+    "method"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#rendermenubutton",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-renderMenuButton",
+    "src/views/navigation/navigation.view.js~Navigation#renderMenuButton",
+    "method"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#routes",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-get-routes",
+    "src/views/navigation/navigation.view.js~Navigation#routes",
+    "member"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#state",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-member-state",
+    "src/views/navigation/navigation.view.js~Navigation#state",
+    "member"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation#togglemenu",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#instance-method-toggleMenu",
+    "src/views/navigation/navigation.view.js~Navigation#toggleMenu",
+    "method"
+  ],
+  [
+    "src/views/navigation/navigation.view.js~navigation.proptypes",
+    "class/src/views/navigation/navigation.view.js~Navigation.html#static-member-propTypes",
+    "src/views/navigation/navigation.view.js~Navigation.propTypes",
+    "member"
   ],
   [
     "src/views/page-control/page-control.view.js",
@@ -462,15 +576,21 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/views/page-control/page-control.view.js~pagecontrol#render",
-    "class/src/views/page-control/page-control.view.js~PageControl.html#instance-method-render",
-    "src/views/page-control/page-control.view.js~PageControl#render",
-    "method"
+    "src/views/page-control/page-control.view.js~pagecontrol.route",
+    "typedef/index.html#static-typedef-Route",
+    "src/views/page-control/page-control.view.js~PageControl.Route",
+    "typedef"
   ],
   [
-    "src/views/page-control/page-control.view.js~pagecontrol#renderroutes",
-    "class/src/views/page-control/page-control.view.js~PageControl.html#instance-method-renderRoutes",
-    "src/views/page-control/page-control.view.js~PageControl#renderRoutes",
-    "method"
+    "src/views/page-control/page-control.view.js~pagecontrol.proptypes",
+    "class/src/views/page-control/page-control.view.js~PageControl.html#static-member-propTypes",
+    "src/views/page-control/page-control.view.js~PageControl.propTypes",
+    "member"
+  ],
+  [
+    "src/views/page-control/page-control.view.js~react~component",
+    "https://reactjs.org/docs/react-component.html",
+    "src/views/page-control/page-control.view.js~react~Component",
+    "external"
   ]
 ]
