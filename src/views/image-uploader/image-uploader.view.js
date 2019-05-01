@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
-import * as ImageUtils from '../../utils/image';
+import { ImageUtils } from '../../utils';
 
 class ImageUploader extends Component {
   static propTypes = {

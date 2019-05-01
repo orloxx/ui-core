@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as ImageUtils from '../../utils/image';
+import { ImageUtils } from '../../utils';
 
 class ImageFile extends Component {
   static propTypes = {

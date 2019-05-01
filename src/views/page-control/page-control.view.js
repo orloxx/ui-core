@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import Navigation from '../navigation/navigation.view';
 
 /**
- * @external {React.Component} https://reactjs.org/docs/react-component.html
+ * @external {react~Component} https://reactjs.org/docs/react-component.html
  */
 
 /**
@@ -25,7 +25,7 @@ class PageControl extends Component {
    * @typedef {Object} Route
    * @property {String} name - The name of the section to load. It will appear in the header of navigation
    * @property {String} to - The path to the page it will go to
-   * @property {React.Component} component - The component it will load below the {@link Navigation}
+   * @property {react~Component} component - The component it will load below the {@link Navigation}
    *
    * @example
    * { name: 'Some name', to: 'path/to/page', component: SomeComponent }
