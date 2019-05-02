@@ -6,8 +6,6 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Documentation Coverage](https://orloxx.github.io/ui-core/docs/badge.svg)](https://orloxx.github.io/ui-core/docs/)
 
-https://orloxx.github.io/ui-core/docs/badge.svg
-
 This is an attempt to create a components library to bootstrap React SPAs.
 
 ## Install
