@@ -1,24 +1,94 @@
 import { StringUtils } from '../../utils';
 
 /**
- * Controls communication and handling of the Google Maps API
+ * @external {google~Map} https://developers.google.com/maps/documentation/javascript/reference/map
+ */
+
+/**
+ * @external {google~LatLng} https://developers.google.com/maps/documentation/javascript/reference/coordinates
+ */
+
+/**
+ * @external {google~MapOptions} https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
+ *
+ * @example
+ * { center: { lat: 10.4657, lng: -66.8796 }, zoom: 12 }
+ */
+
+/**
+ * @external {Element} https://developer.mozilla.org/en-US/docs/Web/API/Element
+ */
+
+/**
+ * Controls communication and handling of the Google Maps JavaScript API
+ *
+ * @example
+ * const googleMap = new GoogleMapModel(
+ *   'your-google-api-key',
+ *   document.getElementById('some-map'),
+ *   { center: { lat: 10.4657, lng: -66.8796 }, zoom: 12 }
+ * );
  */
 class GoogleMapModel {
-  constructor(apiKey, $el) {
+  /**
+   * Initialises the map using Google Maps JavaScript API
+   *
+   * @param {String} apiKey - Google provides this in their console
+   * @param {Element} $el - The element where the map will be rendered
+   * @param {google~MapOptions} options - Google Maps options
+   */
+  constructor(apiKey, $el, options) {
+    /**
+     * Google's API key
+     * @type {String}
+     */
     this.apiKey = apiKey;
+    /**
+     * The element where the map will be rendered
+     * @type {Element}
+     */
     this.$el = $el;
+    /**
+     * Google Maps options
+     * @type {google~MapOptions}
+     */
+    this.options = options;
+    /**
+     * The map instance from Google Maps JavaScript API
+     * @type {google~Map}
+     */
+    this.map = null;
     this.renderMap = this.renderMap.bind(this);
     this.initGoogleMap();
   }
 
+  /**
+   * The callback name attached to the Google's script library
+   *
+   * @return {String}
+   */
   static get INIT_CALLBACK() {
     return 'initGoogleMapsLib';
   }
 
+  /**
+   * The callback name triggered when the Google's script library is called
+   *
+   * @return {String}
+   */
   static get READY_CALLBACK() {
     return 'googleMapsLibReady';
   }
 
+  /**
+   * Initialises the Google Maps JavaScript library and safely calls {@link renderMap}
+   *
+   * There are three ways this can go down:
+   *
+   * 1. It's the first map added to the page and the script library has not been included yet
+   * 2. The library was included and INIT_CALLBACK already triggered
+   * 3. The library was included but it has not initialised yet
+   */
   initGoogleMap() {
     if (!window[GoogleMapModel.INIT_CALLBACK]) {
       window[GoogleMapModel.INIT_CALLBACK] = () => {
@@ -46,13 +116,16 @@ class GoogleMapModel {
     }
   }
 
+  /**
+   * Renders the map in the chosen {@link $el}
+   */
   renderMap() {
     document.removeEventListener(GoogleMapModel.READY_CALLBACK, this.renderMap);
-    this.map = new window.google.maps.Map(this.$el, {
+    this.map = new window.google.maps.Map(this.$el, Object.assign({
       clickableIcons: false,
-      center: { lat: 0, lng: 0 },
-      zoom: 10,
-    });
+      center: { lat: 10.4657, lng: -66.8796 },
+      zoom: 12,
+    }, this.options));
   }
 }
 
