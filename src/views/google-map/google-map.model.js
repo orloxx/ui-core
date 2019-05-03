@@ -58,8 +58,6 @@ class GoogleMapModel {
      * @type {google~Map}
      */
     this.map = null;
-    this.renderMap = this.renderMap.bind(this);
-    this.initGoogleMap();
   }
 
   /**
@@ -88,44 +86,52 @@ class GoogleMapModel {
    * 1. It's the first map added to the page and the script library has not been included yet
    * 2. The library was included and INIT_CALLBACK already triggered
    * 3. The library was included but it has not initialised yet
+   *
+   * @return {Promise<google~Map>}
    */
   initGoogleMap() {
-    if (!window[GoogleMapModel.INIT_CALLBACK]) {
-      window[GoogleMapModel.INIT_CALLBACK] = () => {
-        const initEvent = new Event(GoogleMapModel.READY_CALLBACK);
-        document.dispatchEvent(initEvent);
-        window[GoogleMapModel.READY_CALLBACK] = true;
-        this.renderMap();
-      };
-      const API_URL = 'https://maps.googleapis.com/maps/api/js';
-      const libScript = document.createElement('script');
-      const params = {
-        key: this.apiKey,
-        callback: GoogleMapModel.INIT_CALLBACK,
-      };
-      libScript.async = true;
-      libScript.defer = true;
-      libScript.src = `${API_URL}?${StringUtils.serialize(params)}`;
-      document.body.appendChild(libScript);
-    } else if (window[GoogleMapModel.READY_CALLBACK] === true) {
-      // Library is ready and event was already called
-      this.renderMap();
-    } else {
-      // Library was defined but not ready yet
-      document.addEventListener(GoogleMapModel.READY_CALLBACK, this.renderMap);
-    }
+    return new Promise((resolve) => {
+      if (!window[GoogleMapModel.INIT_CALLBACK]) {
+        window[GoogleMapModel.INIT_CALLBACK] = () => {
+          const initEvent = new Event(GoogleMapModel.READY_CALLBACK);
+          document.dispatchEvent(initEvent);
+          window[GoogleMapModel.READY_CALLBACK] = true;
+          resolve(this.renderMap());
+        };
+        const API_URL = 'https://maps.googleapis.com/maps/api/js';
+        const libScript = document.createElement('script');
+        const params = {
+          key: this.apiKey,
+          callback: GoogleMapModel.INIT_CALLBACK,
+        };
+        libScript.async = true;
+        libScript.defer = true;
+        libScript.src = `${API_URL}?${StringUtils.serialize(params)}`;
+        document.body.appendChild(libScript);
+      } else if (window[GoogleMapModel.READY_CALLBACK] === true) {
+        // Library is ready and event was already called
+        resolve(this.renderMap());
+      } else {
+        // Library was defined but not ready yet
+        document.addEventListener(GoogleMapModel.READY_CALLBACK, () => {
+          resolve(this.renderMap());
+        });
+      }
+    });
   }
 
   /**
    * Renders the map in the chosen {@link $el}
+   *
+   * @return {google~Map}
    */
   renderMap() {
-    document.removeEventListener(GoogleMapModel.READY_CALLBACK, this.renderMap);
     this.map = new window.google.maps.Map(this.$el, Object.assign({
       clickableIcons: false,
       center: { lat: 10.4657, lng: -66.8796 },
       zoom: 12,
     }, this.options));
+    return this.map;
   }
 }
 

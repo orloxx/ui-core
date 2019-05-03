@@ -15,10 +15,14 @@ class GoogleMap extends Component {
    * @type {Object}
    * @property {String} apiKey - Google provides this in their console
    * @property {google~MapOptions} options - Options passed when map is initialised
+   * @property {Function} [onDragend] - Triggers when user finishes dragging map
+   * @property {Function} [onDragend] - Triggers when zoom changes
    */
   static propTypes = {
     apiKey: PropTypes.string.isRequired,
     options: PropTypes.object.isRequired,
+    onDragend: PropTypes.func,
+    onZoomChanged: PropTypes.func,
   };
 
   /**
@@ -42,6 +46,15 @@ class GoogleMap extends Component {
      * @ignore
      */
     this.google = new GoogleMapModel(apiKey, this.$map.current, options);
+    this.google.initGoogleMap().then((map) => {
+      const { onDragend, onZoomChanged } = this.props;
+      if (onDragend) {
+        map.addListener('dragend', onDragend.bind(this, map));
+      }
+      if (onZoomChanged) {
+        map.addListener('zoom_changed', onZoomChanged.bind(this, map));
+      }
+    });
   }
 
   /**
