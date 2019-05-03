@@ -71,6 +71,7 @@
   },
   "files": [
     "dist",
-    "scss"
+    "scss",
+    "src"
   ]
 }
