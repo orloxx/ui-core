@@ -22,7 +22,7 @@ For more information check out [the documentation](https://orloxx.github.io/ui-c
 
 ## Donate
 
-I can always use a beer :beer: or two :)
+I can always use a beer &#127866; or two :)
 
 Bitcoin: `1sSBBuBgnapZ1Zxmf9PYoBMxv8kN6Wggb`
 
