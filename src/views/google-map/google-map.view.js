@@ -8,7 +8,9 @@ import GoogleMapModel from './google-map.model';
  * @see https://developers.google.com/maps/documentation/javascript/tutorial
  *
  * @example
- * <GoogleMap apiKey='your-google-api-key' />
+ * <GoogleMap
+ *   apiKey='your-google-api-key'
+ *   options={{ center: { lat: 10.4657, lng: -66.8796 }, zoom: 12 }} />
  */
 class GoogleMap extends Component {
   /**
@@ -46,15 +48,20 @@ class GoogleMap extends Component {
      * @ignore
      */
     this.google = new GoogleMapModel(apiKey, this.$map.current, options);
-    this.google.initGoogleMap().then((map) => {
-      const { onDragend, onZoomChanged } = this.props;
-      if (onDragend) {
-        map.addListener('dragend', onDragend.bind(this, map));
-      }
-      if (onZoomChanged) {
-        map.addListener('zoom_changed', onZoomChanged.bind(this, map));
-      }
-    });
+    this.google.initGoogleMap().then(this.addMapListeners.bind(this));
+  }
+
+  /**
+   * @ignore
+   */
+  addMapListeners(map) {
+    const { onDragend, onZoomChanged } = this.props;
+    if (onDragend) {
+      map.addListener('dragend', onDragend.bind(this, map));
+    }
+    if (onZoomChanged) {
+      map.addListener('zoom_changed', onZoomChanged.bind(this, map));
+    }
   }
 
   /**
