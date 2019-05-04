@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 126,
+  "end": 180,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 3,
+      "line": 4,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 126,
+    "end": 180,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 3,
+        "line": 4,
         "column": 0
       }
     },
@@ -31,7 +31,7 @@
       {
         "type": "ExportNamedDeclaration",
         "start": 0,
-        "end": 65,
+        "end": 53,
         "loc": {
           "start": {
             "line": 1,
@@ -39,14 +39,14 @@
           },
           "end": {
             "line": 1,
-            "column": 65
+            "column": 53
           }
         },
         "specifiers": [
           {
             "type": "ExportDefaultSpecifier",
             "start": 7,
-            "end": 20,
+            "end": 16,
             "loc": {
               "start": {
                 "line": 1,
@@ -54,13 +54,13 @@
               },
               "end": {
                 "line": 1,
-                "column": 20
+                "column": 16
               }
             },
             "exported": {
               "type": "Identifier",
               "start": 7,
-              "end": 20,
+              "end": 16,
               "loc": {
                 "start": {
                   "line": 1,
@@ -68,6 +68,75 @@
                 },
                 "end": {
                   "line": 1,
+                  "column": 16
+                },
+                "identifierName": "GoogleMap"
+              },
+              "name": "GoogleMap"
+            }
+          }
+        ],
+        "source": {
+          "type": "StringLiteral",
+          "start": 22,
+          "end": 52,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 22
+            },
+            "end": {
+              "line": 1,
+              "column": 52
+            }
+          },
+          "extra": {
+            "rawValue": "./google-map/google-map.view",
+            "raw": "'./google-map/google-map.view'"
+          },
+          "value": "./google-map/google-map.view"
+        }
+      },
+      {
+        "type": "ExportNamedDeclaration",
+        "start": 54,
+        "end": 119,
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 65
+          }
+        },
+        "specifiers": [
+          {
+            "type": "ExportDefaultSpecifier",
+            "start": 61,
+            "end": 74,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 20
+              }
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 61,
+              "end": 74,
+              "loc": {
+                "start": {
+                  "line": 2,
+                  "column": 7
+                },
+                "end": {
+                  "line": 2,
                   "column": 20
                 },
                 "identifierName": "ImageUploader"
@@ -78,15 +147,15 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 26,
-          "end": 64,
+          "start": 80,
+          "end": 118,
           "loc": {
             "start": {
-              "line": 1,
+              "line": 2,
               "column": 26
             },
             "end": {
-              "line": 1,
+              "line": 2,
               "column": 64
             }
           },
@@ -99,44 +168,44 @@
       },
       {
         "type": "ExportNamedDeclaration",
-        "start": 66,
-        "end": 125,
+        "start": 120,
+        "end": 179,
         "loc": {
           "start": {
-            "line": 2,
+            "line": 3,
             "column": 0
           },
           "end": {
-            "line": 2,
+            "line": 3,
             "column": 59
           }
         },
         "specifiers": [
           {
             "type": "ExportDefaultSpecifier",
-            "start": 73,
-            "end": 84,
+            "start": 127,
+            "end": 138,
             "loc": {
               "start": {
-                "line": 2,
+                "line": 3,
                 "column": 7
               },
               "end": {
-                "line": 2,
+                "line": 3,
                 "column": 18
               }
             },
             "exported": {
               "type": "Identifier",
-              "start": 73,
-              "end": 84,
+              "start": 127,
+              "end": 138,
               "loc": {
                 "start": {
-                  "line": 2,
+                  "line": 3,
                   "column": 7
                 },
                 "end": {
-                  "line": 2,
+                  "line": 3,
                   "column": 18
                 },
                 "identifierName": "PageControl"
@@ -147,15 +216,15 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 90,
-          "end": 124,
+          "start": 144,
+          "end": 178,
           "loc": {
             "start": {
-              "line": 2,
+              "line": 3,
               "column": 24
             },
             "end": {
-              "line": 2,
+              "line": 3,
               "column": 58
             }
           },
@@ -211,9 +280,9 @@
         "postfix": false,
         "binop": null
       },
-      "value": "ImageUploader",
+      "value": "GoogleMap",
       "start": 7,
-      "end": 20,
+      "end": 16,
       "loc": {
         "start": {
           "line": 1,
@@ -221,7 +290,7 @@
         },
         "end": {
           "line": 1,
-          "column": 20
+          "column": 16
         }
       }
     },
@@ -238,16 +307,16 @@
         "binop": null
       },
       "value": "from",
-      "start": 21,
-      "end": 25,
+      "start": 17,
+      "end": 21,
       "loc": {
         "start": {
           "line": 1,
-          "column": 21
+          "column": 17
         },
         "end": {
           "line": 1,
-          "column": 25
+          "column": 21
         }
       }
     },
@@ -264,17 +333,17 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./image-uploader/image-uploader.view",
-      "start": 26,
-      "end": 64,
+      "value": "./google-map/google-map.view",
+      "start": 22,
+      "end": 52,
       "loc": {
         "start": {
           "line": 1,
-          "column": 26
+          "column": 22
         },
         "end": {
           "line": 1,
-          "column": 64
+          "column": 52
         }
       }
     },
@@ -291,16 +360,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 64,
-      "end": 65,
+      "start": 52,
+      "end": 53,
       "loc": {
         "start": {
           "line": 1,
-          "column": 64
+          "column": 52
         },
         "end": {
           "line": 1,
-          "column": 65
+          "column": 53
         }
       }
     },
@@ -319,8 +388,8 @@
         "updateContext": null
       },
       "value": "export",
-      "start": 66,
-      "end": 72,
+      "start": 54,
+      "end": 60,
       "loc": {
         "start": {
           "line": 2,
@@ -344,9 +413,9 @@
         "postfix": false,
         "binop": null
       },
-      "value": "PageControl",
-      "start": 73,
-      "end": 84,
+      "value": "ImageUploader",
+      "start": 61,
+      "end": 74,
       "loc": {
         "start": {
           "line": 2,
@@ -354,6 +423,139 @@
         },
         "end": {
           "line": 2,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 75,
+      "end": 79,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 21
+        },
+        "end": {
+          "line": 2,
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "./image-uploader/image-uploader.view",
+      "start": 80,
+      "end": 118,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 26
+        },
+        "end": {
+          "line": 2,
+          "column": 64
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 118,
+      "end": 119,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 64
+        },
+        "end": {
+          "line": 2,
+          "column": 65
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "export",
+        "keyword": "export",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "export",
+      "start": 120,
+      "end": 126,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "PageControl",
+      "start": 127,
+      "end": 138,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 7
+        },
+        "end": {
+          "line": 3,
           "column": 18
         }
       }
@@ -371,15 +573,15 @@
         "binop": null
       },
       "value": "from",
-      "start": 85,
-      "end": 89,
+      "start": 139,
+      "end": 143,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 19
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 23
         }
       }
@@ -398,15 +600,15 @@
         "updateContext": null
       },
       "value": "./page-control/page-control.view",
-      "start": 90,
-      "end": 124,
+      "start": 144,
+      "end": 178,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 24
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 58
         }
       }
@@ -424,15 +626,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 124,
-      "end": 125,
+      "start": 178,
+      "end": 179,
       "loc": {
         "start": {
-          "line": 2,
+          "line": 3,
           "column": 58
         },
         "end": {
-          "line": 2,
+          "line": 3,
           "column": 59
         }
       }
@@ -450,15 +652,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 126,
-      "end": 126,
+      "start": 180,
+      "end": 180,
       "loc": {
         "start": {
-          "line": 3,
+          "line": 4,
           "column": 0
         },
         "end": {
-          "line": 3,
+          "line": 4,
           "column": 0
         }
       }

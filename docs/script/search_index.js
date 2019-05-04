@@ -6,6 +6,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@orloxx/ui-core/src/views/google-map/google-map.view.js~googlemap",
+    "class/src/views/google-map/google-map.view.js~GoogleMap.html",
+    "<span>GoogleMap</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/google-map/google-map.view.js</span>",
+    "class"
+  ],
+  [
+    "@orloxx/ui-core/src/views/google-map/google-map.model.js~googlemapmodel",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html",
+    "<span>GoogleMapModel</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/google-map/google-map.model.js</span>",
+    "class"
+  ],
+  [
     "@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js~imageuploader",
     "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html",
     "<span>ImageUploader</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js</span>",
@@ -400,6 +412,108 @@ window.esdocSearchIndex = [
     "class/src/utils/string.js~StringUtils.html#static-method-serialize",
     "src/utils/string.js~StringUtils.serialize",
     "method"
+  ],
+  [
+    "src/views/google-map/google-map.model.js",
+    "file/src/views/google-map/google-map.model.js.html",
+    "src/views/google-map/google-map.model.js",
+    "file"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~element",
+    "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "src/views/google-map/google-map.model.js~Element",
+    "external"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel#$el",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#instance-member-$el",
+    "src/views/google-map/google-map.model.js~GoogleMapModel#$el",
+    "member"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel#addlistener",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#instance-method-addListener",
+    "src/views/google-map/google-map.model.js~GoogleMapModel#addListener",
+    "method"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel#apikey",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#instance-member-apiKey",
+    "src/views/google-map/google-map.model.js~GoogleMapModel#apiKey",
+    "member"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel#constructor",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#instance-constructor-constructor",
+    "src/views/google-map/google-map.model.js~GoogleMapModel#constructor",
+    "method"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel#initgooglemap",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#instance-method-initGoogleMap",
+    "src/views/google-map/google-map.model.js~GoogleMapModel#initGoogleMap",
+    "method"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel#map",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#instance-member-map",
+    "src/views/google-map/google-map.model.js~GoogleMapModel#map",
+    "member"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel#options",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#instance-member-options",
+    "src/views/google-map/google-map.model.js~GoogleMapModel#options",
+    "member"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel#rendermap",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#instance-method-renderMap",
+    "src/views/google-map/google-map.model.js~GoogleMapModel#renderMap",
+    "method"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel.init_callback",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#static-get-INIT_CALLBACK",
+    "src/views/google-map/google-map.model.js~GoogleMapModel.INIT_CALLBACK",
+    "member"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~googlemapmodel.ready_callback",
+    "class/src/views/google-map/google-map.model.js~GoogleMapModel.html#static-get-READY_CALLBACK",
+    "src/views/google-map/google-map.model.js~GoogleMapModel.READY_CALLBACK",
+    "member"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~google~latlng",
+    "https://developers.google.com/maps/documentation/javascript/reference/coordinates",
+    "src/views/google-map/google-map.model.js~google~LatLng",
+    "external"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~google~map",
+    "https://developers.google.com/maps/documentation/javascript/reference/map",
+    "src/views/google-map/google-map.model.js~google~Map",
+    "external"
+  ],
+  [
+    "src/views/google-map/google-map.model.js~google~mapoptions",
+    "https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions",
+    "src/views/google-map/google-map.model.js~google~MapOptions",
+    "external"
+  ],
+  [
+    "src/views/google-map/google-map.view.js",
+    "file/src/views/google-map/google-map.view.js.html",
+    "src/views/google-map/google-map.view.js",
+    "file"
+  ],
+  [
+    "src/views/google-map/google-map.view.js~googlemap.proptypes",
+    "class/src/views/google-map/google-map.view.js~GoogleMap.html#static-member-propTypes",
+    "src/views/google-map/google-map.view.js~GoogleMap.propTypes",
+    "member"
   ],
   [
     "src/views/image-uploader/image-uploader.view.js",

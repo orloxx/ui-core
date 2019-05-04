@@ -35,6 +35,12 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Position">Position</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/PositionError">PositionError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-google-map">views/google-map</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/google-map/google-map.model.js~GoogleMapModel.html">GoogleMapModel</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/google-map/google-map.view.js~GoogleMap.html">GoogleMap</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/coordinates">google~LatLng</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/map">google~Map</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions">google~MapOptions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-uploader">views/image-uploader</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html">ImageUploader</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-navigation">views/navigation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html">Navigation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span></span></li>
@@ -46,13 +52,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import PageControl from &apos;<span><a href="file/src/views/page-control/page-control.view.js.html#lineNumber23">@orloxx/ui-core/src/views/page-control/page-control.view.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import PageControl from &apos;<span><a href="file/src/views/page-control/page-control.view.js.html#lineNumber27">@orloxx/ui-core/src/views/page-control/page-control.view.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/views/page-control/page-control.view.js.html#lineNumber23">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/views/page-control/page-control.view.js.html#lineNumber27">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -73,7 +79,8 @@
   
   
   <div class="description" data-ice="description"><p>Controls navigations and routes</p>
-</div>
+<h4 id="scss-import-">SCSS import:</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/page-control&quot;;</code>
+</code></pre></div>
   
 
   
@@ -86,9 +93,11 @@
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const routes = [
   { name: &apos;Home&apos;, to: &apos;/&apos;, component: HomeComponent },
   { name: &apos;Text example&apos;, to: &apos;/some-text&apos;, component: TextComponent },
-];
-
-&lt;PageRoutes base=&apos;/&apos; routes={routes} /&gt;</code></pre>
+];</code></pre>
+    </div>
+<div class="example-doc" data-ice="exampleDoc">
+      
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;PageControl base=&apos;/&apos; routes={routes} /&gt;</code></pre>
     </div>
 </div>
 
@@ -153,7 +162,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/views/page-control/page-control.view.js.html#lineNumber38">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/views/page-control/page-control.view.js.html#lineNumber42">source</a></span></span>
     </span>
   </h3>
 

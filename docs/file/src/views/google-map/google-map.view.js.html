@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">src/views/page-control/page-control.view.js | @orloxx/ui-core</title>
+  <title data-ice="title">src/views/google-map/google-map.view.js | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -51,80 +51,154 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/views/page-control/page-control.view.js</h1>
+<div class="content" data-ice="content"><h1 data-ice="title">src/views/google-map/google-map.view.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { Component } from &apos;react&apos;;
 import PropTypes from &apos;prop-types&apos;;
-import { BrowserRouter as Router, Route, withRouter } from &apos;react-router-dom&apos;;
-import Navigation from &apos;../navigation/navigation.view&apos;;
+import GoogleMapModel from &apos;./google-map.model&apos;;
 
 /**
- * @external {react~Component} https://reactjs.org/docs/react-component.html
- */
-
-/**
- * Controls navigations and routes
+ * Controls a map initialised with the Google Maps JavaScript API
  *
  * #### SCSS import:
  * ```
- * @import &quot;~@orloxx/ui-core/scss/page-control&quot;;
+ * @import &quot;~@orloxx/ui-core/scss/google-map&quot;;
  * ```
  *
- * @example
- * const routes = [
- *   { name: &apos;Home&apos;, to: &apos;/&apos;, component: HomeComponent },
- *   { name: &apos;Text example&apos;, to: &apos;/some-text&apos;, component: TextComponent },
- * ];
+ * @see https://developers.google.com/maps/documentation/javascript/tutorial
  *
  * @example
- * &lt;PageControl base=&apos;/&apos; routes={routes} /&gt;
+ * const mapOptions = { center: { lat: 10.4657, lng: -66.8796 }, zoom: 10 };
+ * const onMapReady = (map) =&gt; {
+ *   // Handles map
+ * };
+ *
+ * @example
+ * &lt;GoogleMap
+ *   apiKey=&apos;your-google-api-key&apos;
+ *   options={mapOptions}
+ *   onInit={map =&gt; onMapReady(map)} /&gt;
  */
-class PageControl extends Component {
-  /**
-   * @typedef {Object} Route
-   * @property {String} name - The name of the section to load. It will appear in the header of navigation
-   * @property {String} to - The path to the page it will go to
-   * @property {react~Component} component - The component it will load below the {@link Navigation}
-   *
-   * @example
-   * { name: &apos;Some name&apos;, to: &apos;path/to/page&apos;, component: SomeComponent }
-   */
+class GoogleMap extends Component {
   /**
    * @type {Object}
-   * @property {String} base - The base URL used in `Router`&apos;s `basename` attribute: default is `/`
-   * @property {Array&lt;Route&gt;} routes - All possible routes available
+   * @property {String} apiKey - Google provides this in their console
+   * @property {google~MapOptions} options - Options passed when map is initialised
+   * @property {Function} [onInit] - Triggers when the map is ready and rendered
+   *
+   * @property {Function} [onBoundsChanged] - Triggers when the viewport bounds have changed.
+   * @property {Function} [onCenterChanged] - Triggers when the map center property changes.
+   * @property {Function} [onClick] - Triggers when the user clicks on the map.
+   *   An ApiMouseEvent with properties for the clicked location is returned unless a place
+   *   icon was clicked, in which case an IconMouseEvent with a placeid is returned.
+   *   IconMouseEvent and ApiMouseEvent are identical, except that IconMouseEvent has the
+   *   placeid field. The event can always be treated as an ApiMouseEvent when the placeid
+   *   is not important. The click event is not fired if a marker or infowindow was clicked.
+   * @property {Function} [onDoubleClick] - Triggers when the user double-clicks on the map.
+   *   Note that the click event will also fire, right before this one.
+   * @property {Function} [onDrag] - This event is repeatedly fired while the user drags the map.
+   * @property {Function} [onDragEnd] - Triggers when the user stops dragging the map.
+   * @property {Function} [onDragStart] - Triggers when the user starts dragging the map.
+   * @property {Function} [onHeadingChanged] - Triggers when the map heading property changes.
+   * @property {Function} [onIdle] - Triggers when the map becomes idle after panning or zooming.
+   * @property {Function} [onMapTypeIdChanged] - Triggers when the mapTypeId property changes.
+   * @property {Function} [onMouseMove] - Triggers whenever the user&apos;s mouse moves over the map container.
+   * @property {Function} [onMouseOut] - Triggers when the user&apos;s mouse exits the map container.
+   * @property {Function} [OnMouseOver] - Triggers when the user&apos;s mouse enters the map container.
+   * @property {Function} [onProjectionChanged] - Triggers when the projection has changed.
+   * @property {Function} [onRightClick] - Triggers when the DOM contextmenu event is fired on the map container.
+   * @property {Function} [onTilesLoaded] - Triggers when the visible tiles have finished loading.
+   * @property {Function} [onTiltChanged] - Triggers when the map tilt property changes.
+   * @property {Function} [onZoomChanged] - Triggers when the map zoom property changes.
    */
   static propTypes = {
-    base: PropTypes.string,
-    routes: PropTypes.array,
+    apiKey: PropTypes.string.isRequired,
+    options: PropTypes.object.isRequired,
+    onInit: PropTypes.func,
+    onBoundsChanged: PropTypes.func,
+    onCenterChanged: PropTypes.func,
+    onClick: PropTypes.func,
+    onDoubleClick: PropTypes.func,
+    onDrag: PropTypes.func,
+    onDragEnd: PropTypes.func,
+    onDragStart: PropTypes.func,
+    onHeadingChanged: PropTypes.func,
+    onIdle: PropTypes.func,
+    onMapTypeIdChanged: PropTypes.func,
+    onMouseMove: PropTypes.func,
+    onMouseOut: PropTypes.func,
+    OnMouseOver: PropTypes.func,
+    onProjectionChanged: PropTypes.func,
+    onRightClick: PropTypes.func,
+    onTilesLoaded: PropTypes.func,
+    onTiltChanged: PropTypes.func,
+    onZoomChanged: PropTypes.func,
   };
 
   /**
    * @ignore
    */
-  renderRoutes() {
-    const { routes } = this.props;
-    if (routes &amp;&amp; routes.length) {
-      return routes.map(page =&gt; (
-        &lt;Route key={page.to} exact path={page.to} component={page.component} /&gt;
-      ));
+  constructor(props) {
+    super(props);
+
+    /**
+     * @ignore
+     */
+    this.$map = React.createRef();
+  }
+
+  /**
+   * @ignore
+   */
+  componentDidMount() {
+    const { apiKey, options } = this.props;
+    /**
+     * @ignore
+     */
+    this.google = new GoogleMapModel(apiKey, this.$map.current, options);
+    this.google.initGoogleMap().then(this.addMapListeners.bind(this));
+  }
+
+  /**
+   * @ignore
+   */
+  addMapListeners(map) {
+    const { onInit } = this.props;
+    if (onInit) {
+      onInit(map);
     }
+    this.google.addListener(&apos;bounds_changed&apos;, this.props.onBoundsChanged);
+    this.google.addListener(&apos;center_changed&apos;, this.props.onCenterChanged);
+    this.google.addListener(&apos;click&apos;, this.props.onClick);
+    this.google.addListener(&apos;dblclick&apos;, this.props.onDoubleClick);
+    this.google.addListener(&apos;drag&apos;, this.props.onDrag);
+    this.google.addListener(&apos;dragend&apos;, this.props.onDragEnd);
+    this.google.addListener(&apos;dragstart&apos;, this.props.onDragStart);
+    this.google.addListener(&apos;heading_changed&apos;, this.props.onHeadingChanged);
+    this.google.addListener(&apos;idle&apos;, this.props.onIdle);
+    this.google.addListener(&apos;maptypeid_changed&apos;, this.props.onMapTypeIdChanged);
+    this.google.addListener(&apos;mousemove&apos;, this.props.onMouseMove);
+    this.google.addListener(&apos;mouseout&apos;, this.props.onMouseOut);
+    this.google.addListener(&apos;mouseover&apos;, this.props.OnMouseOver);
+    this.google.addListener(&apos;projection_changed&apos;, this.props.onProjectionChanged);
+    this.google.addListener(&apos;rightclick&apos;, this.props.onRightClick);
+    this.google.addListener(&apos;tilesloaded&apos;, this.props.onTilesLoaded);
+    this.google.addListener(&apos;tilt_changed&apos;, this.props.onTiltChanged);
+    this.google.addListener(&apos;zoom_changed&apos;, this.props.onZoomChanged);
   }
 
   /**
    * @ignore
    */
   render() {
-    const Nav = withRouter(Navigation);
     return (
-      &lt;Router basename={this.props.base || &apos;/&apos;}&gt;
-        &lt;Nav routes={this.props.routes} /&gt;
-        {this.renderRoutes()}
-      &lt;/Router&gt;
+      &lt;section className=&apos;googlemap&apos;&gt;
+        &lt;div className=&apos;googlemap__map&apos; ref={this.$map} /&gt;
+      &lt;/section&gt;
     );
   }
 }
 
-export default PageControl;
+export default GoogleMap;
 </code></pre>
 
 </div>

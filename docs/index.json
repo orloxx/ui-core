@@ -996,8 +996,711 @@
   {
     "__docId__": 67,
     "kind": "file",
+    "name": "src/views/google-map/google-map.model.js",
+    "content": "import { StringUtils } from '../../utils';\n\n/**\n * @external {google~Map} https://developers.google.com/maps/documentation/javascript/reference/map\n */\n\n/**\n * @external {google~LatLng} https://developers.google.com/maps/documentation/javascript/reference/coordinates\n */\n\n/**\n * @external {google~MapOptions} https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions\n */\n\n/**\n * @external {Element} https://developer.mozilla.org/en-US/docs/Web/API/Element\n */\n\n/**\n * Controls communication and handling of the Google Maps JavaScript API\n *\n * @example\n * const googleMap = new GoogleMapModel(\n *   'your-google-api-key',\n *   document.getElementById('some-map'),\n *   { center: { lat: 10.4657, lng: -66.8796 }, zoom: 12 }\n * );\n */\nclass GoogleMapModel {\n  /**\n   * Initialises the map using Google Maps JavaScript API\n   *\n   * @param {String} apiKey - Google provides this in their console\n   * @param {Element} $el - The element where the map will be rendered\n   * @param {google~MapOptions} options - Google Maps options\n   */\n  constructor(apiKey, $el, options) {\n    /**\n     * Google's API key\n     * @type {String}\n     */\n    this.apiKey = apiKey;\n    /**\n     * The element where the map will be rendered\n     * @type {Element}\n     */\n    this.$el = $el;\n    /**\n     * Google Maps options\n     * @type {google~MapOptions}\n     */\n    this.options = options;\n    /**\n     * The map instance from Google Maps JavaScript API\n     * @type {google~Map}\n     */\n    this.map = null;\n  }\n\n  /**\n   * The callback name attached to the Google's script library\n   *\n   * @return {String}\n   */\n  static get INIT_CALLBACK() {\n    return 'initGoogleMapsLib';\n  }\n\n  /**\n   * The callback name triggered when the Google's script library is called\n   *\n   * @return {String}\n   */\n  static get READY_CALLBACK() {\n    return 'googleMapsLibReady';\n  }\n\n  /**\n   * Initialises the Google Maps JavaScript library and safely calls {@link renderMap}\n   *\n   * There are three ways this can go down:\n   *\n   * 1. It's the first map added to the page and the script library has not been included yet\n   * 2. The library was included and INIT_CALLBACK already triggered\n   * 3. The library was included but it has not initialised yet\n   *\n   * @return {Promise<google~Map>}\n   */\n  initGoogleMap() {\n    return new Promise((resolve) => {\n      if (!window[GoogleMapModel.INIT_CALLBACK]) {\n        window[GoogleMapModel.INIT_CALLBACK] = () => {\n          const initEvent = new Event(GoogleMapModel.READY_CALLBACK);\n          document.dispatchEvent(initEvent);\n          window[GoogleMapModel.READY_CALLBACK] = true;\n          resolve(this.renderMap());\n        };\n        const API_URL = 'https://maps.googleapis.com/maps/api/js';\n        const libScript = document.createElement('script');\n        const params = {\n          key: this.apiKey,\n          callback: GoogleMapModel.INIT_CALLBACK,\n        };\n        libScript.async = true;\n        libScript.defer = true;\n        libScript.src = `${API_URL}?${StringUtils.serialize(params)}`;\n        document.body.appendChild(libScript);\n      } else if (window[GoogleMapModel.READY_CALLBACK] === true) {\n        // Library is ready and event was already called\n        resolve(this.renderMap());\n      } else {\n        // Library was defined but not ready yet\n        document.addEventListener(GoogleMapModel.READY_CALLBACK, () => {\n          resolve(this.renderMap());\n        });\n      }\n    });\n  }\n\n  /**\n   * Adds map listener\n   *\n   * @see https://developers.google.com/maps/documentation/javascript/events\n   *\n   * @param {String} name - The event name\n   * @param {Function} callback - The event callback function\n   */\n  addListener(name, callback) {\n    if (callback) {\n      this.map.addListener(name, callback);\n    }\n  }\n\n  /**\n   * Renders the map in the chosen {@link $el}\n   *\n   * @return {google~Map}\n   */\n  renderMap() {\n    this.map = new window.google.maps.Map(this.$el, Object.assign({\n      clickableIcons: false,\n      center: { lat: 10.4657, lng: -66.8796 },\n      zoom: 12,\n    }, this.options));\n    return this.map;\n  }\n}\n\nexport default GoogleMapModel;\n",
+    "static": true,
+    "longname": "/Users/ikertxu/Personal/ui-core/src/views/google-map/google-map.model.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 68,
+    "kind": "external",
+    "name": "google~Map",
+    "externalLink": "https://developers.google.com/maps/documentation/javascript/reference/map",
+    "memberof": "src/views/google-map/google-map.model.js",
+    "static": true,
+    "longname": "src/views/google-map/google-map.model.js~google~Map",
+    "access": "public",
+    "description": ""
+  },
+  {
+    "__docId__": 69,
+    "kind": "external",
+    "name": "google~LatLng",
+    "externalLink": "https://developers.google.com/maps/documentation/javascript/reference/coordinates",
+    "memberof": "src/views/google-map/google-map.model.js",
+    "static": true,
+    "longname": "src/views/google-map/google-map.model.js~google~LatLng",
+    "access": "public",
+    "description": ""
+  },
+  {
+    "__docId__": 70,
+    "kind": "external",
+    "name": "google~MapOptions",
+    "externalLink": "https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions",
+    "memberof": "src/views/google-map/google-map.model.js",
+    "static": true,
+    "longname": "src/views/google-map/google-map.model.js~google~MapOptions",
+    "access": "public",
+    "description": ""
+  },
+  {
+    "__docId__": 71,
+    "kind": "external",
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "src/views/google-map/google-map.model.js",
+    "static": true,
+    "longname": "src/views/google-map/google-map.model.js~Element",
+    "access": "public",
+    "description": ""
+  },
+  {
+    "__docId__": 72,
+    "kind": "class",
+    "name": "GoogleMapModel",
+    "memberof": "src/views/google-map/google-map.model.js",
+    "static": true,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "access": "public",
+    "export": true,
+    "importPath": "@orloxx/ui-core/src/views/google-map/google-map.model.js",
+    "importStyle": "GoogleMapModel",
+    "description": "Controls communication and handling of the Google Maps JavaScript API",
+    "examples": [
+      "const googleMap = new GoogleMapModel(\n  'your-google-api-key',\n  document.getElementById('some-map'),\n  { center: { lat: 10.4657, lng: -66.8796 }, zoom: 12 }\n);"
+    ],
+    "lineNumber": 29,
+    "interface": false
+  },
+  {
+    "__docId__": 73,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel#constructor",
+    "access": "public",
+    "description": "Initialises the map using Google Maps JavaScript API",
+    "lineNumber": 37,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "apiKey",
+        "description": "Google provides this in their console"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Element"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "$el",
+        "description": "The element where the map will be rendered"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "google~MapOptions"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "Google Maps options"
+      }
+    ]
+  },
+  {
+    "__docId__": 74,
+    "kind": "member",
+    "name": "apiKey",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "static": false,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel#apiKey",
+    "access": "public",
+    "description": "Google's API key",
+    "lineNumber": 42,
+    "type": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 75,
+    "kind": "member",
+    "name": "$el",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "static": false,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel#$el",
+    "access": "public",
+    "description": "The element where the map will be rendered",
+    "lineNumber": 47,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Element"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "member",
+    "name": "options",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "static": false,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel#options",
+    "access": "public",
+    "description": "Google Maps options",
+    "lineNumber": 52,
+    "type": {
+      "nullable": null,
+      "types": [
+        "google~MapOptions"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "member",
+    "name": "map",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "static": false,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel#map",
+    "access": "public",
+    "description": "The map instance from Google Maps JavaScript API",
+    "lineNumber": 57,
+    "type": {
+      "nullable": null,
+      "types": [
+        "google~Map"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "get",
+    "name": "INIT_CALLBACK",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel.INIT_CALLBACK",
+    "access": "public",
+    "description": "The callback name attached to the Google's script library",
+    "lineNumber": 65,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 79,
+    "kind": "get",
+    "name": "READY_CALLBACK",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel.READY_CALLBACK",
+    "access": "public",
+    "description": "The callback name triggered when the Google's script library is called",
+    "lineNumber": 74,
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 80,
+    "kind": "method",
+    "name": "initGoogleMap",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel#initGoogleMap",
+    "access": "public",
+    "description": "Initialises the Google Maps JavaScript library and safely calls {@link renderMap}\n\nThere are three ways this can go down:\n\n1. It's the first map added to the page and the script library has not been included yet\n2. The library was included and INIT_CALLBACK already triggered\n3. The library was included but it has not initialised yet",
+    "lineNumber": 89,
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise<google~Map>"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 81,
+    "kind": "method",
+    "name": "addListener",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel#addListener",
+    "access": "public",
+    "description": "Adds map listener",
+    "see": [
+      "https://developers.google.com/maps/documentation/javascript/events"
+    ],
+    "lineNumber": 128,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "The event name"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": "The event callback function"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "name": "renderMap",
+    "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/google-map/google-map.model.js~GoogleMapModel#renderMap",
+    "access": "public",
+    "description": "Renders the map in the chosen {@link $el}",
+    "lineNumber": 139,
+    "return": {
+      "nullable": null,
+      "types": [
+        "google~Map"
+      ],
+      "spread": false,
+      "description": ""
+    },
+    "params": []
+  },
+  {
+    "__docId__": 84,
+    "kind": "file",
+    "name": "src/views/google-map/google-map.view.js",
+    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport GoogleMapModel from './google-map.model';\n\n/**\n * Controls a map initialised with the Google Maps JavaScript API\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/google-map\";\n * ```\n *\n * @see https://developers.google.com/maps/documentation/javascript/tutorial\n *\n * @example\n * const mapOptions = { center: { lat: 10.4657, lng: -66.8796 }, zoom: 10 };\n * const onMapReady = (map) => {\n *   // Handles map\n * };\n *\n * @example\n * <GoogleMap\n *   apiKey='your-google-api-key'\n *   options={mapOptions}\n *   onInit={map => onMapReady(map)} />\n */\nclass GoogleMap extends Component {\n  /**\n   * @type {Object}\n   * @property {String} apiKey - Google provides this in their console\n   * @property {google~MapOptions} options - Options passed when map is initialised\n   * @property {Function} [onInit] - Triggers when the map is ready and rendered\n   *\n   * @property {Function} [onBoundsChanged] - Triggers when the viewport bounds have changed.\n   * @property {Function} [onCenterChanged] - Triggers when the map center property changes.\n   * @property {Function} [onClick] - Triggers when the user clicks on the map.\n   *   An ApiMouseEvent with properties for the clicked location is returned unless a place\n   *   icon was clicked, in which case an IconMouseEvent with a placeid is returned.\n   *   IconMouseEvent and ApiMouseEvent are identical, except that IconMouseEvent has the\n   *   placeid field. The event can always be treated as an ApiMouseEvent when the placeid\n   *   is not important. The click event is not fired if a marker or infowindow was clicked.\n   * @property {Function} [onDoubleClick] - Triggers when the user double-clicks on the map.\n   *   Note that the click event will also fire, right before this one.\n   * @property {Function} [onDrag] - This event is repeatedly fired while the user drags the map.\n   * @property {Function} [onDragEnd] - Triggers when the user stops dragging the map.\n   * @property {Function} [onDragStart] - Triggers when the user starts dragging the map.\n   * @property {Function} [onHeadingChanged] - Triggers when the map heading property changes.\n   * @property {Function} [onIdle] - Triggers when the map becomes idle after panning or zooming.\n   * @property {Function} [onMapTypeIdChanged] - Triggers when the mapTypeId property changes.\n   * @property {Function} [onMouseMove] - Triggers whenever the user's mouse moves over the map container.\n   * @property {Function} [onMouseOut] - Triggers when the user's mouse exits the map container.\n   * @property {Function} [OnMouseOver] - Triggers when the user's mouse enters the map container.\n   * @property {Function} [onProjectionChanged] - Triggers when the projection has changed.\n   * @property {Function} [onRightClick] - Triggers when the DOM contextmenu event is fired on the map container.\n   * @property {Function} [onTilesLoaded] - Triggers when the visible tiles have finished loading.\n   * @property {Function} [onTiltChanged] - Triggers when the map tilt property changes.\n   * @property {Function} [onZoomChanged] - Triggers when the map zoom property changes.\n   */\n  static propTypes = {\n    apiKey: PropTypes.string.isRequired,\n    options: PropTypes.object.isRequired,\n    onInit: PropTypes.func,\n    onBoundsChanged: PropTypes.func,\n    onCenterChanged: PropTypes.func,\n    onClick: PropTypes.func,\n    onDoubleClick: PropTypes.func,\n    onDrag: PropTypes.func,\n    onDragEnd: PropTypes.func,\n    onDragStart: PropTypes.func,\n    onHeadingChanged: PropTypes.func,\n    onIdle: PropTypes.func,\n    onMapTypeIdChanged: PropTypes.func,\n    onMouseMove: PropTypes.func,\n    onMouseOut: PropTypes.func,\n    OnMouseOver: PropTypes.func,\n    onProjectionChanged: PropTypes.func,\n    onRightClick: PropTypes.func,\n    onTilesLoaded: PropTypes.func,\n    onTiltChanged: PropTypes.func,\n    onZoomChanged: PropTypes.func,\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.$map = React.createRef();\n  }\n\n  /**\n   * @ignore\n   */\n  componentDidMount() {\n    const { apiKey, options } = this.props;\n    /**\n     * @ignore\n     */\n    this.google = new GoogleMapModel(apiKey, this.$map.current, options);\n    this.google.initGoogleMap().then(this.addMapListeners.bind(this));\n  }\n\n  /**\n   * @ignore\n   */\n  addMapListeners(map) {\n    const { onInit } = this.props;\n    if (onInit) {\n      onInit(map);\n    }\n    this.google.addListener('bounds_changed', this.props.onBoundsChanged);\n    this.google.addListener('center_changed', this.props.onCenterChanged);\n    this.google.addListener('click', this.props.onClick);\n    this.google.addListener('dblclick', this.props.onDoubleClick);\n    this.google.addListener('drag', this.props.onDrag);\n    this.google.addListener('dragend', this.props.onDragEnd);\n    this.google.addListener('dragstart', this.props.onDragStart);\n    this.google.addListener('heading_changed', this.props.onHeadingChanged);\n    this.google.addListener('idle', this.props.onIdle);\n    this.google.addListener('maptypeid_changed', this.props.onMapTypeIdChanged);\n    this.google.addListener('mousemove', this.props.onMouseMove);\n    this.google.addListener('mouseout', this.props.onMouseOut);\n    this.google.addListener('mouseover', this.props.OnMouseOver);\n    this.google.addListener('projection_changed', this.props.onProjectionChanged);\n    this.google.addListener('rightclick', this.props.onRightClick);\n    this.google.addListener('tilesloaded', this.props.onTilesLoaded);\n    this.google.addListener('tilt_changed', this.props.onTiltChanged);\n    this.google.addListener('zoom_changed', this.props.onZoomChanged);\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    return (\n      <section className='googlemap'>\n        <div className='googlemap__map' ref={this.$map} />\n      </section>\n    );\n  }\n}\n\nexport default GoogleMap;\n",
+    "static": true,
+    "longname": "/Users/ikertxu/Personal/ui-core/src/views/google-map/google-map.view.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 85,
+    "kind": "class",
+    "name": "GoogleMap",
+    "memberof": "src/views/google-map/google-map.view.js",
+    "static": true,
+    "longname": "src/views/google-map/google-map.view.js~GoogleMap",
+    "access": "public",
+    "export": true,
+    "importPath": "@orloxx/ui-core/src/views/google-map/google-map.view.js",
+    "importStyle": "GoogleMap",
+    "description": "Controls a map initialised with the Google Maps JavaScript API\n\n#### SCSS import:\n```\n@import \"~@orloxx/ui-core/scss/google-map\";\n```",
+    "examples": [
+      "const mapOptions = { center: { lat: 10.4657, lng: -66.8796 }, zoom: 10 };\nconst onMapReady = (map) => {\n  // Handles map\n};",
+      "<GoogleMap\n  apiKey='your-google-api-key'\n  options={mapOptions}\n  onInit={map => onMapReady(map)} />"
+    ],
+    "see": [
+      "https://developers.google.com/maps/documentation/javascript/tutorial"
+    ],
+    "lineNumber": 27,
+    "interface": false,
+    "extends": [
+      "react~Component"
+    ]
+  },
+  {
+    "__docId__": 86,
+    "kind": "member",
+    "name": "propTypes",
+    "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
+    "static": true,
+    "longname": "src/views/google-map/google-map.view.js~GoogleMap.propTypes",
+    "access": "public",
+    "description": "",
+    "lineNumber": 59,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "apiKey",
+        "description": "Google provides this in their console"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "google~MapOptions"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "options",
+        "description": "Options passed when map is initialised"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onInit",
+        "description": "Triggers when the map is ready and rendered"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onBoundsChanged",
+        "description": "Triggers when the viewport bounds have changed."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onCenterChanged",
+        "description": "Triggers when the map center property changes."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onClick",
+        "description": "Triggers when the user clicks on the map.\n  An ApiMouseEvent with properties for the clicked location is returned unless a place\n  icon was clicked, in which case an IconMouseEvent with a placeid is returned.\n  IconMouseEvent and ApiMouseEvent are identical, except that IconMouseEvent has the\n  placeid field. The event can always be treated as an ApiMouseEvent when the placeid\n  is not important. The click event is not fired if a marker or infowindow was clicked."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onDoubleClick",
+        "description": "Triggers when the user double-clicks on the map.\n  Note that the click event will also fire, right before this one."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onDrag",
+        "description": "This event is repeatedly fired while the user drags the map."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onDragEnd",
+        "description": "Triggers when the user stops dragging the map."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onDragStart",
+        "description": "Triggers when the user starts dragging the map."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onHeadingChanged",
+        "description": "Triggers when the map heading property changes."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onIdle",
+        "description": "Triggers when the map becomes idle after panning or zooming."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onMapTypeIdChanged",
+        "description": "Triggers when the mapTypeId property changes."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onMouseMove",
+        "description": "Triggers whenever the user's mouse moves over the map container."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onMouseOut",
+        "description": "Triggers when the user's mouse exits the map container."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "OnMouseOver",
+        "description": "Triggers when the user's mouse enters the map container."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onProjectionChanged",
+        "description": "Triggers when the projection has changed."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onRightClick",
+        "description": "Triggers when the DOM contextmenu event is fired on the map container."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onTilesLoaded",
+        "description": "Triggers when the visible tiles have finished loading."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onTiltChanged",
+        "description": "Triggers when the map tilt property changes."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Function"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "onZoomChanged",
+        "description": "Triggers when the map zoom property changes."
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 87,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/google-map/google-map.view.js~GoogleMap#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 86,
+    "ignore": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "member",
+    "name": "$map",
+    "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
+    "static": false,
+    "longname": "src/views/google-map/google-map.view.js~GoogleMap#$map",
+    "access": "public",
+    "description": "",
+    "lineNumber": 92,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 89,
+    "kind": "method",
+    "name": "componentDidMount",
+    "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/google-map/google-map.view.js~GoogleMap#componentDidMount",
+    "access": "public",
+    "description": "",
+    "lineNumber": 98,
+    "ignore": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 90,
+    "kind": "member",
+    "name": "google",
+    "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
+    "static": false,
+    "longname": "src/views/google-map/google-map.view.js~GoogleMap#google",
+    "access": "public",
+    "description": "",
+    "lineNumber": 103,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 91,
+    "kind": "method",
+    "name": "addMapListeners",
+    "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/google-map/google-map.view.js~GoogleMap#addMapListeners",
+    "access": "public",
+    "description": "",
+    "lineNumber": 110,
+    "ignore": true,
+    "params": [
+      {
+        "name": "map",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 92,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/google-map/google-map.view.js~GoogleMap#render",
+    "access": "public",
+    "description": "",
+    "lineNumber": 138,
+    "ignore": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 93,
+    "kind": "file",
     "name": "src/views/image-uploader/image-uploader.view.js",
-    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faUpload } from '@fortawesome/free-solid-svg-icons';\nimport { ImageUtils } from '../../utils';\n\n/**\n * Controls an input file element that shows a preview of the selected image\n *\n * @example\n * <ImageUploader id='image' name='image' />\n */\nclass ImageUploader extends Component {\n  /**\n   * @type {Object}\n   * @property {String} id - The same `id` added to the input field\n   * @property {String} name - The same `name` added to the input field\n   * @property {String} [caption] - Caption text added at the bottom of the field\n   * @property {String} [src] - Default image path when nothing is selected\n   * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted\n   */\n  static propTypes = {\n    id: PropTypes.string.isRequired,\n    name: PropTypes.string.isRequired,\n    caption: PropTypes.string,\n    src: PropTypes.string,\n    fileSize: PropTypes.number,\n  };\n\n  /**\n   * @ignore\n   */\n  static defaultProps = {\n    src: '',\n    fileSize: 256,\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = {\n      imageData: null,\n    };\n  }\n\n  /**\n   * @ignore\n   */\n  get hasImageClassName() {\n    return this.imageSrc ? 'imageUploader--hasImage' : '';\n  }\n\n  /**\n   * @ignore\n   */\n  get imageSrc() {\n    const { imageData } = this.state;\n    const { src } = this.props;\n    return imageData || src;\n  }\n\n  /**\n   * @ignore\n   */\n  setImage(e) {\n    const file = e.target.files[0];\n    const maxKb = this.props.fileSize;\n    const maxSize = maxKb * 1024;\n\n    if (file && file.size > maxSize) {\n      alert(`File cannot be greater than ${maxKb}Kb. Image will be removed.`);\n      e.target.value = null;\n      this.setState({ imageData: null });\n      return;\n    }\n    this.setImageData(file);\n  }\n\n  /**\n   * @ignore\n   */\n  setImageData(file) {\n    if (file) {\n      ImageUtils.getFileData(file).then(imageData => this.setState({ imageData }));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const { id, name, caption } = this.props;\n    return (\n      <div className={`imageUploader ${this.hasImageClassName}`}>\n        <label className='button imageUploader__label' htmlFor={id}>\n          <img\n            className='imageUploader__image'\n            src={this.imageSrc}\n            alt='Upload'\n          />\n          <input type='hidden' name={name} value={this.imageSrc} />\n          <input\n            className='imageUploader__input'\n            id={id}\n            name='image-uploader-file'\n            type='file'\n            accept='image/*'\n            onChange={e => this.setImage(e)}\n          />\n          <FA className='imageUploader__noImageIcon' icon={faUpload} />\n          {caption || 'Upload image'}\n        </label>\n      </div>\n    );\n  }\n}\n\nexport default ImageUploader;\n",
+    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faUpload } from '@fortawesome/free-solid-svg-icons';\nimport { ImageUtils } from '../../utils';\n\n/**\n * Controls an input file element that shows a preview of the selected image\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/image-uploader\";\n * ```\n *\n * @example\n * <ImageUploader id='image' name='image' />\n */\nclass ImageUploader extends Component {\n  /**\n   * @type {Object}\n   * @property {String} id - The same `id` added to the input field\n   * @property {String} name - The same `name` added to the input field\n   * @property {String} [caption] - Caption text added at the bottom of the field\n   * @property {String} [src] - Default image path when nothing is selected\n   * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted\n   */\n  static propTypes = {\n    id: PropTypes.string.isRequired,\n    name: PropTypes.string.isRequired,\n    caption: PropTypes.string,\n    src: PropTypes.string,\n    fileSize: PropTypes.number,\n  };\n\n  /**\n   * @ignore\n   */\n  static defaultProps = {\n    src: '',\n    fileSize: 256,\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = {\n      imageData: null,\n    };\n  }\n\n  /**\n   * @ignore\n   */\n  get hasImageClassName() {\n    return this.imageSrc ? 'imageUploader--hasImage' : '';\n  }\n\n  /**\n   * @ignore\n   */\n  get imageSrc() {\n    const { imageData } = this.state;\n    const { src } = this.props;\n    return imageData || src;\n  }\n\n  /**\n   * @ignore\n   */\n  setImage(e) {\n    const file = e.target.files[0];\n    const maxKb = this.props.fileSize;\n    const maxSize = maxKb * 1024;\n\n    if (file && file.size > maxSize) {\n      alert(`File cannot be greater than ${maxKb}Kb. Image will be removed.`);\n      e.target.value = null;\n      this.setState({ imageData: null });\n      return;\n    }\n    this.setImageData(file);\n  }\n\n  /**\n   * @ignore\n   */\n  setImageData(file) {\n    if (file) {\n      ImageUtils.getFileData(file).then(imageData => this.setState({ imageData }));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const { id, name, caption } = this.props;\n    return (\n      <div className={`imageUploader ${this.hasImageClassName}`}>\n        <label className='button imageUploader__label' htmlFor={id}>\n          <img\n            className='imageUploader__image'\n            src={this.imageSrc}\n            alt='Upload'\n          />\n          <input type='hidden' name={name} value={this.imageSrc} />\n          <input\n            className='imageUploader__input'\n            id={id}\n            name='image-uploader-file'\n            type='file'\n            accept='image/*'\n            onChange={e => this.setImage(e)}\n          />\n          <FA className='imageUploader__noImageIcon' icon={faUpload} />\n          {caption || 'Upload image'}\n        </label>\n      </div>\n    );\n  }\n}\n\nexport default ImageUploader;\n",
     "static": true,
     "longname": "/Users/ikertxu/Personal/ui-core/src/views/image-uploader/image-uploader.view.js",
     "access": "public",
@@ -1005,7 +1708,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 68,
+    "__docId__": 94,
     "kind": "class",
     "name": "ImageUploader",
     "memberof": "src/views/image-uploader/image-uploader.view.js",
@@ -1015,18 +1718,18 @@
     "export": true,
     "importPath": "@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js",
     "importStyle": "ImageUploader",
-    "description": "Controls an input file element that shows a preview of the selected image",
+    "description": "Controls an input file element that shows a preview of the selected image\n\n#### SCSS import:\n```\n@import \"~@orloxx/ui-core/scss/image-uploader\";\n```",
     "examples": [
       "<ImageUploader id='image' name='image' />"
     ],
-    "lineNumber": 13,
+    "lineNumber": 18,
     "interface": false,
     "extends": [
       "react~Component"
     ]
   },
   {
-    "__docId__": 69,
+    "__docId__": 95,
     "kind": "member",
     "name": "propTypes",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1034,7 +1737,7 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader.propTypes",
     "access": "public",
     "description": "",
-    "lineNumber": 22,
+    "lineNumber": 27,
     "properties": [
       {
         "nullable": null,
@@ -1099,7 +1802,7 @@
     }
   },
   {
-    "__docId__": 70,
+    "__docId__": 96,
     "kind": "member",
     "name": "defaultProps",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1107,7 +1810,7 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader.defaultProps",
     "access": "public",
     "description": "",
-    "lineNumber": 33,
+    "lineNumber": 38,
     "ignore": true,
     "type": {
       "types": [
@@ -1116,7 +1819,7 @@
     }
   },
   {
-    "__docId__": 71,
+    "__docId__": 97,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1126,11 +1829,11 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#constructor",
     "access": "public",
     "description": "",
-    "lineNumber": 41,
+    "lineNumber": 46,
     "ignore": true
   },
   {
-    "__docId__": 72,
+    "__docId__": 98,
     "kind": "member",
     "name": "state",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1138,7 +1841,7 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#state",
     "access": "public",
     "description": "",
-    "lineNumber": 47,
+    "lineNumber": 52,
     "ignore": true,
     "type": {
       "types": [
@@ -1147,7 +1850,7 @@
     }
   },
   {
-    "__docId__": 73,
+    "__docId__": 99,
     "kind": "get",
     "name": "hasImageClassName",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1157,7 +1860,7 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#hasImageClassName",
     "access": "public",
     "description": "",
-    "lineNumber": 55,
+    "lineNumber": 60,
     "ignore": true,
     "type": {
       "types": [
@@ -1166,7 +1869,7 @@
     }
   },
   {
-    "__docId__": 74,
+    "__docId__": 100,
     "kind": "get",
     "name": "imageSrc",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1176,7 +1879,7 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#imageSrc",
     "access": "public",
     "description": "",
-    "lineNumber": 62,
+    "lineNumber": 67,
     "ignore": true,
     "type": {
       "types": [
@@ -1185,7 +1888,7 @@
     }
   },
   {
-    "__docId__": 75,
+    "__docId__": 101,
     "kind": "method",
     "name": "setImage",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1195,7 +1898,7 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#setImage",
     "access": "public",
     "description": "",
-    "lineNumber": 71,
+    "lineNumber": 76,
     "ignore": true,
     "params": [
       {
@@ -1208,7 +1911,7 @@
     "return": null
   },
   {
-    "__docId__": 76,
+    "__docId__": 102,
     "kind": "method",
     "name": "setImageData",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1218,7 +1921,7 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#setImageData",
     "access": "public",
     "description": "",
-    "lineNumber": 88,
+    "lineNumber": 93,
     "ignore": true,
     "params": [
       {
@@ -1231,7 +1934,7 @@
     "return": null
   },
   {
-    "__docId__": 77,
+    "__docId__": 103,
     "kind": "method",
     "name": "render",
     "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
@@ -1241,7 +1944,7 @@
     "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#render",
     "access": "public",
     "description": "",
-    "lineNumber": 97,
+    "lineNumber": 102,
     "ignore": true,
     "params": [],
     "return": {
@@ -1251,10 +1954,10 @@
     }
   },
   {
-    "__docId__": 78,
+    "__docId__": 104,
     "kind": "file",
     "name": "src/views/index.js",
-    "content": "export ImageUploader from './image-uploader/image-uploader.view';\nexport PageControl from './page-control/page-control.view';\n",
+    "content": "export GoogleMap from './google-map/google-map.view';\nexport ImageUploader from './image-uploader/image-uploader.view';\nexport PageControl from './page-control/page-control.view';\n",
     "static": true,
     "longname": "/Users/ikertxu/Personal/ui-core/src/views/index.js",
     "access": "public",
@@ -1262,10 +1965,10 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 79,
+    "__docId__": 105,
     "kind": "file",
     "name": "src/views/navigation/navigation.view.js",
-    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { Link } from 'react-router-dom';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faHome, faBars } from '@fortawesome/free-solid-svg-icons';\n\n/**\n * @external {react-router-dom~withRouter} https://reacttraining.com/react-router/web/api/withRouter\n */\n\n/**\n * Controls the navigation bar.\n * Uses the same routes object defined in {@link PageControl}\n *\n * @example\n * const Nav = withRoute(Navigation);\n *\n * <Nav routes={routes} />\n */\nclass Navigation extends Component {\n  /**\n   *\n   * @type {Object}\n   * @property {Object} location - Comes from the {@link react-router-dom~withRouter} function\n   * @property {Array<Route>} routes - Same {@link Route} object defined in {@link PageControl}\n   */\n  static propTypes = {\n    location: PropTypes.object.isRequired,\n    routes: PropTypes.array.isRequired,\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = {\n      isMenuOpen: false,\n    };\n  }\n\n  /**\n   * @ignore\n   */\n  get currentTitle() {\n    const { routes, location } = this.props;\n    const route = routes.find(item => item.to === location.pathname);\n    return route ? route.name : 'Home';\n  }\n\n  /**\n   * @ignore\n   */\n  get routes() {\n    const { routes } = this.props;\n    return routes.filter(route => route.to && route.to !== '/');\n  }\n\n  /**\n   * @ignore\n   */\n  toggleMenu() {\n    const { isMenuOpen } = this.state;\n    this.setState({ isMenuOpen: !isMenuOpen });\n  }\n\n  /**\n   * @ignore\n   */\n  closeMenu() {\n    this.setState({ isMenuOpen: false });\n  }\n\n  /**\n   * @ignore\n   */\n  renderMenuButton() {\n    const routes = this.routes;\n    if (routes && routes.length) {\n      return (\n        <button\n          className='navigation__button'\n          onClick={() => this.toggleMenu()}>\n          <FA icon={faBars} />\n        </button>\n      );\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  renderMenu() {\n    const { isMenuOpen } = this.state;\n    if (isMenuOpen) {\n      return this.routes.map(route => (\n        <li key={route.to} className='navigation__menuItem'>\n          <Link\n            className='navigation__menuLink' to={route.to}\n            onClick={() => this.closeMenu()}>{route.name}</Link>\n        </li>\n      ));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    return (\n      <nav className='navigation'>\n        <section className='navigation__top'>\n          <div className='navigation__sides'>\n            <Link\n              className='navigation__button' to='/'\n              onClick={() => this.closeMenu()}>\n              <FA icon={faHome} />\n            </Link>\n          </div>\n          <div className='navigation__title'>{this.currentTitle}</div>\n          <div className='navigation__sides'>\n            {this.renderMenuButton()}\n          </div>\n        </section>\n        <section className='navigation__menu'>\n          <ul className='navigation__menuList'>{this.renderMenu()}</ul>\n        </section>\n      </nav>\n    );\n  }\n}\n\nexport default Navigation;\n",
+    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { Link } from 'react-router-dom';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faHome, faBars } from '@fortawesome/free-solid-svg-icons';\n\n/**\n * @external {react-router-dom~withRouter} https://reacttraining.com/react-router/web/api/withRouter\n */\n\n/**\n * Controls the navigation bar.\n * Uses the same routes object defined in {@link PageControl}\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/navigation\";\n * ```\n *\n * @example\n * const Nav = withRoute(Navigation);\n *\n * @example\n * <Nav routes={routes} />\n */\nclass Navigation extends Component {\n  /**\n   *\n   * @type {Object}\n   * @property {Object} location - Comes from the {@link react-router-dom~withRouter} function\n   * @property {Array<Route>} routes - Same {@link Route} object defined in {@link PageControl}\n   */\n  static propTypes = {\n    location: PropTypes.object.isRequired,\n    routes: PropTypes.array.isRequired,\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = {\n      isMenuOpen: false,\n    };\n  }\n\n  /**\n   * @ignore\n   */\n  get currentTitle() {\n    const { routes, location } = this.props;\n    const route = routes.find(item => item.to === location.pathname);\n    return route ? route.name : 'Home';\n  }\n\n  /**\n   * @ignore\n   */\n  get routes() {\n    const { routes } = this.props;\n    return routes.filter(route => route.to && route.to !== '/');\n  }\n\n  /**\n   * @ignore\n   */\n  toggleMenu() {\n    const { isMenuOpen } = this.state;\n    this.setState({ isMenuOpen: !isMenuOpen });\n  }\n\n  /**\n   * @ignore\n   */\n  closeMenu() {\n    this.setState({ isMenuOpen: false });\n  }\n\n  /**\n   * @ignore\n   */\n  renderMenuButton() {\n    const routes = this.routes;\n    if (routes && routes.length) {\n      return (\n        <button\n          className='navigation__button'\n          onClick={() => this.toggleMenu()}>\n          <FA icon={faBars} />\n        </button>\n      );\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  renderMenu() {\n    const { isMenuOpen } = this.state;\n    if (isMenuOpen) {\n      return this.routes.map(route => (\n        <li key={route.to} className='navigation__menuItem'>\n          <Link\n            className='navigation__menuLink' to={route.to}\n            onClick={() => this.closeMenu()}>{route.name}</Link>\n        </li>\n      ));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    return (\n      <nav className='navigation'>\n        <section className='navigation__top'>\n          <div className='navigation__sides'>\n            <Link\n              className='navigation__button' to='/'\n              onClick={() => this.closeMenu()}>\n              <FA icon={faHome} />\n            </Link>\n          </div>\n          <div className='navigation__title'>{this.currentTitle}</div>\n          <div className='navigation__sides'>\n            {this.renderMenuButton()}\n          </div>\n        </section>\n        <section className='navigation__menu'>\n          <ul className='navigation__menuList'>{this.renderMenu()}</ul>\n        </section>\n      </nav>\n    );\n  }\n}\n\nexport default Navigation;\n",
     "static": true,
     "longname": "/Users/ikertxu/Personal/ui-core/src/views/navigation/navigation.view.js",
     "access": "public",
@@ -1273,7 +1976,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 80,
+    "__docId__": 106,
     "kind": "external",
     "name": "react-router-dom~withRouter",
     "externalLink": "https://reacttraining.com/react-router/web/api/withRouter",
@@ -1284,7 +1987,7 @@
     "description": ""
   },
   {
-    "__docId__": 81,
+    "__docId__": 107,
     "kind": "class",
     "name": "Navigation",
     "memberof": "src/views/navigation/navigation.view.js",
@@ -1294,18 +1997,19 @@
     "export": true,
     "importPath": "@orloxx/ui-core/src/views/navigation/navigation.view.js",
     "importStyle": "Navigation",
-    "description": "Controls the navigation bar.\nUses the same routes object defined in {@link PageControl}",
+    "description": "Controls the navigation bar.\nUses the same routes object defined in {@link PageControl}\n\n#### SCSS import:\n```\n@import \"~@orloxx/ui-core/scss/navigation\";\n```",
     "examples": [
-      "const Nav = withRoute(Navigation);\n\n<Nav routes={routes} />"
+      "const Nav = withRoute(Navigation);",
+      "<Nav routes={routes} />"
     ],
-    "lineNumber": 20,
+    "lineNumber": 26,
     "interface": false,
     "extends": [
       "react~Component"
     ]
   },
   {
-    "__docId__": 82,
+    "__docId__": 108,
     "kind": "member",
     "name": "propTypes",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1313,7 +2017,7 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation.propTypes",
     "access": "public",
     "description": "",
-    "lineNumber": 27,
+    "lineNumber": 33,
     "properties": [
       {
         "nullable": null,
@@ -1346,7 +2050,7 @@
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 109,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1356,11 +2060,11 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#constructor",
     "access": "public",
     "description": "",
-    "lineNumber": 35,
+    "lineNumber": 41,
     "ignore": true
   },
   {
-    "__docId__": 84,
+    "__docId__": 110,
     "kind": "member",
     "name": "state",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1368,7 +2072,7 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#state",
     "access": "public",
     "description": "",
-    "lineNumber": 41,
+    "lineNumber": 47,
     "ignore": true,
     "type": {
       "types": [
@@ -1377,7 +2081,7 @@
     }
   },
   {
-    "__docId__": 85,
+    "__docId__": 111,
     "kind": "get",
     "name": "currentTitle",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1387,7 +2091,7 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#currentTitle",
     "access": "public",
     "description": "",
-    "lineNumber": 49,
+    "lineNumber": 55,
     "ignore": true,
     "type": {
       "types": [
@@ -1396,7 +2100,7 @@
     }
   },
   {
-    "__docId__": 86,
+    "__docId__": 112,
     "kind": "get",
     "name": "routes",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1406,7 +2110,7 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#routes",
     "access": "public",
     "description": "",
-    "lineNumber": 58,
+    "lineNumber": 64,
     "ignore": true,
     "type": {
       "types": [
@@ -1415,7 +2119,7 @@
     }
   },
   {
-    "__docId__": 87,
+    "__docId__": 113,
     "kind": "method",
     "name": "toggleMenu",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1425,13 +2129,13 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#toggleMenu",
     "access": "public",
     "description": "",
-    "lineNumber": 66,
+    "lineNumber": 72,
     "ignore": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 88,
+    "__docId__": 114,
     "kind": "method",
     "name": "closeMenu",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1441,13 +2145,13 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#closeMenu",
     "access": "public",
     "description": "",
-    "lineNumber": 74,
+    "lineNumber": 80,
     "ignore": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 89,
+    "__docId__": 115,
     "kind": "method",
     "name": "renderMenuButton",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1457,7 +2161,7 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#renderMenuButton",
     "access": "public",
     "description": "",
-    "lineNumber": 81,
+    "lineNumber": 87,
     "ignore": true,
     "params": [],
     "return": {
@@ -1467,7 +2171,7 @@
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 116,
     "kind": "method",
     "name": "renderMenu",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1477,7 +2181,7 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#renderMenu",
     "access": "public",
     "description": "",
-    "lineNumber": 97,
+    "lineNumber": 103,
     "ignore": true,
     "params": [],
     "return": {
@@ -1487,7 +2191,7 @@
     }
   },
   {
-    "__docId__": 91,
+    "__docId__": 117,
     "kind": "method",
     "name": "render",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -1497,7 +2201,7 @@
     "longname": "src/views/navigation/navigation.view.js~Navigation#render",
     "access": "public",
     "description": "",
-    "lineNumber": 113,
+    "lineNumber": 119,
     "ignore": true,
     "params": [],
     "return": {
@@ -1507,10 +2211,10 @@
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 118,
     "kind": "file",
     "name": "src/views/page-control/page-control.view.js",
-    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';\nimport Navigation from '../navigation/navigation.view';\n\n/**\n * @external {react~Component} https://reactjs.org/docs/react-component.html\n */\n\n/**\n * Controls navigations and routes\n *\n * @class PageControl\n *\n * @example\n * const routes = [\n *   { name: 'Home', to: '/', component: HomeComponent },\n *   { name: 'Text example', to: '/some-text', component: TextComponent },\n * ];\n *\n * <PageRoutes base='/' routes={routes} />\n */\nclass PageControl extends Component {\n  /**\n   * @typedef {Object} Route\n   * @property {String} name - The name of the section to load. It will appear in the header of navigation\n   * @property {String} to - The path to the page it will go to\n   * @property {react~Component} component - The component it will load below the {@link Navigation}\n   *\n   * @example\n   * { name: 'Some name', to: 'path/to/page', component: SomeComponent }\n   */\n  /**\n   * @type {Object}\n   * @property {String} base - The base URL used in `Router`'s `basename` attribute: default is `/`\n   * @property {Array<Route>} routes - All possible routes available\n   */\n  static propTypes = {\n    base: PropTypes.string,\n    routes: PropTypes.array,\n  };\n\n  /**\n   * @ignore\n   */\n  renderRoutes() {\n    const { routes } = this.props;\n    if (routes && routes.length) {\n      return routes.map(page => (\n        <Route key={page.to} exact path={page.to} component={page.component} />\n      ));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const Nav = withRouter(Navigation);\n    return (\n      <Router basename={this.props.base || '/'}>\n        <Nav routes={this.props.routes} />\n        {this.renderRoutes()}\n      </Router>\n    );\n  }\n}\n\nexport default PageControl;\n",
+    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';\nimport Navigation from '../navigation/navigation.view';\n\n/**\n * @external {react~Component} https://reactjs.org/docs/react-component.html\n */\n\n/**\n * Controls navigations and routes\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/page-control\";\n * ```\n *\n * @example\n * const routes = [\n *   { name: 'Home', to: '/', component: HomeComponent },\n *   { name: 'Text example', to: '/some-text', component: TextComponent },\n * ];\n *\n * @example\n * <PageControl base='/' routes={routes} />\n */\nclass PageControl extends Component {\n  /**\n   * @typedef {Object} Route\n   * @property {String} name - The name of the section to load. It will appear in the header of navigation\n   * @property {String} to - The path to the page it will go to\n   * @property {react~Component} component - The component it will load below the {@link Navigation}\n   *\n   * @example\n   * { name: 'Some name', to: 'path/to/page', component: SomeComponent }\n   */\n  /**\n   * @type {Object}\n   * @property {String} base - The base URL used in `Router`'s `basename` attribute: default is `/`\n   * @property {Array<Route>} routes - All possible routes available\n   */\n  static propTypes = {\n    base: PropTypes.string,\n    routes: PropTypes.array,\n  };\n\n  /**\n   * @ignore\n   */\n  renderRoutes() {\n    const { routes } = this.props;\n    if (routes && routes.length) {\n      return routes.map(page => (\n        <Route key={page.to} exact path={page.to} component={page.component} />\n      ));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const Nav = withRouter(Navigation);\n    return (\n      <Router basename={this.props.base || '/'}>\n        <Nav routes={this.props.routes} />\n        {this.renderRoutes()}\n      </Router>\n    );\n  }\n}\n\nexport default PageControl;\n",
     "static": true,
     "longname": "/Users/ikertxu/Personal/ui-core/src/views/page-control/page-control.view.js",
     "access": "public",
@@ -1518,7 +2222,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 93,
+    "__docId__": 119,
     "kind": "external",
     "name": "react~Component",
     "externalLink": "https://reactjs.org/docs/react-component.html",
@@ -1529,7 +2233,7 @@
     "description": ""
   },
   {
-    "__docId__": 94,
+    "__docId__": 120,
     "kind": "class",
     "name": "PageControl",
     "memberof": "src/views/page-control/page-control.view.js",
@@ -1539,24 +2243,19 @@
     "export": true,
     "importPath": "@orloxx/ui-core/src/views/page-control/page-control.view.js",
     "importStyle": "PageControl",
-    "description": "Controls navigations and routes",
+    "description": "Controls navigations and routes\n\n#### SCSS import:\n```\n@import \"~@orloxx/ui-core/scss/page-control\";\n```",
     "examples": [
-      "const routes = [\n  { name: 'Home', to: '/', component: HomeComponent },\n  { name: 'Text example', to: '/some-text', component: TextComponent },\n];\n\n<PageRoutes base='/' routes={routes} />"
+      "const routes = [\n  { name: 'Home', to: '/', component: HomeComponent },\n  { name: 'Text example', to: '/some-text', component: TextComponent },\n];",
+      "<PageControl base='/' routes={routes} />"
     ],
-    "lineNumber": 23,
-    "unknown": [
-      {
-        "tagName": "@class",
-        "tagValue": "PageControl"
-      }
-    ],
+    "lineNumber": 27,
     "interface": false,
     "extends": [
       "react~Component"
     ]
   },
   {
-    "__docId__": 95,
+    "__docId__": 121,
     "kind": "typedef",
     "name": "Route",
     "memberof": "src/views/page-control/page-control.view.js~PageControl",
@@ -1608,7 +2307,7 @@
     }
   },
   {
-    "__docId__": 96,
+    "__docId__": 122,
     "kind": "member",
     "name": "propTypes",
     "memberof": "src/views/page-control/page-control.view.js~PageControl",
@@ -1616,7 +2315,7 @@
     "longname": "src/views/page-control/page-control.view.js~PageControl.propTypes",
     "access": "public",
     "description": "",
-    "lineNumber": 38,
+    "lineNumber": 42,
     "properties": [
       {
         "nullable": null,
@@ -1649,7 +2348,7 @@
     }
   },
   {
-    "__docId__": 97,
+    "__docId__": 123,
     "kind": "method",
     "name": "renderRoutes",
     "memberof": "src/views/page-control/page-control.view.js~PageControl",
@@ -1659,7 +2358,7 @@
     "longname": "src/views/page-control/page-control.view.js~PageControl#renderRoutes",
     "access": "public",
     "description": "",
-    "lineNumber": 46,
+    "lineNumber": 50,
     "ignore": true,
     "params": [],
     "return": {
@@ -1669,7 +2368,7 @@
     }
   },
   {
-    "__docId__": 98,
+    "__docId__": 124,
     "kind": "method",
     "name": "render",
     "memberof": "src/views/page-control/page-control.view.js~PageControl",
@@ -1679,7 +2378,7 @@
     "longname": "src/views/page-control/page-control.view.js~PageControl#render",
     "access": "public",
     "description": "",
-    "lineNumber": 58,
+    "lineNumber": 62,
     "ignore": true,
     "params": [],
     "return": {
@@ -1690,7 +2389,7 @@
   },
   {
     "kind": "index",
-    "content": "# @orloxx/ui-core\n\n> UI Core Components for React\n\n[![NPM](https://img.shields.io/npm/v/@orloxx/ui-core.svg)](https://www.npmjs.com/package/@orloxx/ui-core) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)\n\nThis is an attempt to create a components library to bootstrap React SPAs.\n\n## Install\n\n```bash\nnpm install --save @orloxx/ui-core\n```\n\n## Usage\n\nThis is a work in progress, you can check out the `/example` folder which is deployed [**here**](http://orloxx.github.io/ui-core).\n\nFor more information check out [the documentation](https://orloxx.github.io/ui-core/docs/) which is autogenerated using [ESDoc](https://esdoc.org/).\n\n## License\n\nMIT © [orloxx](https://github.com/orloxx)\n",
+    "content": "# @orloxx/ui-core\n\n> UI Core Components for React\n\n[![NPM](https://img.shields.io/npm/v/@orloxx/ui-core.svg)](https://www.npmjs.com/package/@orloxx/ui-core)\n[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)\n[![Documentation Coverage](https://orloxx.github.io/ui-core/docs/badge.svg)](https://orloxx.github.io/ui-core/docs/)\n\nThis is an attempt to create a components library to bootstrap React SPAs.\n\n## Install\n\n```bash\nnpm install --save @orloxx/ui-core\n```\n\n## Usage\n\nThis is a work in progress, you can check out the `/example` folder which is deployed [here](http://orloxx.github.io/ui-core).\n\nFor more information check out [the documentation](https://orloxx.github.io/ui-core/docs/) which is autogenerated using [ESDoc](https://esdoc.org/).\n\n## Donate\n\nI can always use a beer :beer: or two :)\n\nBitcoin: `1sSBBuBgnapZ1Zxmf9PYoBMxv8kN6Wggb`\n\n![Donate Bitcoin](https://github.com/orloxx/ui-core/raw/develop/example/src/views/home/bitcoin.jpg)\n\n## License\n\nMIT © [orloxx](https://github.com/orloxx)\n",
     "longname": "/Users/ikertxu/Personal/ui-core/README.md",
     "name": "./README.md",
     "static": true,
@@ -1698,7 +2397,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"@orloxx/ui-core\",\n  \"version\": \"1.0.9\",\n  \"description\": \"UI Core Components for React\",\n  \"author\": \"orloxx\",\n  \"license\": \"MIT\",\n  \"repository\": \"github:orloxx/ui-core\",\n  \"main\": \"dist/index.js\",\n  \"module\": \"dist/index.es.js\",\n  \"jsnext:main\": \"dist/index.es.js\",\n  \"engines\": {\n    \"node\": \">=8\",\n    \"npm\": \">=5\"\n  },\n  \"scripts\": {\n    \"test\": \"cross-env CI=1 react-scripts test --env=jsdom\",\n    \"test:watch\": \"react-scripts test --env=jsdom\",\n    \"build\": \"rollup -c\",\n    \"start\": \"rollup -c -w\",\n    \"predeploy\": \"npm run build-example && npm run docs\",\n    \"build-example\": \"cd example && npm run build\",\n    \"deploy\": \"gh-pages -d example/build\",\n    \"docs\": \"./node_modules/.bin/esdoc -c .esdoc.json\"\n  },\n  \"peerDependencies\": {\n    \"@fortawesome/fontawesome-svg-core\": \"^1.2.17\",\n    \"@fortawesome/free-solid-svg-icons\": \"^5.8.1\",\n    \"@fortawesome/react-fontawesome\": \"^0.1.4\",\n    \"node-sass\": \"^4.11.0\",\n    \"prop-types\": \"^15.7.2\",\n    \"react\": \"^16.8.6\",\n    \"react-dom\": \"^16.8.6\",\n    \"react-router-dom\": \"^5.0.0\"\n  },\n  \"dependencies\": {\n    \"@fortawesome/fontawesome-svg-core\": \"^1.2.17\",\n    \"@fortawesome/free-solid-svg-icons\": \"^5.8.1\",\n    \"@fortawesome/react-fontawesome\": \"^0.1.4\",\n    \"prop-types\": \"^15.7.2\",\n    \"react-router-dom\": \"^5.0.0\"\n  },\n  \"devDependencies\": {\n    \"babel-core\": \"^6.26.3\",\n    \"babel-plugin-external-helpers\": \"^6.22.0\",\n    \"babel-preset-env\": \"^1.7.0\",\n    \"babel-preset-react\": \"^6.24.1\",\n    \"babel-preset-stage-0\": \"^6.24.1\",\n    \"cross-env\": \"^5.1.4\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-jsx-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^5.0.1\",\n    \"eslint-config-standard\": \"^11.0.0\",\n    \"eslint-config-standard-react\": \"^6.0.0\",\n    \"eslint-plugin-import\": \"^2.13.0\",\n    \"eslint-plugin-node\": \"^7.0.1\",\n    \"eslint-plugin-promise\": \"^4.0.0\",\n    \"eslint-plugin-react\": \"^7.10.0\",\n    \"eslint-plugin-standard\": \"^3.1.0\",\n    \"gh-pages\": \"^1.2.0\",\n    \"react\": \"^16.8.6\",\n    \"react-dom\": \"^16.8.6\",\n    \"react-scripts\": \"3.0.0\",\n    \"rollup\": \"^0.64.1\",\n    \"rollup-plugin-babel\": \"^3.0.7\",\n    \"rollup-plugin-commonjs\": \"^9.1.3\",\n    \"rollup-plugin-node-resolve\": \"^3.3.0\",\n    \"rollup-plugin-peer-deps-external\": \"^2.2.0\",\n    \"rollup-plugin-url\": \"^1.4.0\"\n  },\n  \"files\": [\n    \"dist\",\n    \"scss\"\n  ]\n}\n",
+    "content": "{\n  \"name\": \"@orloxx/ui-core\",\n  \"version\": \"1.0.10\",\n  \"description\": \"UI Core Components for React\",\n  \"author\": \"orloxx\",\n  \"license\": \"MIT\",\n  \"repository\": \"github:orloxx/ui-core\",\n  \"main\": \"dist/index.js\",\n  \"module\": \"dist/index.es.js\",\n  \"jsnext:main\": \"dist/index.es.js\",\n  \"engines\": {\n    \"node\": \">=8\",\n    \"npm\": \">=5\"\n  },\n  \"scripts\": {\n    \"test\": \"cross-env CI=1 react-scripts test --env=jsdom\",\n    \"test:watch\": \"react-scripts test --env=jsdom\",\n    \"build\": \"rollup -c\",\n    \"start\": \"rollup -c -w\",\n    \"predeploy\": \"npm run build-example && npm run docs\",\n    \"build-example\": \"cd example && npm run build\",\n    \"deploy\": \"gh-pages -d example/build\",\n    \"docs\": \"./node_modules/.bin/esdoc -c .esdoc.json\"\n  },\n  \"peerDependencies\": {\n    \"@fortawesome/fontawesome-svg-core\": \"^1.2.17\",\n    \"@fortawesome/free-solid-svg-icons\": \"^5.8.1\",\n    \"@fortawesome/react-fontawesome\": \"^0.1.4\",\n    \"node-sass\": \"^4.11.0\",\n    \"prop-types\": \"^15.7.2\",\n    \"react\": \"^16.8.6\",\n    \"react-dom\": \"^16.8.6\",\n    \"react-router-dom\": \"^5.0.0\"\n  },\n  \"dependencies\": {\n    \"@fortawesome/fontawesome-svg-core\": \"^1.2.17\",\n    \"@fortawesome/free-solid-svg-icons\": \"^5.8.1\",\n    \"@fortawesome/react-fontawesome\": \"^0.1.4\",\n    \"prop-types\": \"^15.7.2\",\n    \"react-router-dom\": \"^5.0.0\"\n  },\n  \"devDependencies\": {\n    \"babel-core\": \"^6.26.3\",\n    \"babel-plugin-external-helpers\": \"^6.22.0\",\n    \"babel-preset-env\": \"^1.7.0\",\n    \"babel-preset-react\": \"^6.24.1\",\n    \"babel-preset-stage-0\": \"^6.24.1\",\n    \"cross-env\": \"^5.1.4\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-jsx-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^5.0.1\",\n    \"eslint-config-standard\": \"^11.0.0\",\n    \"eslint-config-standard-react\": \"^6.0.0\",\n    \"eslint-plugin-import\": \"^2.13.0\",\n    \"eslint-plugin-node\": \"^7.0.1\",\n    \"eslint-plugin-promise\": \"^4.0.0\",\n    \"eslint-plugin-react\": \"^7.10.0\",\n    \"eslint-plugin-standard\": \"^3.1.0\",\n    \"gh-pages\": \"^1.2.0\",\n    \"react\": \"^16.8.6\",\n    \"react-dom\": \"^16.8.6\",\n    \"react-scripts\": \"3.0.0\",\n    \"rollup\": \"^0.64.1\",\n    \"rollup-plugin-babel\": \"^3.0.7\",\n    \"rollup-plugin-commonjs\": \"^9.1.3\",\n    \"rollup-plugin-node-resolve\": \"^3.3.0\",\n    \"rollup-plugin-peer-deps-external\": \"^2.2.0\",\n    \"rollup-plugin-url\": \"^1.4.0\"\n  },\n  \"files\": [\n    \"dist\",\n    \"scss\"\n  ]\n}\n",
     "longname": "/Users/ikertxu/Personal/ui-core/package.json",
     "name": "package.json",
     "static": true,

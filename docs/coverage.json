@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 36,
-  "actualCount": 36,
+  "expectCount": 55,
+  "actualCount": 55,
   "files": {
     "src/utils/geolocation.js": {
       "expectCount": 7,
@@ -16,6 +16,16 @@
     "src/utils/string.js": {
       "expectCount": 2,
       "actualCount": 2,
+      "undocumentLines": []
+    },
+    "src/views/google-map/google-map.model.js": {
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
+    "src/views/google-map/google-map.view.js": {
+      "expectCount": 8,
+      "actualCount": 8,
       "undocumentLines": []
     },
     "src/views/image-uploader/image-uploader.view.js": {
