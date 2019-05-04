@@ -10,7 +10,10 @@ import Navigation from '../navigation/navigation.view';
 /**
  * Controls navigations and routes
  *
- * @class PageControl
+ * #### SCSS import:
+ * ```
+ * @import "~@orloxx/ui-core/scss/page-control";
+ * ```
  *
  * @example
  * const routes = [

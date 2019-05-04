@@ -5,6 +5,11 @@ import GoogleMapModel from './google-map.model';
 /**
  * Controls a map initialised with the Google Maps JavaScript API
  *
+ * #### SCSS import:
+ * ```
+ * @import "~@orloxx/ui-core/scss/google-map";
+ * ```
+ *
  * @see https://developers.google.com/maps/documentation/javascript/tutorial
  *
  * @example

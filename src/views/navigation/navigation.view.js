@@ -12,6 +12,11 @@ import { faHome, faBars } from '@fortawesome/free-solid-svg-icons';
  * Controls the navigation bar.
  * Uses the same routes object defined in {@link PageControl}
  *
+ * #### SCSS import:
+ * ```
+ * @import "~@orloxx/ui-core/scss/navigation";
+ * ```
+ *
  * @example
  * const Nav = withRoute(Navigation);
  *
