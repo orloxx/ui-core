@@ -52,7 +52,7 @@ $nav-size: 50px !default;
       border-bottom: 1px solid $c-action;
       max-width: $b-container;
       margin: 0 auto;
-
+      list-style: none;
 
       &:last-child {
         border: 0;
