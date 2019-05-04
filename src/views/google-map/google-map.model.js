@@ -10,9 +10,6 @@ import { StringUtils } from '../../utils';
 
 /**
  * @external {google~MapOptions} https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions
- *
- * @example
- * { center: { lat: 10.4657, lng: -66.8796 }, zoom: 12 }
  */
 
 /**
@@ -118,6 +115,20 @@ class GoogleMapModel {
         });
       }
     });
+  }
+
+  /**
+   * Adds map listener
+   *
+   * @see https://developers.google.com/maps/documentation/javascript/events
+   *
+   * @param {String} name - The event name
+   * @param {Function} callback - The event callback function
+   */
+  addListener(name, callback) {
+    if (callback) {
+      this.map.addListener(name, callback);
+    }
   }
 
   /**
