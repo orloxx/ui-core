@@ -18,7 +18,8 @@ import Navigation from '../navigation/navigation.view';
  *   { name: 'Text example', to: '/some-text', component: TextComponent },
  * ];
  *
- * <PageRoutes base='/' routes={routes} />
+ * @example
+ * <PageControl base='/' routes={routes} />
  */
 class PageControl extends Component {
   /**

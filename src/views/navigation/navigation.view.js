@@ -15,6 +15,7 @@ import { faHome, faBars } from '@fortawesome/free-solid-svg-icons';
  * @example
  * const Nav = withRoute(Navigation);
  *
+ * @example
  * <Nav routes={routes} />
  */
 class Navigation extends Component {
