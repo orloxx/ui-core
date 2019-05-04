@@ -26,7 +26,7 @@ I can always use a beer :beer: or two :)
 
 Bitcoin: `1sSBBuBgnapZ1Zxmf9PYoBMxv8kN6Wggb`
 
-![Donate Bitcoin](example/src/views/home/bitcoin.jpg)
+![Donate Bitcoin](https://github.com/orloxx/ui-core/tree/develop/example/src/views/home/bitcoin.jpg)
 
 ## License
 
