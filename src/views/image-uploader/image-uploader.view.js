@@ -7,6 +7,11 @@ import { ImageUtils } from '../../utils';
 /**
  * Controls an input file element that shows a preview of the selected image
  *
+ * #### SCSS import:
+ * ```
+ * @import "~@orloxx/ui-core/scss/image-uploader";
+ * ```
+ *
  * @example
  * <ImageUploader id='image' name='image' />
  */

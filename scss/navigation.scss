@@ -4,7 +4,7 @@ $nav-size: 50px !default;
   background: $c-action;
   color: $c-action-text;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   &__top {
     display: flex;
@@ -36,9 +36,11 @@ $nav-size: 50px !default;
     display: inline-block;
     line-height: $nav-size;
     padding: 0 18px;
+    color: $c-action-text;
 
     &:hover {
       background: darken($c-action, 10);
+      color: $c-action-text;
     }
   }
 
@@ -52,7 +54,7 @@ $nav-size: 50px !default;
       border-bottom: 1px solid $c-action;
       max-width: $b-container;
       margin: 0 auto;
-
+      list-style: none;
 
       &:last-child {
         border: 0;
@@ -62,9 +64,11 @@ $nav-size: 50px !default;
     &Link {
       display: block;
       padding: 10px;
+      color: $c-action-text;
 
       &:hover {
         background: $c-action;
+        color: $c-action-text;
       }
     }
   }

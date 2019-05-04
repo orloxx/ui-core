@@ -7,7 +7,7 @@ import { PageControl } from '@orloxx/ui-core';
 import { Home, Text } from './views';
 
 const routes = [
-  { name: 'Home', to: '/', component: Home },
+  { name: 'UI Core', to: '/', component: Home },
   { name: 'Text example', to: '/some-text', component: Text },
 ];
 

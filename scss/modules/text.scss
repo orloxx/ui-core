@@ -30,4 +30,12 @@
   p {
     margin-bottom: 10px;
   }
+
+  a {
+    color: $c-action;
+
+    &:hover {
+      color: darken($c-action, 10);
+    }
+  }
 }
