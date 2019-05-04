@@ -8,12 +8,12 @@ export class Home extends Component {
         <h1>UI Core</h1>
         <p>This is an attempt to create a components library to bootstrap React SPAs</p>
         <ul>
-          <li><a href='https://orloxx.github.io/ui-core/docs/'
-                 target='_blank' rel='noopener noreferrer'>JS documentation</a></li>
+          <li><a href='https://orloxx.github.io/ui-core/docs/'>JS documentation</a></li>
         </ul>
         <p>I can always use a beer <span role='img' aria-label='Oh beer'>&#x1F37A;</span> or two :)</p>
         <p>Bitcoin: 1sSBBuBgnapZ1Zxmf9PYoBMxv8kN6Wggb</p>
         <p><img src={bitcoinImg} alt='Donate Bitcoin' /></p>
+        <p><a href="https://github.com/orloxx/ui-core">Return to Github Repository</a></p>
       </section>
     );
   }
