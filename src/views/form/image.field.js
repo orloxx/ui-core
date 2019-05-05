@@ -16,7 +16,7 @@ import Field from './field.view';
  * @extends {Field}
  *
  * @example
- * <ImageField id='image' name='image' />
+ * <ImageField id='image' name='image' label='Choose from computer' />
  */
 class ImageField extends Field {
   /**

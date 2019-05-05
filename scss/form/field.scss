@@ -1,3 +1,29 @@
 .field {
-  display: block;
+  &,
+  &__label,
+  &__labelSpan {
+    display: block;
+  }
+
+  & {
+    margin-bottom: 15px;
+  }
+
+  &__labelSpan {
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    margin: 0;
+    padding: 10px;
+    border: 1px solid $c-border;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+      border-color: $c-action;
+    }
+  }
 }

@@ -19,6 +19,7 @@ class Field extends Component {
    * @property {String} id - The input element id attribute
    * @property {String} name - The input element name attribute
    * @property {String} label - The label attached to the input field
+   * @property {String} placeholder - Placeholder text
    */
   static propTypes = {
     id: PropTypes.string.isRequired,
@@ -26,6 +27,7 @@ class Field extends Component {
     label: PropTypes.string.isRequired,
     required: PropTypes.bool,
     pattern: PropTypes.string,
+    placeholder: PropTypes.string,
   };
 
   /**
@@ -41,6 +43,7 @@ class Field extends Component {
             type='text'
             id={this.props.id}
             name={this.props.name}
+            placeholder={this.props.placeholder}
             required={this.props.required}
             pattern={this.props.pattern} />
         </label>

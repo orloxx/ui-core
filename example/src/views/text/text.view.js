@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Field, ImageField } from '@orloxx/ui-core';
 
 export class Text extends Component {
   render() {
@@ -8,8 +7,6 @@ export class Text extends Component {
         <h1>Some h1</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lobortis velit ac libero suscipit ullamcorper. Sed velit arcu, maximus sit amet sapien sit amet, tempor rutrum ligula. Etiam quis odio at ipsum laoreet porttitor at a nulla. Nunc non justo sit amet ligula iaculis tempus. Pellentesque facilisis aliquet lacus ut placerat</p>
         <h2>Some h2</h2>
-        <Field id='input' name='input' label='Some input' />
-        <ImageField id='input2' name='input2' label='Some image' />
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lobortis velit ac libero suscipit ullamcorper. Sed velit arcu, maximus sit amet sapien sit amet, tempor rutrum ligula. Etiam quis odio at ipsum laoreet porttitor at a nulla. Nunc non justo sit amet ligula iaculis tempus. Pellentesque facilisis aliquet lacus ut placerat</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lobortis velit ac libero suscipit ullamcorper. Sed velit arcu, maximus sit amet sapien sit amet, tempor rutrum ligula. Etiam quis odio at ipsum laoreet porttitor at a nulla. Nunc non justo sit amet ligula iaculis tempus. Pellentesque facilisis aliquet lacus ut placerat</p>
         <h3>Some h3</h3>

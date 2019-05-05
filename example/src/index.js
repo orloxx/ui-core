@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { PageControl } from '@orloxx/ui-core';
-import { Home, Text } from './views';
+import { Home, Text, Form } from './views';
 
 const tripleNestedRoutes = [
   { name: 'Nested example 1.3.1', to: '/nested1.3.1', component: Text },
@@ -22,7 +22,7 @@ const nestedRoutes = [
 const routes = [
   { name: 'UI Core', to: '/', component: Home },
   { name: 'Text example', to: '/text', component: Text },
-  { name: 'Nested example 1', to: '/nested', component: Text, children: nestedRoutes },
+  { name: 'Form example', to: '/form', component: Form, children: nestedRoutes },
   { name: 'Text example1', to: '/text1', component: Text },
   { name: 'Text example2', to: '/text2', component: Text },
   { name: 'Text example3', to: '/text3', component: Text },

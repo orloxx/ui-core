@@ -38,6 +38,7 @@ $nav-size: 50px !default;
     padding: 0 18px;
     color: $c-action-text;
 
+    &:focus,
     &:hover {
       background: darken($c-action, 10);
       color: $c-action-text;
