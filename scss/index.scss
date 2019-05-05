@@ -12,7 +12,6 @@
 // Modules
 @import "modules/button";
 @import "modules/container";
-@import "modules/input";
 @import "modules/reset";
 @import "modules/text";
 
@@ -20,6 +19,5 @@
   @include reset;
   @include button;
   @include container;
-  @include input;
   @include text;
 }

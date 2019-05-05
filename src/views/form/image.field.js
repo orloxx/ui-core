@@ -13,9 +13,9 @@ import { ImageUtils } from '../../utils';
  * ```
  *
  * @example
- * <ImageUploader id='image' name='image' />
+ * <ImageField id='image' name='image' />
  */
-class ImageUploader extends Component {
+class ImageField extends Component {
   /**
    * @type {Object}
    * @property {String} id - The same `id` added to the input field
@@ -58,7 +58,7 @@ class ImageUploader extends Component {
    * @ignore
    */
   get hasImageClassName() {
-    return this.imageSrc ? 'imageUploader--hasImage' : '';
+    return this.imageSrc ? 'imageField--hasImage' : '';
   }
 
   /**
@@ -102,23 +102,23 @@ class ImageUploader extends Component {
   render() {
     const { id, name, caption } = this.props;
     return (
-      <div className={`imageUploader ${this.hasImageClassName}`}>
-        <label className='button imageUploader__label' htmlFor={id}>
+      <div className={`imageField ${this.hasImageClassName}`}>
+        <label className='button imageField__label' htmlFor={id}>
           <img
-            className='imageUploader__image'
+            className='imageField__image'
             src={this.imageSrc}
             alt='Upload'
           />
           <input type='hidden' name={name} value={this.imageSrc} />
           <input
-            className='imageUploader__input'
+            className='imageField__input'
             id={id}
             name='image-uploader-file'
             type='file'
             accept='image/*'
             onChange={e => this.setImage(e)}
           />
-          <FA className='imageUploader__noImageIcon' icon={faUpload} />
+          <FA className='imageField__noImageIcon' icon={faUpload} />
           {caption || 'Upload image'}
         </label>
       </div>
@@ -126,4 +126,4 @@ class ImageUploader extends Component {
   }
 }
 
-export default ImageUploader;
+export default ImageField;
