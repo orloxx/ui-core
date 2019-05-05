@@ -1,36 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { ImageUtils } from '../../utils';
+import Field from './field.view';
 
 /**
  * Controls an input file element that shows a preview of the selected image
  *
  * #### SCSS import:
  * ```
- * @import "~@orloxx/ui-core/scss/image-uploader";
+ * @import "~@orloxx/ui-core/scss/form/image-field";
  * ```
+ *
+ * @extends {Field}
  *
  * @example
  * <ImageField id='image' name='image' />
  */
-class ImageField extends Component {
+class ImageField extends Field {
   /**
    * @type {Object}
-   * @property {String} id - The same `id` added to the input field
-   * @property {String} name - The same `name` added to the input field
-   * @property {String} [caption] - Caption text added at the bottom of the field
    * @property {String} [src] - Default image path when nothing is selected
    * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted
    */
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    caption: PropTypes.string,
+  static propTypes = Object.assign(Field.propTypes, {
     src: PropTypes.string,
     fileSize: PropTypes.number,
-  };
+  });
 
   /**
    * @ignore
@@ -100,7 +97,7 @@ class ImageField extends Component {
    * @ignore
    */
   render() {
-    const { id, name, caption } = this.props;
+    const { id, name, label } = this.props;
     return (
       <div className={`imageField ${this.hasImageClassName}`}>
         <label className='button imageField__label' htmlFor={id}>
@@ -119,7 +116,7 @@ class ImageField extends Component {
             onChange={e => this.setImage(e)}
           />
           <FA className='imageField__noImageIcon' icon={faUpload} />
-          {caption || 'Upload image'}
+          {label || 'Upload image'}
         </label>
       </div>
     );
