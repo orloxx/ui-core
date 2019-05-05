@@ -99,7 +99,7 @@ class Navigation extends Component {
    * @ignore
    */
   renderMenuButton() {
-    const routes = this.routes;
+    const routes = Navigation.simplified(this.routes);
     if (routes && routes.length) {
       return (
         <button
@@ -111,19 +111,29 @@ class Navigation extends Component {
     }
   }
 
+  static renderNested(routes) {
+    if (routes && routes.length) {
+      const links = routes.map(route => (
+        <li key={route.to} className='navigation__menuItem'>
+          <Link
+            className='navigation__menuLink' to={route.to}
+            onClick={() => this.closeMenu()}>{route.name}</Link>
+          {Navigation.renderNested(route.children)}
+        </li>
+      ));
+      return (
+        <ul className='navigation__menuList'>{links}</ul>
+      );
+    }
+  }
+
   /**
    * @ignore
    */
   renderMenu() {
     const { isMenuOpen } = this.state;
     if (isMenuOpen) {
-      return this.routes.map(route => (
-        <li key={route.to} className='navigation__menuItem'>
-          <Link
-            className='navigation__menuLink' to={route.to}
-            onClick={() => this.closeMenu()}>{route.name}</Link>
-        </li>
-      ));
+      return Navigation.renderNested(this.routes);
     }
   }
 
@@ -147,7 +157,7 @@ class Navigation extends Component {
           </div>
         </section>
         <section className='navigation__menu'>
-          <ul className='navigation__menuList'>{this.renderMenu()}</ul>
+          {this.renderMenu()}
         </section>
       </nav>
     );
