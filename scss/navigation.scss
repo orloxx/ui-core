@@ -48,24 +48,25 @@ $nav-size: 50px !default;
     &List {
       background: darken($c-action, 10);
       margin: 0;
+
+      & & {
+        margin: 0 20px;
+      }
     }
 
     &Item {
-      border-bottom: 1px solid $c-action;
       max-width: $b-container;
       margin: 0 auto;
       list-style: none;
-
-      &:last-child {
-        border: 0;
-      }
     }
 
     &Link {
       display: block;
       padding: 10px;
       color: $c-action-text;
+      border-bottom: 1px solid $c-action;
 
+      &.isActive,
       &:hover {
         background: $c-action;
         color: $c-action-text;

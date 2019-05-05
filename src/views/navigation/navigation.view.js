@@ -95,6 +95,11 @@ class Navigation extends Component {
     this.setState({ isMenuOpen: false });
   }
 
+  isActiveClass(pathname) {
+    const { location } = this.props;
+    return location && location.pathname === pathname ? 'isActive' : '';
+  }
+
   /**
    * @ignore
    */
@@ -114,14 +119,17 @@ class Navigation extends Component {
   /**
    * @ignore
    */
-  static renderNested(routes) {
+  renderNested(routes) {
     if (routes && routes.length) {
       const links = routes.map(route => (
-        <li key={route.to} className='navigation__menuItem'>
+        <li
+          key={route.to}
+          className='navigation__menuItem'>
           <Link
-            className='navigation__menuLink' to={route.to}
+            className={`navigation__menuLink ${this.isActiveClass(route.to)}`}
+            to={route.to}
             onClick={() => this.closeMenu()}>{route.name}</Link>
-          {Navigation.renderNested(route.children)}
+          {this.renderNested(route.children)}
         </li>
       ));
       return (
@@ -136,7 +144,7 @@ class Navigation extends Component {
   renderMenu() {
     const { isMenuOpen } = this.state;
     if (isMenuOpen) {
-      return Navigation.renderNested(this.routes);
+      return this.renderNested(this.routes);
     }
   }
 
