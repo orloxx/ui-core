@@ -111,6 +111,9 @@ class Navigation extends Component {
     }
   }
 
+  /**
+   * @ignore
+   */
   static renderNested(routes) {
     if (routes && routes.length) {
       const links = routes.map(route => (
