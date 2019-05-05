@@ -50,7 +50,7 @@ class PageControl extends Component {
   renderRoutes() {
     const { routes } = this.props;
     if (routes && routes.length) {
-      return routes.map(page => (
+      return Navigation.simplified(routes).map(page => (
         <Route key={page.to} exact path={page.to} component={page.component} />
       ));
     }

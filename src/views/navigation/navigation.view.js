@@ -54,7 +54,7 @@ class Navigation extends Component {
    */
   get currentTitle() {
     const { routes, location } = this.props;
-    const route = routes.find(item => item.to === location.pathname);
+    const route = Navigation.simplified(routes).find(item => item.to === location.pathname);
     return route ? route.name : 'Home';
   }
 
@@ -64,6 +64,20 @@ class Navigation extends Component {
   get routes() {
     const { routes } = this.props;
     return routes.filter(route => route.to && route.to !== '/');
+  }
+
+  /**
+   * @ignore
+   */
+  static simplified(routes) {
+    if (routes && routes.length) {
+      return routes.reduce((previous, current) => [
+        ...previous,
+        current,
+        ...Navigation.simplified(current.children),
+      ], []);
+    }
+    return [];
   }
 
   /**
