@@ -95,6 +95,9 @@ class Navigation extends Component {
     this.setState({ isMenuOpen: false });
   }
 
+  /**
+   * @ignore
+   */
   isActiveClass(pathname) {
     const { location } = this.props;
     return location && location.pathname === pathname ? 'isActive' : '';
