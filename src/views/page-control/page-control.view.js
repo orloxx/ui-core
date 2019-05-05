@@ -26,13 +26,28 @@ import Navigation from '../navigation/navigation.view';
  */
 class PageControl extends Component {
   /**
+   * A Route is a place where content/resources are located at and defines
+   * which `component` to load depending on the URL path.
+   *
+   * Children routes are optional and recursive.
+   *
    * @typedef {Object} Route
-   * @property {String} name - The name of the section to load. It will appear in the header of navigation
+   * @property {String} name - Short descriptive name of the section to load
    * @property {String} to - The path to the page it will go to
    * @property {react~Component} component - The component it will load below the {@link Navigation}
+   * @property {Array<Route>} [children] - All nested routes
    *
    * @example
-   * { name: 'Some name', to: 'path/to/page', component: SomeComponent }
+   * {
+   *   name: 'Some name',
+   *   to: 'path/to/page',
+   *   component: SomeComponent,
+   *   children: [{
+   *     name: 'Nested component',
+   *     to: 'path/to/nested',
+   *     component: NestedComponent
+   *   }]
+   * }
    */
   /**
    * @type {Object}
@@ -50,7 +65,7 @@ class PageControl extends Component {
   renderRoutes() {
     const { routes } = this.props;
     if (routes && routes.length) {
-      return routes.map(page => (
+      return Navigation.simplified(routes).map(page => (
         <Route key={page.to} exact path={page.to} component={page.component} />
       ));
     }
