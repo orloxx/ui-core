@@ -99,8 +99,8 @@ class ImageField extends Field {
   render() {
     const { id, name, label } = this.props;
     return (
-      <div className={`imageField ${this.hasImageClassName}`}>
-        <label className='button imageField__label' htmlFor={id}>
+      <div className={`field imageField ${this.hasImageClassName}`}>
+        <label className='button field__label imageField__label' htmlFor={id}>
           <img
             className='imageField__image'
             src={this.imageSrc}
@@ -108,7 +108,7 @@ class ImageField extends Field {
           />
           <input type='hidden' name={name} value={this.imageSrc} />
           <input
-            className='imageField__input'
+            className='field__input imageField__input'
             id={id}
             name='image-uploader-file'
             type='file'
@@ -116,7 +116,9 @@ class ImageField extends Field {
             onChange={e => this.setImage(e)}
           />
           <FA className='imageField__noImageIcon' icon={faUpload} />
-          {label || 'Upload image'}
+          <span className='field__labelSpan imageField__labelSpan'>
+            {label || 'Upload image'}
+          </span>
         </label>
       </div>
     );

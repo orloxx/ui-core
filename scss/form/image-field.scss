@@ -1,6 +1,4 @@
 .imageField {
-  text-align: center;
-
   &__image {
     width: 100%;
     margin-bottom: 10px;
@@ -22,6 +20,13 @@
 
   &__label {
     display: inline-block;
+    padding: 15px 10px 10px;
+    min-width: 114px;
+    max-width: 200px;
+
+    &Span {
+      text-align: center;
+    }
   }
 
   &__noImageIcon {

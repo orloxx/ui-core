@@ -44,6 +44,7 @@ class Field extends Component {
             id={this.props.id}
             name={this.props.name}
             placeholder={this.props.placeholder}
+            title={this.props.placeholder}
             required={this.props.required}
             pattern={this.props.pattern} />
         </label>

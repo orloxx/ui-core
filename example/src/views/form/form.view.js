@@ -7,10 +7,14 @@ export class Form extends Component {
       <section className='form container'>
         <h1>Form</h1>
         <form action=''>
-          <Field id='text1' name='text1' label='Some label1' placeholder='Insert value1' />
-          <Field id='text2' name='text2' label='Some label2' placeholder='Insert value2' />
-          <Field id='text3' name='text3' label='Some label3' placeholder='Insert value3' />
-          <ImageField id='image' name='image' label='Upload image' />
+          <ImageField id='avatar' name='avatar' label='Avatar' />
+          <Field id='username' name='username'
+                 label='Username' placeholder='Enter your username' />
+          <Field id='name' name='name'
+                 label='Name' placeholder='Enter your full name' />
+          <Field id='email' name='email'
+                 label='Email' placeholder='Enter your email address' />
+          <button className='button'>Cancel</button> <button className='button'>Save</button>
         </form>
       </section>
     );
