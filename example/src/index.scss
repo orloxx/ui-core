@@ -6,3 +6,7 @@
 @import "~@orloxx/ui-core/scss/form/dropdown-field";
 @import "~@orloxx/ui-core/scss/form/image-field";
 @import "~@orloxx/ui-core/scss/page-control";
+
+.form {
+  max-width: 625px;
+}

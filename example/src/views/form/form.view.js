@@ -6,7 +6,7 @@ export class Form extends Component {
     return (
       <section className='form container'>
         <h1>Form</h1>
-        <form action=''>
+        <form className='form' action=''>
           <ImageField id='avatar' name='avatar' label='Avatar' />
           <Field id='username' name='username'
                  label='Username' placeholder='Enter your username' />
