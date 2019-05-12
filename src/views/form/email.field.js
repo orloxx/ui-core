@@ -6,9 +6,12 @@ import Field from './field.view';
  * @extends {Field}
  *
  * @example
- * <EmailField id='email' name='email' label='Enter your email' />
+ * <EmailField id='email' name='email' label='Email' />
  */
 class EmailField extends Field {
+  /**
+   * @ignore
+   */
   static defaultProps = {
     type: 'email',
   };

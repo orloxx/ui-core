@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, ImageField, EmailField } from '@orloxx/ui-core';
+import { Field, ImageField, EmailField, DropdownField } from '@orloxx/ui-core';
 
 export class Form extends Component {
   render() {
@@ -13,8 +13,12 @@ export class Form extends Component {
           <Field id='name' name='name'
                  label='Name' placeholder='Enter your full name' />
           <EmailField id='email' name='email'
-                 label='Email' placeholder='Enter your email address' />
-          <button className='button'>Cancel</button> <button className='button'>Save</button>
+                      label='Email' placeholder='Enter your email address' />
+          <DropdownField id='sex' name='sex' label='Sex' placeholder='Select one'>
+            <option value='M'>Male</option>
+            <option value='F'>Female</option>
+          </DropdownField>
+          <button type='button' className='button'>Cancel</button> <button className='button'>Save</button>
         </form>
       </section>
     );
