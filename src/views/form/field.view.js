@@ -25,9 +25,17 @@ class Field extends Component {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    type: PropTypes.string,
     required: PropTypes.bool,
     pattern: PropTypes.string,
     placeholder: PropTypes.string,
+  };
+
+  /**
+   * @ignore
+   */
+  static defaultProps = {
+    type: 'text',
   };
 
   /**
@@ -40,7 +48,7 @@ class Field extends Component {
           <span className='field__labelSpan'>{this.props.label}</span>
           <input
             className='field__input'
-            type='text'
+            type={this.props.type}
             id={this.props.id}
             name={this.props.name}
             placeholder={this.props.placeholder}
