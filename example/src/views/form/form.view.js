@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, ImageField } from '@orloxx/ui-core';
+import { Field, ImageField, EmailField } from '@orloxx/ui-core';
 
 export class Form extends Component {
   render() {
@@ -12,7 +12,7 @@ export class Form extends Component {
                  label='Username' placeholder='Enter your username' />
           <Field id='name' name='name'
                  label='Name' placeholder='Enter your full name' />
-          <Field id='email' name='email'
+          <EmailField id='email' name='email'
                  label='Email' placeholder='Enter your email address' />
           <button className='button'>Cancel</button> <button className='button'>Save</button>
         </form>
