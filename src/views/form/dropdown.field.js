@@ -126,15 +126,15 @@ class DropdownField extends Field {
           {label}
         </label>
         <div className='field__inputWrapper'>
-          <input type='hidden' value={selectedOption.id} />
           <input
-            className='field__input dropdown__input' type='text' readOnly
-            id={id}
-            name={name}
-            placeholder={placeholder}
-            title={placeholder}
+            type='hidden' id={`${id}-value`}
+            name={`${name}-value`} value={selectedOption.id} />
+          <input
+            className='field__input dropdown__input' type='text'
+            id={id} name={name}
+            placeholder={placeholder} title={placeholder}
             required={required}
-            value={selectedOption.label}
+            value={selectedOption.label} readOnly
             onFocus={() => this.setState({ isFocused: true })} />
           <button
             type='button' className='field__icon'
