@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import Field from './field.view';
 import PropTypes from 'prop-types';
 
@@ -92,6 +92,15 @@ class DropdownField extends Field {
   /**
    * @ignore
    */
+  renderIcon() {
+    return this.state.isFocused
+      ? (<FA icon={faChevronUp} />)
+      : (<FA icon={faChevronDown} />);
+  }
+
+  /**
+   * @ignore
+   */
   renderOptions() {
     if (this.state.isFocused) {
       return this.state.options.map(option => (
@@ -132,7 +141,7 @@ class DropdownField extends Field {
             title={`Toggle ${label} dropdown`}
             onFocus={() => this.setState({ isFocused: true })}
             onClick={() => this.setState({ isFocused: !isFocused })}>
-            <FA icon={faChevronDown} />
+            {this.renderIcon()}
           </button>
         </div>
         <ul className='dropdown__list'>

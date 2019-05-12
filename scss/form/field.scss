@@ -1,4 +1,4 @@
-$s-field-icon-size: 40px;
+$s-field-icon-size: 30px;
 
 .field {
   position: relative;
@@ -40,7 +40,7 @@ $s-field-icon-size: 40px;
     width: $s-field-icon-size;
     height: $s-field-icon-size;
     top: calc(50% - #{($s-field-icon-size / 2)});
-    right: 0;
+    right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
