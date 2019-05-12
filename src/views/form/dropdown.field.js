@@ -9,6 +9,11 @@ import PropTypes from 'prop-types';
 /**
  * Controls a dropdown type of input
  *
+ * #### SCSS import:
+ * ```
+ * @import "~@orloxx/ui-core/scss/form/dropdown-field";
+ * ```
+ *
  * @extends {Field}
  *
  * @example
