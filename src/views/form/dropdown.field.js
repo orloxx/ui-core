@@ -42,13 +42,13 @@ class DropdownField extends Field {
     /**
      * @ignore
      */
-    this.state = {
+    this.state = Object.assign({}, this.state, {
       isFocused: false,
       options: [],
       selectedOption: {
         id: '', label: '',
       },
-    };
+    });
   }
 
   /**

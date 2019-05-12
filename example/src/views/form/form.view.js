@@ -9,10 +9,10 @@ export class Form extends Component {
         <form className='form' action=''>
           <ImageField id='avatar' name='avatar' label='Avatar' />
           <Field id='username' name='username'
-                 label='Username' placeholder='Enter your username' />
+                 label='Username' placeholder='Enter your username' required pattern='^[a-zA-Z]+$' />
           <Field id='name' name='name'
                  label='Name' placeholder='Enter your full name' />
-          <EmailField id='email' name='email'
+          <EmailField id='email' name='email' required
                       label='Email' placeholder='Enter your email address' />
           <DropdownField id='sex' name='sex' label='Sex' placeholder='Select one'>
             <option value='M'>Male</option>

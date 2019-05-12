@@ -46,9 +46,9 @@ class ImageField extends Field {
     /**
      * @ignore
      */
-    this.state = {
+    this.state = Object.assign({}, this.state, {
       imageData: null,
-    };
+    });
   }
 
   /**

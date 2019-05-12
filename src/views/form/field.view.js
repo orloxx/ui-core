@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * Base class for all form fields. It's supposed to be used as a super class
@@ -16,10 +18,13 @@ import PropTypes from 'prop-types';
 class Field extends Component {
   /**
    * @type {Object}
-   * @property {String} id - The input element id attribute
-   * @property {String} name - The input element name attribute
+   * @property {String} id - The input element `id` attribute
+   * @property {String} name - The input element `name` attribute
    * @property {String} label - The label attached to the input field
-   * @property {String} placeholder - Placeholder text
+   * @property {String} [type='text'] - The input element `type` attribute
+   * @property {Boolean} [required=false] - The input element `required` attribute
+   * @property {String} [pattern] - The pattern to validate the input's value
+   * @property {String} [placeholder] - Placeholder text
    */
   static propTypes = {
     id: PropTypes.string.isRequired,
@@ -36,26 +41,116 @@ class Field extends Component {
    */
   static defaultProps = {
     type: 'text',
+    required: false,
   };
 
   /**
    * @ignore
    */
+  constructor(props) {
+    super(props);
+
+    /**
+     * @ignore
+     */
+    this.input = React.createRef();
+
+    /**
+     * @ignore
+     */
+    this.state = { isValid: true, isPattern: true, isDirty: false };
+  }
+
+  /**
+   * @ignore
+   */
+  get isValid() {
+    const { required } = this.props;
+    if (required) {
+      const { current } = this.input;
+      return !!current.value;
+    }
+    return true;
+  }
+
+  /**
+   * @ignore
+   */
+  get isPattern() {
+    const { pattern } = this.props;
+    const { current } = this.input;
+    if (pattern && current.value) {
+      const reg = new RegExp(pattern, 'g');
+      return reg.test(current.value);
+    }
+    return true;
+  }
+
+  /**
+   * @ignore
+   */
+  get fieldClasses() {
+    const { isValid, isPattern } = this.state;
+    return !isValid || !isPattern ? 'field--error' : '';
+  }
+
+  /**
+   * @ignore
+   */
+  onBlur() {
+    this.setState({
+      isDirty: true,
+      isValid: this.isValid,
+      isPattern: this.isPattern,
+    });
+  }
+
+  /**
+   * @ignore
+   */
+  renderValidationIcon() {
+    const { isValid, isPattern, isDirty } = this.state;
+    if (isDirty) {
+      return isValid && isPattern
+        ? (<div className='field__icon field__icon--valid'>
+          <FA icon={faCheckCircle} /></div>)
+        : (<div className='field__icon field__icon--invalid'>
+          <FA icon={faTimesCircle} /></div>);
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  renderValidationMessages() {
+    const { isValid, isPattern, isDirty } = this.state;
+    if (isDirty) {
+      if (!isValid) {
+        return (<em className='field__msg field__msg--error'>This field is required</em>);
+      } else if (!isPattern) {
+        return (<em className='field__msg field__msg--error'>Please enter correct format</em>);
+      }
+    }
+  }
+
+  /**
+   * @ignore
+   */
   render() {
+    const { id, name, label, type, required, pattern, placeholder } = this.props;
     return (
-      <div className='field'>
-        <label className='field__label' htmlFor={this.props.id}>
-          {this.props.label}
-        </label>
-        <input
-          className='field__input'
-          type={this.props.type}
-          id={this.props.id}
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          title={this.props.placeholder}
-          required={this.props.required}
-          pattern={this.props.pattern} />
+      <div className={`field ${this.fieldClasses}`}>
+        <label className='field__label' htmlFor={id}>{label}</label>
+        <div className='field__inputWrapper'>
+          <input
+            className='field__input' ref={this.input}
+            type={type} id={id} name={name}
+            placeholder={placeholder} title={placeholder}
+            required={required} pattern={pattern}
+            onBlur={() => this.onBlur()} />
+          {this.renderValidationIcon()}
+        </div>
+        {this.renderValidationMessages()}
       </div>
     );
   }

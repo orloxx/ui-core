@@ -1,6 +1,8 @@
 $s-field-icon-size: 30px;
 
 .field {
+  $this: &;
+
   position: relative;
 
   &,
@@ -30,8 +32,13 @@ $s-field-icon-size: 30px;
       border-color: $c-action;
     }
 
+    #{$this}--error & {
+      border-color: $c-error;
+    }
+
     &Wrapper {
       position: relative;
+      margin-bottom: 3px;
     }
   }
 
@@ -46,5 +53,22 @@ $s-field-icon-size: 30px;
     align-items: center;
     color: $c-action;
     font-size: 1.2rem;
+
+    &--valid {
+      color: $c-ok;
+    }
+
+    &--invalid {
+      color: $c-error;
+    }
+  }
+
+  &__msg {
+    font-style: italic;
+    font-size: 0.9rem;
+
+    &--error {
+      color: $c-error;
+    }
   }
 }
