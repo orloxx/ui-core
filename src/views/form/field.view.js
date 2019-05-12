@@ -45,17 +45,17 @@ class Field extends Component {
     return (
       <div className='field'>
         <label className='field__label' htmlFor={this.props.id}>
-          <span className='field__labelSpan'>{this.props.label}</span>
-          <input
-            className='field__input'
-            type={this.props.type}
-            id={this.props.id}
-            name={this.props.name}
-            placeholder={this.props.placeholder}
-            title={this.props.placeholder}
-            required={this.props.required}
-            pattern={this.props.pattern} />
+          {this.props.label}
         </label>
+        <input
+          className='field__input'
+          type={this.props.type}
+          id={this.props.id}
+          name={this.props.name}
+          placeholder={this.props.placeholder}
+          title={this.props.placeholder}
+          required={this.props.required}
+          pattern={this.props.pattern} />
       </div>
     );
   }

@@ -109,17 +109,17 @@ class DropdownField extends Field {
     return (
       <div className='field dropdown' onBlur={e => this.handleFocus(e)}>
         <label className='field__label' htmlFor={this.props.id}>
-          <span className='field__labelSpan'>{this.props.label}</span>
-          <input
-            className='field__input dropdown__input' type='text' readOnly
-            id={this.props.id}
-            name={this.props.name}
-            placeholder={this.props.placeholder}
-            title={this.props.placeholder}
-            required={this.props.required}
-            value={this.state.selectedOption.label}
-            onFocus={() => this.setState({ isFocused: true })} />
+          {this.props.label}
         </label>
+        <input
+          className='field__input dropdown__input' type='text' readOnly
+          id={this.props.id}
+          name={this.props.name}
+          placeholder={this.props.placeholder}
+          title={this.props.placeholder}
+          required={this.props.required}
+          value={this.state.selectedOption.label}
+          onFocus={() => this.setState({ isFocused: true })} />
         <ul className='dropdown__list'>
           {this.renderOptions()}
         </ul>
