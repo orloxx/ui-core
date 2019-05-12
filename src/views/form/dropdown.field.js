@@ -148,7 +148,6 @@ class DropdownField extends Field {
           <button
             type='button' className='field__icon'
             title={`Toggle ${label} dropdown`}
-            onFocus={() => this.setState({ isFocused: true })}
             onClick={() => this.setState({ isFocused: !isFocused })}>
             {this.renderIcon()}
           </button>
