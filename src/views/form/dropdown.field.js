@@ -73,6 +73,15 @@ class DropdownField extends Field {
   /**
    * @ignore
    */
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isFocused && !this.state.isFocused) {
+      this.onBlur();
+    }
+  }
+
+  /**
+   * @ignore
+   */
   onSelect(e, option) {
     e.preventDefault();
     this.setState({ selectedOption: option, isFocused: false });
@@ -86,7 +95,7 @@ class DropdownField extends Field {
       (relatedTarget.classList.contains('dropdown__link') ||
         relatedTarget.classList.contains('dropdown__input') ||
         relatedTarget.classList.contains('field__icon'));
-    this.setState({ isFocused });
+    this.setState({ isFocused: !!isFocused });
   }
 
   /**
@@ -121,7 +130,7 @@ class DropdownField extends Field {
     const { id, label, name, placeholder, required } = this.props;
     const { selectedOption, isFocused } = this.state;
     return (
-      <div className='field dropdown' onBlur={e => this.handleFocus(e)}>
+      <div className={`field dropdown ${this.fieldClasses}`} onBlur={e => this.handleFocus(e)}>
         <label className='field__label' htmlFor={id}>
           {label}
         </label>
@@ -131,7 +140,7 @@ class DropdownField extends Field {
             name={`${name}-value`} value={selectedOption.id} />
           <input
             className='field__input dropdown__input' type='text'
-            id={id} name={name}
+            id={id} name={name} ref={this.input}
             placeholder={placeholder} title={placeholder}
             required={required}
             value={selectedOption.label} readOnly
@@ -143,10 +152,12 @@ class DropdownField extends Field {
             onClick={() => this.setState({ isFocused: !isFocused })}>
             {this.renderIcon()}
           </button>
+          {this.renderValidationIcon()}
         </div>
         <ul className='dropdown__list'>
           {this.renderOptions()}
         </ul>
+        {this.renderValidationMessages()}
       </div>
     );
   }

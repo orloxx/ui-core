@@ -14,7 +14,7 @@ export class Form extends Component {
                  label='Name' placeholder='Enter your full name' />
           <EmailField id='email' name='email' required
                       label='Email' placeholder='Enter your email address' />
-          <DropdownField id='sex' name='sex' label='Sex' placeholder='Select one'>
+          <DropdownField id='sex' name='sex' label='Sex' placeholder='Select one' required>
             <option value='M'>Male</option>
             <option value='F'>Female</option>
           </DropdownField>

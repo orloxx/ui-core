@@ -1,3 +1,5 @@
+$s-field-icon-size: 30px;
+
 .dropdown {
   &__input {
     cursor: pointer;
@@ -18,5 +20,10 @@
     &:hover {
       background: lighten($c-action, 50);
     }
+  }
+
+  .field__icon--valid,
+  .field__icon--invalid {
+    right: $s-field-icon-size + 10px;
   }
 }
