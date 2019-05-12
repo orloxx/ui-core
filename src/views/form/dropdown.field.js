@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import Field from './field.view';
 import PropTypes from 'prop-types';
 
@@ -82,7 +84,8 @@ class DropdownField extends Field {
   handleFocus({ relatedTarget }) {
     const isFocused = relatedTarget &&
       (relatedTarget.classList.contains('dropdown__link') ||
-      relatedTarget.classList.contains('dropdown__input'));
+        relatedTarget.classList.contains('dropdown__input') ||
+        relatedTarget.classList.contains('field__icon'));
     this.setState({ isFocused });
   }
 
@@ -106,20 +109,32 @@ class DropdownField extends Field {
    * @ignore
    */
   render() {
+    const { id, label, name, placeholder, required } = this.props;
+    const { selectedOption, isFocused } = this.state;
     return (
       <div className='field dropdown' onBlur={e => this.handleFocus(e)}>
-        <label className='field__label' htmlFor={this.props.id}>
-          {this.props.label}
+        <label className='field__label' htmlFor={id}>
+          {label}
         </label>
-        <input
-          className='field__input dropdown__input' type='text' readOnly
-          id={this.props.id}
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          title={this.props.placeholder}
-          required={this.props.required}
-          value={this.state.selectedOption.label}
-          onFocus={() => this.setState({ isFocused: true })} />
+        <div className='field__inputWrapper'>
+          <input type='hidden' value={selectedOption.id} />
+          <input
+            className='field__input dropdown__input' type='text' readOnly
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            title={placeholder}
+            required={required}
+            value={selectedOption.label}
+            onFocus={() => this.setState({ isFocused: true })} />
+          <button
+            type='button' className='field__icon'
+            title={`Toggle ${label} dropdown`}
+            onFocus={() => this.setState({ isFocused: true })}
+            onClick={() => this.setState({ isFocused: !isFocused })}>
+            <FA icon={faChevronDown} />
+          </button>
+        </div>
         <ul className='dropdown__list'>
           {this.renderOptions()}
         </ul>

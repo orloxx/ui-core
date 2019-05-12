@@ -1,4 +1,8 @@
+$s-field-icon-size: 40px;
+
 .field {
+  position: relative;
+
   &,
   &__label,
   &__labelSpan {
@@ -25,5 +29,22 @@
     &:focus {
       border-color: $c-action;
     }
+
+    &Wrapper {
+      position: relative;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    width: $s-field-icon-size;
+    height: $s-field-icon-size;
+    top: calc(50% - #{($s-field-icon-size / 2)});
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $c-action;
+    font-size: 1.2rem;
   }
 }
