@@ -14,6 +14,7 @@ class EmailField extends Field {
    */
   static defaultProps = {
     type: 'email',
+    pattern: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
   };
 }
 
