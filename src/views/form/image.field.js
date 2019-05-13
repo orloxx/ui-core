@@ -106,18 +106,18 @@ class ImageField extends Field {
             src={this.imageSrc}
             alt='Upload'
           />
-          <input type='hidden' name={name} value={this.imageSrc} />
+          <input type='hidden' id={`${id}-value`} name={`${name}-value`} value={this.imageSrc} />
           <input
             className='field__input imageField__input'
             id={id}
-            name='image-uploader-file'
+            name={name}
             type='file'
             accept='image/*'
             onChange={e => this.setImage(e)}
           />
           <FA className='imageField__noImageIcon' icon={faUpload} />
           <span className='field__labelSpan imageField__labelSpan'>
-            {label || 'Upload image'}
+            {label || 'Upload image'} {this.requiredLabel}
           </span>
         </label>
       </div>

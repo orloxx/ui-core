@@ -13,7 +13,11 @@ import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
  * ```
  *
  * @example
- * <Field id='some-id' name='some-name' label='Some label' />
+ * <Field id='username' name='username'
+ *   label='Username' placeholder='Enter your username'
+ *   suggestion='Only accepts letters and numbers'
+ *   patternError='Input format is wrong, only accepts letters and numbers'
+ *   required pattern='^[a-zA-Z0-9]+$' />
  */
 class Field extends Component {
   /**
@@ -22,9 +26,13 @@ class Field extends Component {
    * @property {String} name - The input element `name` attribute
    * @property {String} label - The label attached to the input field
    * @property {String} [type='text'] - The input element `type` attribute
-   * @property {Boolean} [required=false] - The input element `required` attribute
+   * @property {Boolean} [required] - The input element `required` attribute
    * @property {String} [pattern] - The pattern to validate the input's value
    * @property {String} [placeholder] - Placeholder text
+   * @property {String} [requiredLabel='(required)'] - The required label added to the input's label
+   * @property {String} [requiredError] - The error message when the required input is empty
+   * @property {String} [patternError] - The error message when the input's pattern is not matched
+   * @property {String} [suggestion] - Suggestion text for the user
    */
   static propTypes = {
     id: PropTypes.string.isRequired,
@@ -34,6 +42,10 @@ class Field extends Component {
     required: PropTypes.bool,
     pattern: PropTypes.string,
     placeholder: PropTypes.string,
+    requiredLabel: PropTypes.string,
+    requiredError: PropTypes.string,
+    patternError: PropTypes.string,
+    suggestion: PropTypes.string,
   };
 
   /**
@@ -41,7 +53,7 @@ class Field extends Component {
    */
   static defaultProps = {
     type: 'text',
-    required: false,
+    requiredLabel: '(required)',
   };
 
   /**
@@ -97,6 +109,15 @@ class Field extends Component {
   /**
    * @ignore
    */
+  get requiredLabel() {
+    if (this.props.required) {
+      return this.props.requiredLabel;
+    }
+  }
+
+  /**
+   * @ignore
+   */
   onBlur() {
     this.setState({
       isDirty: true,
@@ -126,10 +147,16 @@ class Field extends Component {
     const { isValid, isPattern, isDirty } = this.state;
     if (isDirty) {
       if (!isValid) {
-        return (<em className='field__msg field__msg--error'>This field is required</em>);
+        return (<em className='field__msg field__msg--error'>
+          {this.props.requiredError || 'This field is required'}
+        </em>);
       } else if (!isPattern) {
-        return (<em className='field__msg field__msg--error'>Please enter correct format</em>);
+        return (<em className='field__msg field__msg--error'>
+          {this.props.patternError || 'Please enter correct format'}
+        </em>);
       }
+    } else if (this.props.suggestion) {
+      return (<em className='field__msg'>{this.props.suggestion}</em>);
     }
   }
 
@@ -140,7 +167,7 @@ class Field extends Component {
     const { id, name, label, type, required, pattern, placeholder } = this.props;
     return (
       <div className={`field ${this.fieldClasses}`}>
-        <label className='field__label' htmlFor={id}>{label}</label>
+        <label className='field__label' htmlFor={id}>{label} {this.requiredLabel}</label>
         <div className='field__inputWrapper'>
           <input
             className='field__input' ref={this.input}

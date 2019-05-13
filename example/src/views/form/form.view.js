@@ -7,12 +7,15 @@ export class Form extends Component {
       <section className='form container'>
         <h1>Form</h1>
         <form className='form' action=''>
-          <ImageField id='avatar' name='avatar' label='Avatar' />
+          <ImageField id='avatar' name='avatar' label='Avatar' required />
           <Field id='username' name='username'
-                 label='Username' placeholder='Enter your username' required pattern='^[a-zA-Z]+$' />
+                 label='Username' placeholder='Enter your username'
+                 suggestion='Only accepts letters and numbers'
+                 patternError='Input format is wrong, only accepts letters and numbers'
+                 required pattern='^[a-zA-Z0-9]+$' />
           <Field id='name' name='name'
                  label='Name' placeholder='Enter your full name' />
-          <EmailField id='email' name='email' required
+          <EmailField id='email' name='email'
                       label='Email' placeholder='Enter your email address' />
           <DropdownField id='sex' name='sex' label='Sex' placeholder='Select one' required>
             <option value='M'>Male</option>

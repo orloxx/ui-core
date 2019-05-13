@@ -132,7 +132,7 @@ class DropdownField extends Field {
     return (
       <div className={`field dropdown ${this.fieldClasses}`} onBlur={e => this.handleFocus(e)}>
         <label className='field__label' htmlFor={id}>
-          {label}
+          {label} {this.requiredLabel}
         </label>
         <div className='field__inputWrapper'>
           <input
