@@ -57,6 +57,9 @@ class TextareaField extends Field {
     };
   }
 
+  /**
+   * @ignore
+   */
   get loaderClass() {
     const { current } = this.input;
     if (current) {
@@ -87,6 +90,9 @@ class TextareaField extends Field {
     this.onBlur();
   }
 
+  /**
+   * @ignore
+   */
   renderValidationMessages() {
     if (this.props.maxChars && this.state.limitReached) {
       return (<em className='field__msg field__msg--error'>
