@@ -1,4 +1,6 @@
 .imageField {
+  $this: &;
+
   &__image {
     width: 100%;
     margin-bottom: 10px;
@@ -16,6 +18,10 @@
     overflow: hidden;
     position: absolute;
     z-index: -1;
+
+    &:focus + #{$this}__label {
+      background: darken($c-action, 10);
+    }
   }
 
   &__label {

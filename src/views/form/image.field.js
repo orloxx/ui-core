@@ -32,10 +32,10 @@ class ImageField extends Field {
   /**
    * @ignore
    */
-  static defaultProps = {
+  static defaultProps = Object.assign(Field.defaultProps, {
     src: '',
     fileSize: 256,
-  };
+  });
 
   /**
    * @ignore
@@ -89,7 +89,11 @@ class ImageField extends Field {
    */
   setImageData(file) {
     if (file) {
-      ImageUtils.getFileData(file).then(imageData => this.setState({ imageData }));
+      ImageUtils.getFileData(file)
+        .then((imageData) => {
+          this.setState({ imageData });
+          this.onBlur();
+        });
     }
   }
 
@@ -100,26 +104,31 @@ class ImageField extends Field {
     const { id, name, label } = this.props;
     return (
       <div className={`field imageField ${this.hasImageClassName}`}>
-        <label className='button field__label imageField__label' htmlFor={id}>
-          <img
-            className='imageField__image'
-            src={this.imageSrc}
-            alt='Upload'
-          />
-          <input type='hidden' id={`${id}-value`} name={`${name}-value`} value={this.imageSrc} />
+        <div className='field__inputWrapper'>
           <input
             className='field__input imageField__input'
-            id={id}
-            name={name}
+            id={id} name={name}
             type='file'
             accept='image/*'
+            onBlur={() => this.onBlur()}
             onChange={e => this.setImage(e)}
           />
-          <FA className='imageField__noImageIcon' icon={faUpload} />
-          <span className='field__labelSpan imageField__labelSpan'>
-            {label || 'Upload image'} {this.requiredLabel}
-          </span>
-        </label>
+          <label className='button field__label imageField__label' htmlFor={id}>
+            <img
+              className='imageField__image'
+              src={this.imageSrc}
+              alt='Upload'
+            />
+            <input
+              type='hidden' id={`${id}-value`} name={`${name}-value`}
+              ref={this.input} value={this.imageSrc} />
+            <FA className='imageField__noImageIcon' icon={faUpload} />
+            <span className='field__labelSpan imageField__labelSpan'>
+              {label || 'Upload image'} {this.requiredLabel}
+            </span>
+          </label>
+        </div>
+        {this.renderValidationMessages()}
       </div>
     );
   }
