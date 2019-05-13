@@ -109,6 +109,7 @@ class ImageField extends Field {
             className='field__input imageField__input'
             id={id} name={name}
             type='file'
+            required={this.props.required}
             accept='image/*'
             onBlur={() => this.onBlur()}
             onChange={e => this.setImage(e)}
