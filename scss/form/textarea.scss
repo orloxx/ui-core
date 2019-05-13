@@ -1,0 +1,21 @@
+.textarea {
+  &__input {
+    resize: none;
+    min-height: 100px;
+  }
+
+  &__loader {
+    //position: absolute;
+    //bottom: 5px;
+    //right: 15px;
+    transform: rotate(-90deg);
+
+    &Back {
+      color: $c-border;
+    }
+
+    &Front {
+      color: $c-action;
+    }
+  }
+}

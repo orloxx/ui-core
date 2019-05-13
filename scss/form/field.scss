@@ -1,4 +1,4 @@
-$s-field-icon-size: 30px;
+$s-field-padding: 10px;
 
 .field {
   $this: &;
@@ -21,7 +21,10 @@ $s-field-icon-size: 30px;
 
   &__input {
     margin: 0;
-    padding: 10px 40px 10px 10px;
+    padding: $s-field-padding
+      ($s-field-padding + $s-field-icon-size)
+      $s-field-padding
+      $s-field-padding;
     border: 1px solid $c-border;
     font-size: inherit;
     line-height: inherit;
@@ -48,7 +51,7 @@ $s-field-icon-size: 30px;
     width: $s-field-icon-size;
     height: $s-field-icon-size;
     top: calc(50% - #{($s-field-icon-size / 2)});
-    right: 10px;
+    right: 5px;
     display: flex;
     justify-content: center;
     align-items: center;

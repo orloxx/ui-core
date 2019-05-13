@@ -1,5 +1,3 @@
-$s-field-icon-size: 30px;
-
 .dropdown {
   &__input {
     cursor: pointer;
@@ -24,6 +22,6 @@ $s-field-icon-size: 30px;
 
   .field__icon--valid,
   .field__icon--invalid {
-    right: $s-field-icon-size + 10px;
+    right: $s-field-icon-size;
   }
 }
