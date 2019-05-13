@@ -1,29 +1,5 @@
 window.esdocSearchIndex = [
   [
-    "@orloxx/ui-core/src/views/form/dropdown.field.js~dropdownfield",
-    "class/src/views/form/dropdown.field.js~DropdownField.html",
-    "<span>DropdownField</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/form/dropdown.field.js</span>",
-    "class"
-  ],
-  [
-    "@orloxx/ui-core/src/views/form/email.field.js~emailfield",
-    "class/src/views/form/email.field.js~EmailField.html",
-    "<span>EmailField</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/form/email.field.js</span>",
-    "class"
-  ],
-  [
-    "@orloxx/ui-core/src/views/form/field.view.js~field",
-    "class/src/views/form/field.view.js~Field.html",
-    "<span>Field</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/form/field.view.js</span>",
-    "class"
-  ],
-  [
-    "@orloxx/ui-core/src/views/form/form.view.js~form",
-    "class/src/views/form/form.view.js~Form.html",
-    "<span>Form</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/form/form.view.js</span>",
-    "class"
-  ],
-  [
     "@orloxx/ui-core/src/utils/geolocation.js~geolocationutils",
     "class/src/utils/geolocation.js~GeolocationUtils.html",
     "<span>GeolocationUtils</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/geolocation.js</span>",
@@ -42,9 +18,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "@orloxx/ui-core/src/views/form/image.field.js~imagefield",
-    "class/src/views/form/image.field.js~ImageField.html",
-    "<span>ImageField</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/form/image.field.js</span>",
+    "@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js~imageuploader",
+    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html",
+    "<span>ImageUploader</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js</span>",
     "class"
   ],
   [
@@ -69,12 +45,6 @@ window.esdocSearchIndex = [
     "@orloxx/ui-core/src/utils/string.js~stringutils",
     "class/src/utils/string.js~StringUtils.html",
     "<span>StringUtils</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/utils/string.js</span>",
-    "class"
-  ],
-  [
-    "@orloxx/ui-core/src/views/form/textarea.field.js~textareafield",
-    "class/src/views/form/textarea.field.js~TextareaField.html",
-    "<span>TextareaField</span> <span class=\"search-result-import-path\">@orloxx/ui-core/src/views/form/textarea.field.js</span>",
     "class"
   ],
   [
@@ -444,84 +414,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/views/form/dropdown.field.js",
-    "file/src/views/form/dropdown.field.js.html",
-    "src/views/form/dropdown.field.js",
-    "file"
-  ],
-  [
-    "src/views/form/dropdown.field.js~dropdownfield.proptypes",
-    "class/src/views/form/dropdown.field.js~DropdownField.html#static-member-propTypes",
-    "src/views/form/dropdown.field.js~DropdownField.propTypes",
-    "member"
-  ],
-  [
-    "src/views/form/dropdown.field.js~htmloptionelement",
-    "https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement",
-    "src/views/form/dropdown.field.js~HTMLOptionElement",
-    "external"
-  ],
-  [
-    "src/views/form/email.field.js",
-    "file/src/views/form/email.field.js.html",
-    "src/views/form/email.field.js",
-    "file"
-  ],
-  [
-    "src/views/form/field.view.js",
-    "file/src/views/form/field.view.js.html",
-    "src/views/form/field.view.js",
-    "file"
-  ],
-  [
-    "src/views/form/field.view.js~field.proptypes",
-    "class/src/views/form/field.view.js~Field.html#static-member-propTypes",
-    "src/views/form/field.view.js~Field.propTypes",
-    "member"
-  ],
-  [
-    "src/views/form/form.view.js",
-    "file/src/views/form/form.view.js.html",
-    "src/views/form/form.view.js",
-    "file"
-  ],
-  [
-    "src/views/form/form.view.js~form#oncancel",
-    "class/src/views/form/form.view.js~Form.html#instance-method-onCancel",
-    "src/views/form/form.view.js~Form#onCancel",
-    "method"
-  ],
-  [
-    "src/views/form/form.view.js~form.proptypes",
-    "class/src/views/form/form.view.js~Form.html#static-member-propTypes",
-    "src/views/form/form.view.js~Form.propTypes",
-    "member"
-  ],
-  [
-    "src/views/form/image.field.js",
-    "file/src/views/form/image.field.js.html",
-    "src/views/form/image.field.js",
-    "file"
-  ],
-  [
-    "src/views/form/image.field.js~imagefield.proptypes",
-    "class/src/views/form/image.field.js~ImageField.html#static-member-propTypes",
-    "src/views/form/image.field.js~ImageField.propTypes",
-    "member"
-  ],
-  [
-    "src/views/form/textarea.field.js",
-    "file/src/views/form/textarea.field.js.html",
-    "src/views/form/textarea.field.js",
-    "file"
-  ],
-  [
-    "src/views/form/textarea.field.js~textareafield.proptypes",
-    "class/src/views/form/textarea.field.js~TextareaField.html#static-member-propTypes",
-    "src/views/form/textarea.field.js~TextareaField.propTypes",
-    "member"
-  ],
-  [
     "src/views/google-map/google-map.model.js",
     "file/src/views/google-map/google-map.model.js.html",
     "src/views/google-map/google-map.model.js",
@@ -621,6 +513,18 @@ window.esdocSearchIndex = [
     "src/views/google-map/google-map.view.js~googlemap.proptypes",
     "class/src/views/google-map/google-map.view.js~GoogleMap.html#static-member-propTypes",
     "src/views/google-map/google-map.view.js~GoogleMap.propTypes",
+    "member"
+  ],
+  [
+    "src/views/image-uploader/image-uploader.view.js",
+    "file/src/views/image-uploader/image-uploader.view.js.html",
+    "src/views/image-uploader/image-uploader.view.js",
+    "file"
+  ],
+  [
+    "src/views/image-uploader/image-uploader.view.js~imageuploader.proptypes",
+    "class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#static-member-propTypes",
+    "src/views/image-uploader/image-uploader.view.js~ImageUploader.propTypes",
     "member"
   ],
   [

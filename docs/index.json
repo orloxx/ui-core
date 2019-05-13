@@ -996,1618 +996,6 @@
   {
     "__docId__": 67,
     "kind": "file",
-    "name": "src/views/form/dropdown.field.js",
-    "content": "import React from 'react';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';\nimport Field from './field.view';\nimport PropTypes from 'prop-types';\n\n/**\n * @external {HTMLOptionElement} https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement\n */\n\n/**\n * Controls a dropdown type of input\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/form/dropdown-field\";\n * ```\n *\n * @extends {Field}\n *\n * @example\n * <DropdownField id='sex' name='sex' label='Sex'>\n *   <option value='M'>Male</option>\n *   <option value='F'>Female</option>\n * </DropdownField>\n */\nclass DropdownField extends Field {\n  /**\n   * @type {Object}\n   * @property {Array<HTMLOptionElement>} children - Elements to show in the dropdown list\n   */\n  static propTypes = Object.assign({}, Field.propTypes, {\n    children: PropTypes.array.isRequired,\n  });\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = Object.assign({}, this.state, {\n      isFocused: false,\n      options: [],\n      selectedOption: {\n        id: '', label: '',\n      },\n    });\n  }\n\n  /**\n   * @ignore\n   */\n  componentWillMount() {\n    const options = this.props.children.map(el => ({\n      id: el.props.value,\n      label: el.props.children,\n      selected: el.props.selected,\n    }));\n    const { selectedOption } = this.state;\n    this.setState({\n      options,\n      selectedOption: options.find(el => el.selected) || selectedOption,\n    });\n  }\n\n  /**\n   * @ignore\n   */\n  componentDidUpdate(prevProps, prevState) {\n    if (prevState.isFocused && !this.state.isFocused) {\n      this.validate();\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  onSelect(e, option) {\n    e.preventDefault();\n    this.setState({ selectedOption: option, isFocused: false });\n  }\n\n  /**\n   * @ignore\n   */\n  handleFocus({ relatedTarget }) {\n    const isFocused = relatedTarget &&\n      (relatedTarget.classList.contains('dropdown__link') ||\n        relatedTarget.classList.contains('dropdown__input') ||\n        relatedTarget.classList.contains('field__icon'));\n    this.setState({ isFocused: !!isFocused });\n  }\n\n  /**\n   * @ignore\n   */\n  renderIcon() {\n    return this.state.isFocused\n      ? (<FA icon={faChevronUp} />)\n      : (<FA icon={faChevronDown} />);\n  }\n\n  /**\n   * @ignore\n   */\n  renderOptions() {\n    if (this.state.isFocused) {\n      return this.state.options.map(option => (\n        <li className='dropdown__item' key={option.id}>\n          <a\n            className='dropdown__link' href='' title={option.label}\n            onTouchEnd={e => this.onSelect(e, option)}\n            onClick={e => this.onSelect(e, option)}>{option.label}</a>\n        </li>\n      ));\n    }\n    return null;\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const { id, label, name, placeholder, required } = this.props;\n    const { selectedOption, isFocused } = this.state;\n    return (\n      <div className={`field dropdown ${this.fieldClasses}`} onBlur={e => this.handleFocus(e)}>\n        <label className='field__label' htmlFor={id}>\n          {label} {this.requiredLabel}\n        </label>\n        <div className='field__inputWrapper'>\n          <input\n            type='hidden' id={`${id}-value`}\n            name={`${name}-value`} value={selectedOption.id} />\n          <input\n            className='field__input dropdown__input' type='text'\n            id={id} name={name} ref={this.input}\n            placeholder={placeholder} title={placeholder}\n            required={required}\n            value={selectedOption.label} readOnly\n            onFocus={() => this.setState({ isFocused: true })} />\n          <button\n            type='button' className='field__icon'\n            title={`Toggle ${label} dropdown`}\n            onClick={() => this.setState({ isFocused: !isFocused })}>\n            {this.renderIcon()}\n          </button>\n          {this.renderValidationIcon()}\n        </div>\n        <ul className='dropdown__list'>\n          {this.renderOptions()}\n        </ul>\n        {this.renderValidationMessages()}\n      </div>\n    );\n  }\n}\n\nexport default DropdownField;\n",
-    "static": true,
-    "longname": "/Users/ikertxu/Personal/ui-core/src/views/form/dropdown.field.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 68,
-    "kind": "external",
-    "name": "HTMLOptionElement",
-    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement",
-    "memberof": "src/views/form/dropdown.field.js",
-    "static": true,
-    "longname": "src/views/form/dropdown.field.js~HTMLOptionElement",
-    "access": "public",
-    "description": ""
-  },
-  {
-    "__docId__": 69,
-    "kind": "class",
-    "name": "DropdownField",
-    "memberof": "src/views/form/dropdown.field.js",
-    "static": true,
-    "longname": "src/views/form/dropdown.field.js~DropdownField",
-    "access": "public",
-    "export": true,
-    "importPath": "@orloxx/ui-core/src/views/form/dropdown.field.js",
-    "importStyle": "DropdownField",
-    "description": "Controls a dropdown type of input\n\n#### SCSS import:\n```\n@import \"~@orloxx/ui-core/scss/form/dropdown-field\";\n```",
-    "examples": [
-      "<DropdownField id='sex' name='sex' label='Sex'>\n  <option value='M'>Male</option>\n  <option value='F'>Female</option>\n</DropdownField>"
-    ],
-    "lineNumber": 27,
-    "interface": false,
-    "extends": [
-      "Field"
-    ]
-  },
-  {
-    "__docId__": 70,
-    "kind": "member",
-    "name": "propTypes",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "static": true,
-    "longname": "src/views/form/dropdown.field.js~DropdownField.propTypes",
-    "access": "public",
-    "description": "",
-    "lineNumber": 32,
-    "properties": [
-      {
-        "nullable": null,
-        "types": [
-          "Array<HTMLOptionElement>"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "children",
-        "description": "Elements to show in the dropdown list"
-      }
-    ],
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 71,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#constructor",
-    "access": "public",
-    "description": "",
-    "lineNumber": 39,
-    "ignore": true
-  },
-  {
-    "__docId__": 72,
-    "kind": "member",
-    "name": "state",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#state",
-    "access": "public",
-    "description": "",
-    "lineNumber": 45,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 73,
-    "kind": "method",
-    "name": "componentWillMount",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#componentWillMount",
-    "access": "public",
-    "description": "",
-    "lineNumber": 57,
-    "ignore": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 74,
-    "kind": "method",
-    "name": "componentDidUpdate",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#componentDidUpdate",
-    "access": "public",
-    "description": "",
-    "lineNumber": 73,
-    "ignore": true,
-    "params": [
-      {
-        "name": "prevProps",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "prevState",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 75,
-    "kind": "method",
-    "name": "onSelect",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#onSelect",
-    "access": "public",
-    "description": "",
-    "lineNumber": 82,
-    "ignore": true,
-    "params": [
-      {
-        "name": "e",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "option",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 76,
-    "kind": "method",
-    "name": "handleFocus",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#handleFocus",
-    "access": "public",
-    "description": "",
-    "lineNumber": 90,
-    "ignore": true,
-    "params": [
-      {
-        "name": "objectPattern",
-        "types": [
-          "{\"relatedTarget\": *}"
-        ],
-        "defaultRaw": {
-          "relatedTarget": null
-        },
-        "defaultValue": "{\"relatedTarget\":null}"
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 77,
-    "kind": "method",
-    "name": "renderIcon",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#renderIcon",
-    "access": "public",
-    "description": "",
-    "lineNumber": 101,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 78,
-    "kind": "method",
-    "name": "renderOptions",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#renderOptions",
-    "access": "public",
-    "description": "",
-    "lineNumber": 110,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 79,
-    "kind": "method",
-    "name": "render",
-    "memberof": "src/views/form/dropdown.field.js~DropdownField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/dropdown.field.js~DropdownField#render",
-    "access": "public",
-    "description": "",
-    "lineNumber": 127,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 80,
-    "kind": "file",
-    "name": "src/views/form/email.field.js",
-    "content": "import Field from './field.view';\n\n/**\n * Controls input of type email\n *\n * @extends {Field}\n *\n * @example\n * <EmailField id='email' name='email' label='Email' />\n */\nclass EmailField extends Field {\n  /**\n   * @ignore\n   */\n  static defaultProps = Object.assign({}, Field.defaultProps, {\n    type: 'email',\n    pattern: '^(([^<>()[\\\\].,;:\\\\s@\"]+(\\\\.[^<>()[\\\\].,;:\\\\s@\"]+)*)|(\".+\"))@(([^<>()[\\\\].,;:\\\\s@\"]+\\\\.)+[^<>()[\\\\].,;:\\\\s@\"]{2,})$',\n  });\n}\n\nexport default EmailField;\n",
-    "static": true,
-    "longname": "/Users/ikertxu/Personal/ui-core/src/views/form/email.field.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 81,
-    "kind": "class",
-    "name": "EmailField",
-    "memberof": "src/views/form/email.field.js",
-    "static": true,
-    "longname": "src/views/form/email.field.js~EmailField",
-    "access": "public",
-    "export": true,
-    "importPath": "@orloxx/ui-core/src/views/form/email.field.js",
-    "importStyle": "EmailField",
-    "description": "Controls input of type email",
-    "examples": [
-      "<EmailField id='email' name='email' label='Email' />"
-    ],
-    "lineNumber": 11,
-    "interface": false,
-    "extends": [
-      "Field"
-    ]
-  },
-  {
-    "__docId__": 82,
-    "kind": "member",
-    "name": "defaultProps",
-    "memberof": "src/views/form/email.field.js~EmailField",
-    "static": true,
-    "longname": "src/views/form/email.field.js~EmailField.defaultProps",
-    "access": "public",
-    "description": "",
-    "lineNumber": 15,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 83,
-    "kind": "file",
-    "name": "src/views/form/field.view.js",
-    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';\n\n/**\n * Base class for all form fields. It's supposed to be used as a super class\n * but in case it's used as a component it renders an input type text\n *\n * #### SCSS Import\n * ```\n * @import \"~@orloxx/ui-core/scss/form/field\";\n * ```\n *\n * @example\n * <Field id='username' name='username'\n *   label='Username' placeholder='Enter your username'\n *   suggestion='Only accepts letters and numbers'\n *   patternError='Input format is wrong, only accepts letters and numbers'\n *   required pattern='^[a-zA-Z0-9]+$' />\n */\nclass Field extends Component {\n  /**\n   * @type {Object}\n   * @property {String} id - The input element `id` attribute\n   * @property {String} name - The input element `name` attribute\n   * @property {String} label - The label attached to the input field\n   * @property {String} [type='text'] - The input element `type` attribute\n   * @property {Boolean} [required] - The input element `required` attribute\n   * @property {String} [pattern] - The pattern to validate the input's value\n   * @property {String} [placeholder] - Placeholder text\n   * @property {String} [requiredLabel='(required)'] - The required label added to the input's label\n   * @property {String} [requiredError='This field is required'] - The error message when the required input is empty\n   * @property {String} [patternError='Please enter correct format'] - The error message when the input's pattern is not matched\n   * @property {String} [suggestion] - Suggestion text for the user\n   */\n  static propTypes = {\n    id: PropTypes.string.isRequired,\n    name: PropTypes.string.isRequired,\n    label: PropTypes.string.isRequired,\n    type: PropTypes.string,\n    required: PropTypes.bool,\n    pattern: PropTypes.string,\n    placeholder: PropTypes.string,\n    requiredLabel: PropTypes.string,\n    requiredError: PropTypes.string,\n    patternError: PropTypes.string,\n    suggestion: PropTypes.string,\n  };\n\n  /**\n   * @ignore\n   */\n  static defaultProps = {\n    type: 'text',\n    requiredLabel: '(required)',\n    requiredError: 'This field is required',\n    patternError: 'Please enter correct format',\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.input = React.createRef();\n\n    /**\n     * @ignore\n     */\n    this.state = { isValid: true, isPattern: true, isDirty: false };\n  }\n\n  /**\n   * @ignore\n   */\n  get isValid() {\n    const { required } = this.props;\n    if (required) {\n      const { current } = this.input;\n      return !!current.value;\n    }\n    return true;\n  }\n\n  /**\n   * @ignore\n   */\n  get isPattern() {\n    const { pattern } = this.props;\n    const { current } = this.input;\n    if (pattern && current.value) {\n      const reg = new RegExp(pattern, 'g');\n      return reg.test(current.value);\n    }\n    return true;\n  }\n\n  /**\n   * @ignore\n   */\n  get fieldClasses() {\n    const { isValid, isPattern } = this.state;\n    return !isValid || !isPattern ? 'field--error' : '';\n  }\n\n  /**\n   * @ignore\n   */\n  get requiredLabel() {\n    if (this.props.required) {\n      return this.props.requiredLabel;\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  validate() {\n    this.setState({\n      isDirty: true,\n      isValid: this.isValid,\n      isPattern: this.isPattern,\n    });\n  }\n\n  /**\n   * @ignore\n   */\n  renderValidationIcon() {\n    const { isValid, isPattern, isDirty } = this.state;\n    const { required, pattern } = this.props;\n    if ((required || pattern) && isDirty) {\n      return isValid && isPattern\n        ? (<div className='field__icon field__icon--valid'>\n          <FA icon={faCheckCircle} /></div>)\n        : (<div className='field__icon field__icon--invalid'>\n          <FA icon={faTimesCircle} /></div>);\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  renderValidationMessages() {\n    const { isValid, isPattern, isDirty } = this.state;\n    if (isDirty) {\n      if (!isValid) {\n        return (<em className='field__msg field__msg--error'>\n          {this.props.requiredError}\n        </em>);\n      } else if (!isPattern) {\n        return (<em className='field__msg field__msg--error'>\n          {this.props.patternError}\n        </em>);\n      }\n    }\n    if (this.props.suggestion) {\n      return (<em className='field__msg'>{this.props.suggestion}</em>);\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const { id, name, label, type, required, pattern, placeholder } = this.props;\n    return (\n      <div className={`field ${this.fieldClasses}`}>\n        <label className='field__label' htmlFor={id}>{label} {this.requiredLabel}</label>\n        <div className='field__inputWrapper'>\n          <input\n            className='field__input' ref={this.input}\n            type={type} id={id} name={name}\n            placeholder={placeholder} title={placeholder}\n            required={required} pattern={pattern}\n            onBlur={() => this.validate()} />\n          {this.renderValidationIcon()}\n        </div>\n        {this.renderValidationMessages()}\n      </div>\n    );\n  }\n}\n\nexport default Field;\n",
-    "static": true,
-    "longname": "/Users/ikertxu/Personal/ui-core/src/views/form/field.view.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 84,
-    "kind": "class",
-    "name": "Field",
-    "memberof": "src/views/form/field.view.js",
-    "static": true,
-    "longname": "src/views/form/field.view.js~Field",
-    "access": "public",
-    "export": true,
-    "importPath": "@orloxx/ui-core/src/views/form/field.view.js",
-    "importStyle": "Field",
-    "description": "Base class for all form fields. It's supposed to be used as a super class\nbut in case it's used as a component it renders an input type text\n\n#### SCSS Import\n```\n@import \"~@orloxx/ui-core/scss/form/field\";\n```",
-    "examples": [
-      "<Field id='username' name='username'\n  label='Username' placeholder='Enter your username'\n  suggestion='Only accepts letters and numbers'\n  patternError='Input format is wrong, only accepts letters and numbers'\n  required pattern='^[a-zA-Z0-9]+$' />"
-    ],
-    "lineNumber": 22,
-    "interface": false,
-    "extends": [
-      "react~Component"
-    ]
-  },
-  {
-    "__docId__": 85,
-    "kind": "member",
-    "name": "propTypes",
-    "memberof": "src/views/form/field.view.js~Field",
-    "static": true,
-    "longname": "src/views/form/field.view.js~Field.propTypes",
-    "access": "public",
-    "description": "",
-    "lineNumber": 37,
-    "properties": [
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "id",
-        "description": "The input element `id` attribute"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "name",
-        "description": "The input element `name` attribute"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "label",
-        "description": "The label attached to the input field"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "defaultValue": "'text'",
-        "defaultRaw": "'text'",
-        "name": "type",
-        "description": "The input element `type` attribute"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "Boolean"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "required",
-        "description": "The input element `required` attribute"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "pattern",
-        "description": "The pattern to validate the input's value"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "placeholder",
-        "description": "Placeholder text"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "defaultValue": "'(required)'",
-        "defaultRaw": "'(required)'",
-        "name": "requiredLabel",
-        "description": "The required label added to the input's label"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "defaultValue": "'This field is required'",
-        "defaultRaw": "'This field is required'",
-        "name": "requiredError",
-        "description": "The error message when the required input is empty"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "defaultValue": "'Please enter correct format'",
-        "defaultRaw": "'Please enter correct format'",
-        "name": "patternError",
-        "description": "The error message when the input's pattern is not matched"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "suggestion",
-        "description": "Suggestion text for the user"
-      }
-    ],
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 86,
-    "kind": "member",
-    "name": "defaultProps",
-    "memberof": "src/views/form/field.view.js~Field",
-    "static": true,
-    "longname": "src/views/form/field.view.js~Field.defaultProps",
-    "access": "public",
-    "description": "",
-    "lineNumber": 54,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 87,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#constructor",
-    "access": "public",
-    "description": "",
-    "lineNumber": 64,
-    "ignore": true
-  },
-  {
-    "__docId__": 88,
-    "kind": "member",
-    "name": "input",
-    "memberof": "src/views/form/field.view.js~Field",
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#input",
-    "access": "public",
-    "description": "",
-    "lineNumber": 70,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 89,
-    "kind": "member",
-    "name": "state",
-    "memberof": "src/views/form/field.view.js~Field",
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#state",
-    "access": "public",
-    "description": "",
-    "lineNumber": 75,
-    "ignore": true,
-    "type": {
-      "types": [
-        "{\"isValid\": boolean, \"isPattern\": boolean, \"isDirty\": *}"
-      ]
-    }
-  },
-  {
-    "__docId__": 90,
-    "kind": "get",
-    "name": "isValid",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#isValid",
-    "access": "public",
-    "description": "",
-    "lineNumber": 81,
-    "ignore": true,
-    "type": {
-      "types": [
-        "boolean"
-      ]
-    }
-  },
-  {
-    "__docId__": 91,
-    "kind": "get",
-    "name": "isPattern",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#isPattern",
-    "access": "public",
-    "description": "",
-    "lineNumber": 93,
-    "ignore": true,
-    "type": {
-      "types": [
-        "boolean"
-      ]
-    }
-  },
-  {
-    "__docId__": 92,
-    "kind": "get",
-    "name": "fieldClasses",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#fieldClasses",
-    "access": "public",
-    "description": "",
-    "lineNumber": 106,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 93,
-    "kind": "get",
-    "name": "requiredLabel",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#requiredLabel",
-    "access": "public",
-    "description": "",
-    "lineNumber": 114,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 94,
-    "kind": "method",
-    "name": "validate",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#validate",
-    "access": "public",
-    "description": "",
-    "lineNumber": 123,
-    "ignore": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 95,
-    "kind": "method",
-    "name": "renderValidationIcon",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#renderValidationIcon",
-    "access": "public",
-    "description": "",
-    "lineNumber": 134,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 96,
-    "kind": "method",
-    "name": "renderValidationMessages",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#renderValidationMessages",
-    "access": "public",
-    "description": "",
-    "lineNumber": 149,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 97,
-    "kind": "method",
-    "name": "render",
-    "memberof": "src/views/form/field.view.js~Field",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/field.view.js~Field#render",
-    "access": "public",
-    "description": "",
-    "lineNumber": 170,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 98,
-    "kind": "file",
-    "name": "src/views/form/form.view.js",
-    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\n\n/**\n * Controls the form element and validates all children when trying to submit\n *\n * @extends {react~Component}\n *\n * @example\n * <Form action='http://someaction.example.com/'>\n *   <ImageField id='avatar' name='avatar' label='Avatar' />\n *   <Field id='username' name='username'\n *     label='Username' placeholder='Enter your username'\n *     suggestion='Only accepts letters and numbers'\n *     patternError='Input format is wrong, only accepts letters and numbers'\n *     required pattern='^[a-zA-Z0-9]+$' />\n *   <Field id='name' name='name'\n *     label='Name' placeholder='Enter your full name' />\n *   <EmailField id='email' name='email'\n *     label='Email' placeholder='Enter your email address' />\n *   <DropdownField id='sex' name='sex' label='Sex' placeholder='Select one' required>\n *     <option value='M'>Male</option>\n *     <option value='F'>Female</option>\n *   </DropdownField>\n *   <TextareaField id='comments' name='comments' label='Comments'\n *     suggestion='This field has a 100 character limit'\n *     maxChars={100} maxCharsError='Character limit reached' />\n * </Form>\n */\nclass Form extends Component {\n  /**\n   * @type {Object}\n   * @property {Array<HTMLOptionElement>} children - Elements to show inside the form\n   * @property {String} action - The form action attribute\n   * @property {Function} onSubmit - Triggers when the user submits a valid form\n   * @property {Function} [onCancel] - Triggers when the user clicks the cancel button\n   * @property {String} [method='GET'] - The method to use when submitting the form\n   */\n  static propTypes = {\n    children: PropTypes.array.isRequired,\n    action: PropTypes.string.isRequired,\n    onSubmit: PropTypes.func.isRequired,\n    onCancel: PropTypes.func,\n    method: PropTypes.string,\n  };\n\n  /**\n   * @ignore\n   */\n  static defaultProps = {\n    children: [],\n    method: 'GET',\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.instances = {};\n  }\n\n  /**\n   * @ignore\n   */\n  componentWillMount() {\n    /**\n     * @ignore\n     */\n    this.children = this.props.children.map(el => React.cloneElement(el, {\n      key: el.props.id || Math.random().toString(36).slice(-8),\n      ref: this.addChildInstance.bind(this, el),\n    }));\n  }\n  /**\n   * @ignore\n   */\n  addChildInstance(el, instance) {\n    if (el.props.id && typeof el.type !== 'string') {\n      this.instances[el.props.id] = instance;\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  onSubmit(e) {\n    e.preventDefault();\n    const invalidFields = Object.keys(this.instances).filter((key) => {\n      const component = this.instances[key];\n      component.validate();\n      return !component.isValid;\n    });\n    const { onSubmit } = this.props;\n    if (onSubmit && !invalidFields.length) {\n      onSubmit(e);\n    }\n  }\n\n  onCancel() {\n    const { onCancel } = this.props;\n    if (onCancel) {\n      onCancel();\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const { action, method } = this.props;\n    return (\n      <form\n        action={action} method={method}\n        onSubmit={e => this.onSubmit(e)}\n        noValidate>\n        {this.children}\n        <div className='buttonGroup'>\n          <button\n            className='button button--secondary' type='button'\n            onClick={() => this.onCancel()}>Cancel</button>\n          <button className='button' type='submit'>Save</button>\n        </div>\n      </form>\n    );\n  }\n}\n\nexport default Form;\n",
-    "static": true,
-    "longname": "/Users/ikertxu/Personal/ui-core/src/views/form/form.view.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 99,
-    "kind": "class",
-    "name": "Form",
-    "memberof": "src/views/form/form.view.js",
-    "static": true,
-    "longname": "src/views/form/form.view.js~Form",
-    "access": "public",
-    "export": true,
-    "importPath": "@orloxx/ui-core/src/views/form/form.view.js",
-    "importStyle": "Form",
-    "description": "Controls the form element and validates all children when trying to submit",
-    "examples": [
-      "<Form action='http://someaction.example.com/'>\n  <ImageField id='avatar' name='avatar' label='Avatar' />\n  <Field id='username' name='username'\n    label='Username' placeholder='Enter your username'\n    suggestion='Only accepts letters and numbers'\n    patternError='Input format is wrong, only accepts letters and numbers'\n    required pattern='^[a-zA-Z0-9]+$' />\n  <Field id='name' name='name'\n    label='Name' placeholder='Enter your full name' />\n  <EmailField id='email' name='email'\n    label='Email' placeholder='Enter your email address' />\n  <DropdownField id='sex' name='sex' label='Sex' placeholder='Select one' required>\n    <option value='M'>Male</option>\n    <option value='F'>Female</option>\n  </DropdownField>\n  <TextareaField id='comments' name='comments' label='Comments'\n    suggestion='This field has a 100 character limit'\n    maxChars={100} maxCharsError='Character limit reached' />\n</Form>"
-    ],
-    "lineNumber": 30,
-    "interface": false,
-    "extends": [
-      "react~Component"
-    ]
-  },
-  {
-    "__docId__": 100,
-    "kind": "member",
-    "name": "propTypes",
-    "memberof": "src/views/form/form.view.js~Form",
-    "static": true,
-    "longname": "src/views/form/form.view.js~Form.propTypes",
-    "access": "public",
-    "description": "",
-    "lineNumber": 39,
-    "properties": [
-      {
-        "nullable": null,
-        "types": [
-          "Array<HTMLOptionElement>"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "children",
-        "description": "Elements to show inside the form"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "action",
-        "description": "The form action attribute"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "Function"
-        ],
-        "spread": false,
-        "optional": false,
-        "name": "onSubmit",
-        "description": "Triggers when the user submits a valid form"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "Function"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "onCancel",
-        "description": "Triggers when the user clicks the cancel button"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "defaultValue": "'GET'",
-        "defaultRaw": "'GET'",
-        "name": "method",
-        "description": "The method to use when submitting the form"
-      }
-    ],
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 101,
-    "kind": "member",
-    "name": "defaultProps",
-    "memberof": "src/views/form/form.view.js~Form",
-    "static": true,
-    "longname": "src/views/form/form.view.js~Form.defaultProps",
-    "access": "public",
-    "description": "",
-    "lineNumber": 50,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 102,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "src/views/form/form.view.js~Form",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/form.view.js~Form#constructor",
-    "access": "public",
-    "description": "",
-    "lineNumber": 58,
-    "ignore": true
-  },
-  {
-    "__docId__": 103,
-    "kind": "member",
-    "name": "instances",
-    "memberof": "src/views/form/form.view.js~Form",
-    "static": false,
-    "longname": "src/views/form/form.view.js~Form#instances",
-    "access": "public",
-    "description": "",
-    "lineNumber": 64,
-    "ignore": true,
-    "type": {
-      "types": [
-        "{}"
-      ]
-    }
-  },
-  {
-    "__docId__": 104,
-    "kind": "method",
-    "name": "componentWillMount",
-    "memberof": "src/views/form/form.view.js~Form",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/form.view.js~Form#componentWillMount",
-    "access": "public",
-    "description": "",
-    "lineNumber": 70,
-    "ignore": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 105,
-    "kind": "member",
-    "name": "children",
-    "memberof": "src/views/form/form.view.js~Form",
-    "static": false,
-    "longname": "src/views/form/form.view.js~Form#children",
-    "access": "public",
-    "description": "",
-    "lineNumber": 74,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 106,
-    "kind": "method",
-    "name": "addChildInstance",
-    "memberof": "src/views/form/form.view.js~Form",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/form.view.js~Form#addChildInstance",
-    "access": "public",
-    "description": "",
-    "lineNumber": 82,
-    "ignore": true,
-    "params": [
-      {
-        "name": "el",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "instance",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 107,
-    "kind": "method",
-    "name": "onSubmit",
-    "memberof": "src/views/form/form.view.js~Form",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/form.view.js~Form#onSubmit",
-    "access": "public",
-    "description": "",
-    "lineNumber": 91,
-    "ignore": true,
-    "params": [
-      {
-        "name": "e",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 108,
-    "kind": "method",
-    "name": "onCancel",
-    "memberof": "src/views/form/form.view.js~Form",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/form.view.js~Form#onCancel",
-    "access": "public",
-    "description": null,
-    "lineNumber": 104,
-    "undocument": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 109,
-    "kind": "method",
-    "name": "render",
-    "memberof": "src/views/form/form.view.js~Form",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/form.view.js~Form#render",
-    "access": "public",
-    "description": "",
-    "lineNumber": 114,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 110,
-    "kind": "file",
-    "name": "src/views/form/image.field.js",
-    "content": "import React from 'react';\nimport PropTypes from 'prop-types';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faUpload } from '@fortawesome/free-solid-svg-icons';\nimport { ImageUtils } from '../../utils';\nimport Field from './field.view';\n\n/**\n * Controls an input file element that shows a preview of the selected image\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/form/image-field\";\n * ```\n *\n * @extends {Field}\n *\n * @example\n * <ImageField id='image' name='image' label='Choose from computer' />\n */\nclass ImageField extends Field {\n  /**\n   * @type {Object}\n   * @property {String} [src] - Default image path when nothing is selected\n   * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted\n   */\n  static propTypes = Object.assign({}, Field.propTypes, {\n    src: PropTypes.string,\n    fileSize: PropTypes.number,\n  });\n\n  /**\n   * @ignore\n   */\n  static defaultProps = Object.assign({}, Field.defaultProps, {\n    src: '',\n    fileSize: 256,\n  });\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = Object.assign({}, this.state, {\n      imageData: null,\n    });\n  }\n\n  /**\n   * @ignore\n   */\n  get hasImageClassName() {\n    return this.imageSrc ? 'imageField--hasImage' : '';\n  }\n\n  /**\n   * @ignore\n   */\n  get imageSrc() {\n    const { imageData } = this.state;\n    const { src } = this.props;\n    return imageData || src;\n  }\n\n  /**\n   * @ignore\n   */\n  setImage(e) {\n    const file = e.target.files[0];\n    const maxKb = this.props.fileSize;\n    const maxSize = maxKb * 1024;\n\n    if (file && file.size > maxSize) {\n      alert(`File cannot be greater than ${maxKb}Kb. Image will be removed.`);\n      e.target.value = null;\n      this.setState({ imageData: null });\n      return;\n    }\n    this.setImageData(file);\n  }\n\n  /**\n   * @ignore\n   */\n  setImageData(file) {\n    if (file) {\n      ImageUtils.getFileData(file)\n        .then((imageData) => {\n          this.setState({ imageData });\n          this.validate();\n        });\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const { id, name, label } = this.props;\n    return (\n      <div className={`field imageField ${this.hasImageClassName}`}>\n        <div className='field__inputWrapper'>\n          <input\n            className='field__input imageField__input'\n            id={id} name={name}\n            type='file'\n            required={this.props.required}\n            accept='image/*'\n            onBlur={() => this.validate()}\n            onChange={e => this.setImage(e)}\n          />\n          <label className='button field__label imageField__label' htmlFor={id}>\n            <img\n              className='imageField__image'\n              src={this.imageSrc}\n              alt='Upload'\n            />\n            <input\n              type='hidden' id={`${id}-value`} name={`${name}-value`}\n              ref={this.input} value={this.imageSrc} />\n            <FA className='imageField__noImageIcon' icon={faUpload} />\n            <span className='field__labelSpan imageField__labelSpan'>\n              {label} {this.requiredLabel}\n            </span>\n          </label>\n        </div>\n        {this.renderValidationMessages()}\n      </div>\n    );\n  }\n}\n\nexport default ImageField;\n",
-    "static": true,
-    "longname": "/Users/ikertxu/Personal/ui-core/src/views/form/image.field.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 111,
-    "kind": "class",
-    "name": "ImageField",
-    "memberof": "src/views/form/image.field.js",
-    "static": true,
-    "longname": "src/views/form/image.field.js~ImageField",
-    "access": "public",
-    "export": true,
-    "importPath": "@orloxx/ui-core/src/views/form/image.field.js",
-    "importStyle": "ImageField",
-    "description": "Controls an input file element that shows a preview of the selected image\n\n#### SCSS import:\n```\n@import \"~@orloxx/ui-core/scss/form/image-field\";\n```",
-    "examples": [
-      "<ImageField id='image' name='image' label='Choose from computer' />"
-    ],
-    "lineNumber": 21,
-    "interface": false,
-    "extends": [
-      "Field"
-    ]
-  },
-  {
-    "__docId__": 112,
-    "kind": "member",
-    "name": "propTypes",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "static": true,
-    "longname": "src/views/form/image.field.js~ImageField.propTypes",
-    "access": "public",
-    "description": "",
-    "lineNumber": 27,
-    "properties": [
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "src",
-        "description": "Default image path when nothing is selected"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "number"
-        ],
-        "spread": false,
-        "optional": true,
-        "defaultValue": "256Kb",
-        "defaultRaw": "256Kb",
-        "name": "fileSize",
-        "description": "Maximum file size (Kb) accepted"
-      }
-    ],
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 113,
-    "kind": "member",
-    "name": "defaultProps",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "static": true,
-    "longname": "src/views/form/image.field.js~ImageField.defaultProps",
-    "access": "public",
-    "description": "",
-    "lineNumber": 35,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 114,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/image.field.js~ImageField#constructor",
-    "access": "public",
-    "description": "",
-    "lineNumber": 43,
-    "ignore": true
-  },
-  {
-    "__docId__": 115,
-    "kind": "member",
-    "name": "state",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "static": false,
-    "longname": "src/views/form/image.field.js~ImageField#state",
-    "access": "public",
-    "description": "",
-    "lineNumber": 49,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 116,
-    "kind": "get",
-    "name": "hasImageClassName",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/image.field.js~ImageField#hasImageClassName",
-    "access": "public",
-    "description": "",
-    "lineNumber": 57,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 117,
-    "kind": "get",
-    "name": "imageSrc",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/image.field.js~ImageField#imageSrc",
-    "access": "public",
-    "description": "",
-    "lineNumber": 64,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 118,
-    "kind": "method",
-    "name": "setImage",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/image.field.js~ImageField#setImage",
-    "access": "public",
-    "description": "",
-    "lineNumber": 73,
-    "ignore": true,
-    "params": [
-      {
-        "name": "e",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 119,
-    "kind": "method",
-    "name": "setImageData",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/image.field.js~ImageField#setImageData",
-    "access": "public",
-    "description": "",
-    "lineNumber": 90,
-    "ignore": true,
-    "params": [
-      {
-        "name": "file",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 120,
-    "kind": "method",
-    "name": "render",
-    "memberof": "src/views/form/image.field.js~ImageField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/image.field.js~ImageField#render",
-    "access": "public",
-    "description": "",
-    "lineNumber": 103,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 121,
-    "kind": "file",
-    "name": "src/views/form/textarea.field.js",
-    "content": "import React from 'react';\nimport PropTypes from 'prop-types';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faTimesCircle } from '@fortawesome/free-solid-svg-icons';\nimport Field from './field.view';\n\n// loader data\nconst RADIUS = 13;\nconst STROKE = 3;\nconst MAX_STROKE = 2 * Math.PI * RADIUS;\nconst MAX_SIZE = (RADIUS * 2) + (STROKE * 2);\n\n/**\n * Controls the textarea input\n *\n * #### SCSS Import\n * ```\n * @import \"~@orloxx/ui-core/scss/form/textarea\";\n * ```\n *\n * @extends {Field}\n *\n * @example\n * <TextareaField id='email' name='email' label='Email' />\n */\nclass TextareaField extends Field {\n  /**\n   * @type {Object}\n   * @property {number} [maxChars] - The maximum number of characters limit\n   * @property {String} [maxCharsError='You reached the maximum number of characters allowed'] - The error message when the number of characters has been reached\n   */\n  static propTypes = Object.assign({}, Field.propTypes, {\n    maxChars: PropTypes.number,\n    maxCharsError: PropTypes.string,\n  });\n\n  /**\n   * @ignore\n   */\n  static defaultProps = Object.assign({}, Field.defaultProps, {\n    maxCharsError: 'You reached the maximum number of characters allowed',\n  });\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = Object.assign({}, this.state, {\n      strokeDashoffset: MAX_STROKE,\n      extraChars: 0,\n    });\n  }\n\n  /**\n   * @ignore\n   */\n  get loaderStyles() {\n    return {\n      strokeDashoffset: this.state.strokeDashoffset,\n      strokeDasharray: MAX_STROKE,\n    };\n  }\n\n  /**\n   * @ignore\n   */\n  get loaderClass() {\n    const { current } = this.input;\n    if (current) {\n      const { maxChars } = this.props;\n      const offset = maxChars * 0.20;\n      if (this.state.extraChars) {\n        return 'textarea__loaderFront--error';\n      } else if (current.value.length > maxChars - offset) {\n        return 'textarea__loaderFront--warning';\n      }\n    }\n    return '';\n  }\n\n  /**\n   * @ignore\n   */\n  get fieldClasses() {\n    return super.fieldClasses || this.state.extraChars ? 'field--error' : '';\n  }\n\n  /**\n   * @ignore\n   */\n  get isValid() {\n    return super.isValid && !this.state.extraChars;\n  }\n\n  /**\n   * @ignore\n   */\n  componentDidUpdate(prevProps, prevState) {\n    if (prevState.extraChars !== this.state.extraChars) {\n      this.validate();\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  onChange() {\n    if (this.props.maxChars) {\n      const { current } = this.input;\n      const percentDone = current.value.length / this.props.maxChars;\n      const strokeDashoffset = Math.max(0, MAX_STROKE - MAX_STROKE * percentDone);\n      this.setState({\n        strokeDashoffset,\n        extraChars: Math.max(0, current.value.length - this.props.maxChars),\n      });\n    }\n    this.validate();\n  }\n\n  /**\n   * @ignore\n   */\n  renderValidationIcon() {\n    if (this.state.extraChars) {\n      return (<div className='field__icon field__icon--invalid'>\n        <FA icon={faTimesCircle} /></div>);\n    }\n    return super.renderValidationIcon();\n  }\n\n  /**\n   * @ignore\n   */\n  renderValidationMessages() {\n    if (this.props.maxChars && this.state.extraChars) {\n      return (<em className='field__msg field__msg--error'>\n        {this.props.maxCharsError}\n        &nbsp;({-this.state.extraChars})\n      </em>);\n    }\n    return super.renderValidationMessages();\n  }\n\n  /**\n   * @ignore\n   */\n  renderCharLoader() {\n    if (this.props.maxChars) {\n      return (\n        <div className='field__icon'>\n          <svg className='textarea__loader' height={MAX_SIZE} width={MAX_SIZE}>\n            <circle\n              className='textarea__loaderBack'\n              cx='50%' cy='50%' r={RADIUS} fill='none' stroke='currentColor'\n              strokeWidth='1' />\n            <circle\n              className={`textarea__loaderFront ${this.loaderClass}`}\n              cx='50%' cy='50%' r={RADIUS} fill='none' stroke='currentColor'\n              strokeWidth={STROKE}\n              style={this.loaderStyles} />\n          </svg>\n        </div>\n      );\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const { id, name, label, required } = this.props;\n    return (\n      <div className={`field textarea ${this.fieldClasses}`}>\n        <label className='field__label' htmlFor={id}>{label} {this.requiredLabel}</label>\n        <div className='field__inputWrapper'>\n          <textarea\n            className='field__input textarea__input' ref={this.input}\n            id={id} name={name}\n            required={required}\n            onChange={() => this.onChange()} />\n          {this.renderValidationIcon()}\n          {this.renderCharLoader()}\n        </div>\n        {this.renderValidationMessages()}\n      </div>\n    );\n  }\n}\n\nexport default TextareaField;\n",
-    "static": true,
-    "longname": "/Users/ikertxu/Personal/ui-core/src/views/form/textarea.field.js",
-    "access": "public",
-    "description": null,
-    "lineNumber": 1
-  },
-  {
-    "__docId__": 122,
-    "kind": "variable",
-    "name": "RADIUS",
-    "memberof": "src/views/form/textarea.field.js",
-    "static": true,
-    "longname": "src/views/form/textarea.field.js~RADIUS",
-    "access": "public",
-    "export": false,
-    "importPath": "@orloxx/ui-core/src/views/form/textarea.field.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 8,
-    "undocument": true,
-    "type": {
-      "types": [
-        "number"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 123,
-    "kind": "variable",
-    "name": "STROKE",
-    "memberof": "src/views/form/textarea.field.js",
-    "static": true,
-    "longname": "src/views/form/textarea.field.js~STROKE",
-    "access": "public",
-    "export": false,
-    "importPath": "@orloxx/ui-core/src/views/form/textarea.field.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 9,
-    "undocument": true,
-    "type": {
-      "types": [
-        "number"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 124,
-    "kind": "variable",
-    "name": "MAX_STROKE",
-    "memberof": "src/views/form/textarea.field.js",
-    "static": true,
-    "longname": "src/views/form/textarea.field.js~MAX_STROKE",
-    "access": "public",
-    "export": false,
-    "importPath": "@orloxx/ui-core/src/views/form/textarea.field.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 10,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 125,
-    "kind": "variable",
-    "name": "MAX_SIZE",
-    "memberof": "src/views/form/textarea.field.js",
-    "static": true,
-    "longname": "src/views/form/textarea.field.js~MAX_SIZE",
-    "access": "public",
-    "export": false,
-    "importPath": "@orloxx/ui-core/src/views/form/textarea.field.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 11,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 126,
-    "kind": "class",
-    "name": "TextareaField",
-    "memberof": "src/views/form/textarea.field.js",
-    "static": true,
-    "longname": "src/views/form/textarea.field.js~TextareaField",
-    "access": "public",
-    "export": true,
-    "importPath": "@orloxx/ui-core/src/views/form/textarea.field.js",
-    "importStyle": "TextareaField",
-    "description": "Controls the textarea input\n\n#### SCSS Import\n```\n@import \"~@orloxx/ui-core/scss/form/textarea\";\n```",
-    "examples": [
-      "<TextareaField id='email' name='email' label='Email' />"
-    ],
-    "lineNumber": 26,
-    "interface": false,
-    "extends": [
-      "Field"
-    ]
-  },
-  {
-    "__docId__": 127,
-    "kind": "member",
-    "name": "propTypes",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "static": true,
-    "longname": "src/views/form/textarea.field.js~TextareaField.propTypes",
-    "access": "public",
-    "description": "",
-    "lineNumber": 32,
-    "properties": [
-      {
-        "nullable": null,
-        "types": [
-          "number"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "maxChars",
-        "description": "The maximum number of characters limit"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "defaultValue": "'You reached the maximum number of characters allowed'",
-        "defaultRaw": "'You reached the maximum number of characters allowed'",
-        "name": "maxCharsError",
-        "description": "The error message when the number of characters has been reached"
-      }
-    ],
-    "type": {
-      "nullable": null,
-      "types": [
-        "Object"
-      ],
-      "spread": false,
-      "description": null
-    }
-  },
-  {
-    "__docId__": 128,
-    "kind": "member",
-    "name": "defaultProps",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "static": true,
-    "longname": "src/views/form/textarea.field.js~TextareaField.defaultProps",
-    "access": "public",
-    "description": "",
-    "lineNumber": 40,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 129,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#constructor",
-    "access": "public",
-    "description": "",
-    "lineNumber": 47,
-    "ignore": true
-  },
-  {
-    "__docId__": 130,
-    "kind": "member",
-    "name": "state",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#state",
-    "access": "public",
-    "description": "",
-    "lineNumber": 53,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 131,
-    "kind": "get",
-    "name": "loaderStyles",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#loaderStyles",
-    "access": "public",
-    "description": "",
-    "lineNumber": 62,
-    "ignore": true,
-    "type": {
-      "types": [
-        "{\"strokeDashoffset\": *, \"strokeDasharray\": *}"
-      ]
-    }
-  },
-  {
-    "__docId__": 132,
-    "kind": "get",
-    "name": "loaderClass",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#loaderClass",
-    "access": "public",
-    "description": "",
-    "lineNumber": 72,
-    "ignore": true,
-    "type": {
-      "types": [
-        "string"
-      ]
-    }
-  },
-  {
-    "__docId__": 133,
-    "kind": "get",
-    "name": "fieldClasses",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#fieldClasses",
-    "access": "public",
-    "description": "",
-    "lineNumber": 89,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 134,
-    "kind": "get",
-    "name": "isValid",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#isValid",
-    "access": "public",
-    "description": "",
-    "lineNumber": 96,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 135,
-    "kind": "method",
-    "name": "componentDidUpdate",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#componentDidUpdate",
-    "access": "public",
-    "description": "",
-    "lineNumber": 103,
-    "ignore": true,
-    "params": [
-      {
-        "name": "prevProps",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "prevState",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 136,
-    "kind": "method",
-    "name": "onChange",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#onChange",
-    "access": "public",
-    "description": "",
-    "lineNumber": 112,
-    "ignore": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 137,
-    "kind": "method",
-    "name": "renderValidationIcon",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#renderValidationIcon",
-    "access": "public",
-    "description": "",
-    "lineNumber": 128,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 138,
-    "kind": "method",
-    "name": "renderValidationMessages",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#renderValidationMessages",
-    "access": "public",
-    "description": "",
-    "lineNumber": 139,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 139,
-    "kind": "method",
-    "name": "renderCharLoader",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#renderCharLoader",
-    "access": "public",
-    "description": "",
-    "lineNumber": 152,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 140,
-    "kind": "method",
-    "name": "render",
-    "memberof": "src/views/form/textarea.field.js~TextareaField",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/form/textarea.field.js~TextareaField#render",
-    "access": "public",
-    "description": "",
-    "lineNumber": 175,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 141,
-    "kind": "file",
     "name": "src/views/google-map/google-map.model.js",
     "content": "import { StringUtils } from '../../utils';\n\n/**\n * @external {google~Map} https://developers.google.com/maps/documentation/javascript/reference/map\n */\n\n/**\n * @external {google~LatLng} https://developers.google.com/maps/documentation/javascript/reference/coordinates\n */\n\n/**\n * @external {google~MapOptions} https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions\n */\n\n/**\n * @external {Element} https://developer.mozilla.org/en-US/docs/Web/API/Element\n */\n\n/**\n * Controls communication and handling of the Google Maps JavaScript API\n *\n * @example\n * const googleMap = new GoogleMapModel(\n *   'your-google-api-key',\n *   document.getElementById('some-map'),\n *   { center: { lat: 10.4657, lng: -66.8796 }, zoom: 12 }\n * );\n */\nclass GoogleMapModel {\n  /**\n   * Initialises the map using Google Maps JavaScript API\n   *\n   * @param {String} apiKey - Google provides this in their console\n   * @param {Element} $el - The element where the map will be rendered\n   * @param {google~MapOptions} options - Google Maps options\n   */\n  constructor(apiKey, $el, options) {\n    /**\n     * Google's API key\n     * @type {String}\n     */\n    this.apiKey = apiKey;\n    /**\n     * The element where the map will be rendered\n     * @type {Element}\n     */\n    this.$el = $el;\n    /**\n     * Google Maps options\n     * @type {google~MapOptions}\n     */\n    this.options = options;\n    /**\n     * The map instance from Google Maps JavaScript API\n     * @type {google~Map}\n     */\n    this.map = null;\n  }\n\n  /**\n   * The callback name attached to the Google's script library\n   *\n   * @return {String}\n   */\n  static get INIT_CALLBACK() {\n    return 'initGoogleMapsLib';\n  }\n\n  /**\n   * The callback name triggered when the Google's script library is called\n   *\n   * @return {String}\n   */\n  static get READY_CALLBACK() {\n    return 'googleMapsLibReady';\n  }\n\n  /**\n   * Initialises the Google Maps JavaScript library and safely calls {@link renderMap}\n   *\n   * There are three ways this can go down:\n   *\n   * 1. It's the first map added to the page and the script library has not been included yet\n   * 2. The library was included and INIT_CALLBACK already triggered\n   * 3. The library was included but it has not initialised yet\n   *\n   * @return {Promise<google~Map>}\n   */\n  initGoogleMap() {\n    return new Promise((resolve) => {\n      if (!window[GoogleMapModel.INIT_CALLBACK]) {\n        window[GoogleMapModel.INIT_CALLBACK] = () => {\n          const initEvent = new Event(GoogleMapModel.READY_CALLBACK);\n          document.dispatchEvent(initEvent);\n          window[GoogleMapModel.READY_CALLBACK] = true;\n          resolve(this.renderMap());\n        };\n        const API_URL = 'https://maps.googleapis.com/maps/api/js';\n        const libScript = document.createElement('script');\n        const params = {\n          key: this.apiKey,\n          callback: GoogleMapModel.INIT_CALLBACK,\n        };\n        libScript.async = true;\n        libScript.defer = true;\n        libScript.src = `${API_URL}?${StringUtils.serialize(params)}`;\n        document.body.appendChild(libScript);\n      } else if (window[GoogleMapModel.READY_CALLBACK] === true) {\n        // Library is ready and event was already called\n        resolve(this.renderMap());\n      } else {\n        // Library was defined but not ready yet\n        document.addEventListener(GoogleMapModel.READY_CALLBACK, () => {\n          resolve(this.renderMap());\n        });\n      }\n    });\n  }\n\n  /**\n   * Adds map listener\n   *\n   * @see https://developers.google.com/maps/documentation/javascript/events\n   *\n   * @param {String} name - The event name\n   * @param {Function} callback - The event callback function\n   */\n  addListener(name, callback) {\n    if (callback) {\n      this.map.addListener(name, callback);\n    }\n  }\n\n  /**\n   * Renders the map in the chosen {@link $el}\n   *\n   * @return {google~Map}\n   */\n  renderMap() {\n    this.map = new window.google.maps.Map(this.$el, Object.assign({\n      clickableIcons: false,\n      center: { lat: 10.4657, lng: -66.8796 },\n      zoom: 12,\n    }, this.options));\n    return this.map;\n  }\n}\n\nexport default GoogleMapModel;\n",
     "static": true,
@@ -2617,7 +1005,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 142,
+    "__docId__": 68,
     "kind": "external",
     "name": "google~Map",
     "externalLink": "https://developers.google.com/maps/documentation/javascript/reference/map",
@@ -2628,7 +1016,7 @@
     "description": ""
   },
   {
-    "__docId__": 143,
+    "__docId__": 69,
     "kind": "external",
     "name": "google~LatLng",
     "externalLink": "https://developers.google.com/maps/documentation/javascript/reference/coordinates",
@@ -2639,7 +1027,7 @@
     "description": ""
   },
   {
-    "__docId__": 144,
+    "__docId__": 70,
     "kind": "external",
     "name": "google~MapOptions",
     "externalLink": "https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions",
@@ -2650,7 +1038,7 @@
     "description": ""
   },
   {
-    "__docId__": 145,
+    "__docId__": 71,
     "kind": "external",
     "name": "Element",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
@@ -2661,7 +1049,7 @@
     "description": ""
   },
   {
-    "__docId__": 146,
+    "__docId__": 72,
     "kind": "class",
     "name": "GoogleMapModel",
     "memberof": "src/views/google-map/google-map.model.js",
@@ -2679,7 +1067,7 @@
     "interface": false
   },
   {
-    "__docId__": 147,
+    "__docId__": 73,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2724,7 +1112,7 @@
     ]
   },
   {
-    "__docId__": 148,
+    "__docId__": 74,
     "kind": "member",
     "name": "apiKey",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2743,7 +1131,7 @@
     }
   },
   {
-    "__docId__": 149,
+    "__docId__": 75,
     "kind": "member",
     "name": "$el",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2762,7 +1150,7 @@
     }
   },
   {
-    "__docId__": 150,
+    "__docId__": 76,
     "kind": "member",
     "name": "options",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2781,7 +1169,7 @@
     }
   },
   {
-    "__docId__": 151,
+    "__docId__": 77,
     "kind": "member",
     "name": "map",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2800,7 +1188,7 @@
     }
   },
   {
-    "__docId__": 152,
+    "__docId__": 78,
     "kind": "get",
     "name": "INIT_CALLBACK",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2826,7 +1214,7 @@
     }
   },
   {
-    "__docId__": 153,
+    "__docId__": 79,
     "kind": "get",
     "name": "READY_CALLBACK",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2852,7 +1240,7 @@
     }
   },
   {
-    "__docId__": 154,
+    "__docId__": 80,
     "kind": "method",
     "name": "initGoogleMap",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2874,7 +1262,7 @@
     "params": []
   },
   {
-    "__docId__": 155,
+    "__docId__": 81,
     "kind": "method",
     "name": "addListener",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2913,7 +1301,7 @@
     "return": null
   },
   {
-    "__docId__": 156,
+    "__docId__": 82,
     "kind": "method",
     "name": "renderMap",
     "memberof": "src/views/google-map/google-map.model.js~GoogleMapModel",
@@ -2935,7 +1323,7 @@
     "params": []
   },
   {
-    "__docId__": 158,
+    "__docId__": 84,
     "kind": "file",
     "name": "src/views/google-map/google-map.view.js",
     "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport GoogleMapModel from './google-map.model';\n\n/**\n * Controls a map initialised with the Google Maps JavaScript API\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/google-map\";\n * ```\n *\n * @see https://developers.google.com/maps/documentation/javascript/tutorial\n *\n * @example\n * const mapOptions = { center: { lat: 10.4657, lng: -66.8796 }, zoom: 10 };\n * const onMapReady = (map) => {\n *   // Handles map\n * };\n *\n * @example\n * <GoogleMap\n *   apiKey='your-google-api-key'\n *   options={mapOptions}\n *   onInit={map => onMapReady(map)} />\n */\nclass GoogleMap extends Component {\n  /**\n   * @type {Object}\n   * @property {String} apiKey - Google provides this in their console\n   * @property {google~MapOptions} options - Options passed when map is initialised\n   * @property {Function} [onInit] - Triggers when the map is ready and rendered\n   *\n   * @property {Function} [onBoundsChanged] - Triggers when the viewport bounds have changed.\n   * @property {Function} [onCenterChanged] - Triggers when the map center property changes.\n   * @property {Function} [onClick] - Triggers when the user clicks on the map.\n   *   An ApiMouseEvent with properties for the clicked location is returned unless a place\n   *   icon was clicked, in which case an IconMouseEvent with a placeid is returned.\n   *   IconMouseEvent and ApiMouseEvent are identical, except that IconMouseEvent has the\n   *   placeid field. The event can always be treated as an ApiMouseEvent when the placeid\n   *   is not important. The click event is not fired if a marker or infowindow was clicked.\n   * @property {Function} [onDoubleClick] - Triggers when the user double-clicks on the map.\n   *   Note that the click event will also fire, right before this one.\n   * @property {Function} [onDrag] - This event is repeatedly fired while the user drags the map.\n   * @property {Function} [onDragEnd] - Triggers when the user stops dragging the map.\n   * @property {Function} [onDragStart] - Triggers when the user starts dragging the map.\n   * @property {Function} [onHeadingChanged] - Triggers when the map heading property changes.\n   * @property {Function} [onIdle] - Triggers when the map becomes idle after panning or zooming.\n   * @property {Function} [onMapTypeIdChanged] - Triggers when the mapTypeId property changes.\n   * @property {Function} [onMouseMove] - Triggers whenever the user's mouse moves over the map container.\n   * @property {Function} [onMouseOut] - Triggers when the user's mouse exits the map container.\n   * @property {Function} [OnMouseOver] - Triggers when the user's mouse enters the map container.\n   * @property {Function} [onProjectionChanged] - Triggers when the projection has changed.\n   * @property {Function} [onRightClick] - Triggers when the DOM contextmenu event is fired on the map container.\n   * @property {Function} [onTilesLoaded] - Triggers when the visible tiles have finished loading.\n   * @property {Function} [onTiltChanged] - Triggers when the map tilt property changes.\n   * @property {Function} [onZoomChanged] - Triggers when the map zoom property changes.\n   */\n  static propTypes = {\n    apiKey: PropTypes.string.isRequired,\n    options: PropTypes.object.isRequired,\n    onInit: PropTypes.func,\n    onBoundsChanged: PropTypes.func,\n    onCenterChanged: PropTypes.func,\n    onClick: PropTypes.func,\n    onDoubleClick: PropTypes.func,\n    onDrag: PropTypes.func,\n    onDragEnd: PropTypes.func,\n    onDragStart: PropTypes.func,\n    onHeadingChanged: PropTypes.func,\n    onIdle: PropTypes.func,\n    onMapTypeIdChanged: PropTypes.func,\n    onMouseMove: PropTypes.func,\n    onMouseOut: PropTypes.func,\n    OnMouseOver: PropTypes.func,\n    onProjectionChanged: PropTypes.func,\n    onRightClick: PropTypes.func,\n    onTilesLoaded: PropTypes.func,\n    onTiltChanged: PropTypes.func,\n    onZoomChanged: PropTypes.func,\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.$map = React.createRef();\n  }\n\n  /**\n   * @ignore\n   */\n  componentDidMount() {\n    const { apiKey, options } = this.props;\n    /**\n     * @ignore\n     */\n    this.google = new GoogleMapModel(apiKey, this.$map.current, options);\n    this.google.initGoogleMap().then(this.addMapListeners.bind(this));\n  }\n\n  /**\n   * @ignore\n   */\n  addMapListeners(map) {\n    const { onInit } = this.props;\n    if (onInit) {\n      onInit(map);\n    }\n    this.google.addListener('bounds_changed', this.props.onBoundsChanged);\n    this.google.addListener('center_changed', this.props.onCenterChanged);\n    this.google.addListener('click', this.props.onClick);\n    this.google.addListener('dblclick', this.props.onDoubleClick);\n    this.google.addListener('drag', this.props.onDrag);\n    this.google.addListener('dragend', this.props.onDragEnd);\n    this.google.addListener('dragstart', this.props.onDragStart);\n    this.google.addListener('heading_changed', this.props.onHeadingChanged);\n    this.google.addListener('idle', this.props.onIdle);\n    this.google.addListener('maptypeid_changed', this.props.onMapTypeIdChanged);\n    this.google.addListener('mousemove', this.props.onMouseMove);\n    this.google.addListener('mouseout', this.props.onMouseOut);\n    this.google.addListener('mouseover', this.props.OnMouseOver);\n    this.google.addListener('projection_changed', this.props.onProjectionChanged);\n    this.google.addListener('rightclick', this.props.onRightClick);\n    this.google.addListener('tilesloaded', this.props.onTilesLoaded);\n    this.google.addListener('tilt_changed', this.props.onTiltChanged);\n    this.google.addListener('zoom_changed', this.props.onZoomChanged);\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    return (\n      <section className='googlemap'>\n        <div className='googlemap__map' ref={this.$map} />\n      </section>\n    );\n  }\n}\n\nexport default GoogleMap;\n",
@@ -2946,7 +1334,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 159,
+    "__docId__": 85,
     "kind": "class",
     "name": "GoogleMap",
     "memberof": "src/views/google-map/google-map.view.js",
@@ -2971,7 +1359,7 @@
     ]
   },
   {
-    "__docId__": 160,
+    "__docId__": 86,
     "kind": "member",
     "name": "propTypes",
     "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
@@ -3202,7 +1590,7 @@
     }
   },
   {
-    "__docId__": 161,
+    "__docId__": 87,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
@@ -3216,7 +1604,7 @@
     "ignore": true
   },
   {
-    "__docId__": 162,
+    "__docId__": 88,
     "kind": "member",
     "name": "$map",
     "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
@@ -3233,7 +1621,7 @@
     }
   },
   {
-    "__docId__": 163,
+    "__docId__": 89,
     "kind": "method",
     "name": "componentDidMount",
     "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
@@ -3249,7 +1637,7 @@
     "return": null
   },
   {
-    "__docId__": 164,
+    "__docId__": 90,
     "kind": "member",
     "name": "google",
     "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
@@ -3266,7 +1654,7 @@
     }
   },
   {
-    "__docId__": 165,
+    "__docId__": 91,
     "kind": "method",
     "name": "addMapListeners",
     "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
@@ -3289,7 +1677,7 @@
     "return": null
   },
   {
-    "__docId__": 166,
+    "__docId__": 92,
     "kind": "method",
     "name": "render",
     "memberof": "src/views/google-map/google-map.view.js~GoogleMap",
@@ -3309,10 +1697,267 @@
     }
   },
   {
-    "__docId__": 167,
+    "__docId__": 93,
+    "kind": "file",
+    "name": "src/views/image-uploader/image-uploader.view.js",
+    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faUpload } from '@fortawesome/free-solid-svg-icons';\nimport { ImageUtils } from '../../utils';\n\n/**\n * Controls an input file element that shows a preview of the selected image\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/image-uploader\";\n * ```\n *\n * @example\n * <ImageUploader id='image' name='image' />\n */\nclass ImageUploader extends Component {\n  /**\n   * @type {Object}\n   * @property {String} id - The same `id` added to the input field\n   * @property {String} name - The same `name` added to the input field\n   * @property {String} [caption] - Caption text added at the bottom of the field\n   * @property {String} [src] - Default image path when nothing is selected\n   * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted\n   */\n  static propTypes = {\n    id: PropTypes.string.isRequired,\n    name: PropTypes.string.isRequired,\n    caption: PropTypes.string,\n    src: PropTypes.string,\n    fileSize: PropTypes.number,\n  };\n\n  /**\n   * @ignore\n   */\n  static defaultProps = {\n    src: '',\n    fileSize: 256,\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = {\n      imageData: null,\n    };\n  }\n\n  /**\n   * @ignore\n   */\n  get hasImageClassName() {\n    return this.imageSrc ? 'imageUploader--hasImage' : '';\n  }\n\n  /**\n   * @ignore\n   */\n  get imageSrc() {\n    const { imageData } = this.state;\n    const { src } = this.props;\n    return imageData || src;\n  }\n\n  /**\n   * @ignore\n   */\n  setImage(e) {\n    const file = e.target.files[0];\n    const maxKb = this.props.fileSize;\n    const maxSize = maxKb * 1024;\n\n    if (file && file.size > maxSize) {\n      alert(`File cannot be greater than ${maxKb}Kb. Image will be removed.`);\n      e.target.value = null;\n      this.setState({ imageData: null });\n      return;\n    }\n    this.setImageData(file);\n  }\n\n  /**\n   * @ignore\n   */\n  setImageData(file) {\n    if (file) {\n      ImageUtils.getFileData(file).then(imageData => this.setState({ imageData }));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const { id, name, caption } = this.props;\n    return (\n      <div className={`imageUploader ${this.hasImageClassName}`}>\n        <label className='button imageUploader__label' htmlFor={id}>\n          <img\n            className='imageUploader__image'\n            src={this.imageSrc}\n            alt='Upload'\n          />\n          <input type='hidden' name={name} value={this.imageSrc} />\n          <input\n            className='imageUploader__input'\n            id={id}\n            name='image-uploader-file'\n            type='file'\n            accept='image/*'\n            onChange={e => this.setImage(e)}\n          />\n          <FA className='imageUploader__noImageIcon' icon={faUpload} />\n          {caption || 'Upload image'}\n        </label>\n      </div>\n    );\n  }\n}\n\nexport default ImageUploader;\n",
+    "static": true,
+    "longname": "/Users/ikertxu/Personal/ui-core/src/views/image-uploader/image-uploader.view.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 94,
+    "kind": "class",
+    "name": "ImageUploader",
+    "memberof": "src/views/image-uploader/image-uploader.view.js",
+    "static": true,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "access": "public",
+    "export": true,
+    "importPath": "@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js",
+    "importStyle": "ImageUploader",
+    "description": "Controls an input file element that shows a preview of the selected image\n\n#### SCSS import:\n```\n@import \"~@orloxx/ui-core/scss/image-uploader\";\n```",
+    "examples": [
+      "<ImageUploader id='image' name='image' />"
+    ],
+    "lineNumber": 18,
+    "interface": false,
+    "extends": [
+      "react~Component"
+    ]
+  },
+  {
+    "__docId__": 95,
+    "kind": "member",
+    "name": "propTypes",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "static": true,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader.propTypes",
+    "access": "public",
+    "description": "",
+    "lineNumber": 27,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": "The same `id` added to the input field"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "The same `name` added to the input field"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "caption",
+        "description": "Caption text added at the bottom of the field"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "src",
+        "description": "Default image path when nothing is selected"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": true,
+        "defaultValue": "256Kb",
+        "defaultRaw": "256Kb",
+        "name": "fileSize",
+        "description": "Maximum file size (Kb) accepted"
+      }
+    ],
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 96,
+    "kind": "member",
+    "name": "defaultProps",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "static": true,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader.defaultProps",
+    "access": "public",
+    "description": "",
+    "lineNumber": 38,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#constructor",
+    "access": "public",
+    "description": "",
+    "lineNumber": 46,
+    "ignore": true
+  },
+  {
+    "__docId__": 98,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "static": false,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#state",
+    "access": "public",
+    "description": "",
+    "lineNumber": 52,
+    "ignore": true,
+    "type": {
+      "types": [
+        "{\"imageData\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 99,
+    "kind": "get",
+    "name": "hasImageClassName",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#hasImageClassName",
+    "access": "public",
+    "description": "",
+    "lineNumber": 60,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "get",
+    "name": "imageSrc",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#imageSrc",
+    "access": "public",
+    "description": "",
+    "lineNumber": 67,
+    "ignore": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "method",
+    "name": "setImage",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#setImage",
+    "access": "public",
+    "description": "",
+    "lineNumber": 76,
+    "ignore": true,
+    "params": [
+      {
+        "name": "e",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 102,
+    "kind": "method",
+    "name": "setImageData",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#setImageData",
+    "access": "public",
+    "description": "",
+    "lineNumber": 93,
+    "ignore": true,
+    "params": [
+      {
+        "name": "file",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 103,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/views/image-uploader/image-uploader.view.js~ImageUploader",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/views/image-uploader/image-uploader.view.js~ImageUploader#render",
+    "access": "public",
+    "description": "",
+    "lineNumber": 102,
+    "ignore": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 104,
     "kind": "file",
     "name": "src/views/index.js",
-    "content": "export Form from './form/form.view';\nexport Field from './form/field.view';\nexport DropdownField from './form/dropdown.field';\nexport EmailField from './form/email.field';\nexport ImageField from './form/image.field';\nexport TextareaField from './form/textarea.field';\n\nexport GoogleMap from './google-map/google-map.view';\nexport PageControl from './page-control/page-control.view';\n",
+    "content": "export GoogleMap from './google-map/google-map.view';\nexport ImageUploader from './image-uploader/image-uploader.view';\nexport PageControl from './page-control/page-control.view';\n",
     "static": true,
     "longname": "/Users/ikertxu/Personal/ui-core/src/views/index.js",
     "access": "public",
@@ -3320,7 +1965,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 168,
+    "__docId__": 105,
     "kind": "file",
     "name": "src/views/navigation/navigation.view.js",
     "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { Link } from 'react-router-dom';\nimport { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';\nimport { faHome, faBars } from '@fortawesome/free-solid-svg-icons';\n\n/**\n * @external {react-router-dom~withRouter} https://reacttraining.com/react-router/web/api/withRouter\n */\n\n/**\n * Controls the navigation bar.\n * Uses the same routes object defined in {@link PageControl}\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/navigation\";\n * ```\n *\n * @example\n * const Nav = withRoute(Navigation);\n *\n * @example\n * <Nav routes={routes} />\n */\nclass Navigation extends Component {\n  /**\n   *\n   * @type {Object}\n   * @property {Object} location - Comes from the {@link react-router-dom~withRouter} function\n   * @property {Array<Route>} routes - Same {@link Route} object defined in {@link PageControl}\n   */\n  static propTypes = {\n    location: PropTypes.object.isRequired,\n    routes: PropTypes.array.isRequired,\n  };\n\n  /**\n   * @ignore\n   */\n  constructor(props) {\n    super(props);\n\n    /**\n     * @ignore\n     */\n    this.state = {\n      isMenuOpen: false,\n    };\n  }\n\n  /**\n   * @ignore\n   */\n  get currentTitle() {\n    const { routes, location } = this.props;\n    const route = Navigation.simplified(routes).find(item => item.to === location.pathname);\n    return route ? route.name : 'Home';\n  }\n\n  /**\n   * @ignore\n   */\n  get routes() {\n    const { routes } = this.props;\n    return routes.filter(route => route.to && route.to !== '/');\n  }\n\n  /**\n   * @ignore\n   */\n  static simplified(routes) {\n    if (routes && routes.length) {\n      return routes.reduce((previous, current) => [\n        ...previous,\n        current,\n        ...Navigation.simplified(current.children),\n      ], []);\n    }\n    return [];\n  }\n\n  /**\n   * @ignore\n   */\n  toggleMenu() {\n    const { isMenuOpen } = this.state;\n    this.setState({ isMenuOpen: !isMenuOpen });\n  }\n\n  /**\n   * @ignore\n   */\n  closeMenu() {\n    this.setState({ isMenuOpen: false });\n  }\n\n  /**\n   * @ignore\n   */\n  isActiveClass(pathname) {\n    const { location } = this.props;\n    return location && location.pathname === pathname ? 'isActive' : '';\n  }\n\n  /**\n   * @ignore\n   */\n  renderMenuButton() {\n    const routes = Navigation.simplified(this.routes);\n    if (routes && routes.length) {\n      return (\n        <button\n          className='navigation__button'\n          onClick={() => this.toggleMenu()}>\n          <FA icon={faBars} />\n        </button>\n      );\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  renderNested(routes) {\n    if (routes && routes.length) {\n      const links = routes.map(route => (\n        <li\n          key={route.to}\n          className='navigation__menuItem'>\n          <Link\n            className={`navigation__menuLink ${this.isActiveClass(route.to)}`}\n            to={route.to}\n            onClick={() => this.closeMenu()}>{route.name}</Link>\n          {this.renderNested(route.children)}\n        </li>\n      ));\n      return (\n        <ul className='navigation__menuList'>{links}</ul>\n      );\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  renderMenu() {\n    const { isMenuOpen } = this.state;\n    if (isMenuOpen) {\n      return this.renderNested(this.routes);\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    return (\n      <nav className='navigation'>\n        <section className='navigation__top'>\n          <div className='navigation__sides'>\n            <Link\n              className='navigation__button' to='/'\n              onClick={() => this.closeMenu()}>\n              <FA icon={faHome} />\n            </Link>\n          </div>\n          <div className='navigation__title'>{this.currentTitle}</div>\n          <div className='navigation__sides'>\n            {this.renderMenuButton()}\n          </div>\n        </section>\n        <section className='navigation__menu'>\n          {this.renderMenu()}\n        </section>\n      </nav>\n    );\n  }\n}\n\nexport default Navigation;\n",
@@ -3331,7 +1976,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 169,
+    "__docId__": 106,
     "kind": "external",
     "name": "react-router-dom~withRouter",
     "externalLink": "https://reacttraining.com/react-router/web/api/withRouter",
@@ -3342,7 +1987,7 @@
     "description": ""
   },
   {
-    "__docId__": 170,
+    "__docId__": 107,
     "kind": "class",
     "name": "Navigation",
     "memberof": "src/views/navigation/navigation.view.js",
@@ -3364,7 +2009,7 @@
     ]
   },
   {
-    "__docId__": 171,
+    "__docId__": 108,
     "kind": "member",
     "name": "propTypes",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3405,7 +2050,7 @@
     }
   },
   {
-    "__docId__": 172,
+    "__docId__": 109,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3419,7 +2064,7 @@
     "ignore": true
   },
   {
-    "__docId__": 173,
+    "__docId__": 110,
     "kind": "member",
     "name": "state",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3436,7 +2081,7 @@
     }
   },
   {
-    "__docId__": 174,
+    "__docId__": 111,
     "kind": "get",
     "name": "currentTitle",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3455,7 +2100,7 @@
     }
   },
   {
-    "__docId__": 175,
+    "__docId__": 112,
     "kind": "get",
     "name": "routes",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3474,7 +2119,7 @@
     }
   },
   {
-    "__docId__": 176,
+    "__docId__": 113,
     "kind": "method",
     "name": "simplified",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3501,7 +2146,7 @@
     }
   },
   {
-    "__docId__": 177,
+    "__docId__": 114,
     "kind": "method",
     "name": "toggleMenu",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3517,7 +2162,7 @@
     "return": null
   },
   {
-    "__docId__": 178,
+    "__docId__": 115,
     "kind": "method",
     "name": "closeMenu",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3533,7 +2178,7 @@
     "return": null
   },
   {
-    "__docId__": 179,
+    "__docId__": 116,
     "kind": "method",
     "name": "isActiveClass",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3560,7 +2205,7 @@
     }
   },
   {
-    "__docId__": 180,
+    "__docId__": 117,
     "kind": "method",
     "name": "renderMenuButton",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3580,7 +2225,7 @@
     }
   },
   {
-    "__docId__": 181,
+    "__docId__": 118,
     "kind": "method",
     "name": "renderNested",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3607,7 +2252,7 @@
     }
   },
   {
-    "__docId__": 182,
+    "__docId__": 119,
     "kind": "method",
     "name": "renderMenu",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3627,7 +2272,7 @@
     }
   },
   {
-    "__docId__": 183,
+    "__docId__": 120,
     "kind": "method",
     "name": "render",
     "memberof": "src/views/navigation/navigation.view.js~Navigation",
@@ -3647,10 +2292,10 @@
     }
   },
   {
-    "__docId__": 184,
+    "__docId__": 121,
     "kind": "file",
     "name": "src/views/page-control/page-control.view.js",
-    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { BrowserRouter as Router, HashRouter, Route, withRouter } from 'react-router-dom';\nimport Navigation from '../navigation/navigation.view';\n\n/**\n * @external {react~Component} https://reactjs.org/docs/react-component.html\n */\n\n/**\n * Controls navigations and routes\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/page-control\";\n * ```\n *\n * @example\n * const routes = [\n *   { name: 'Home', to: '/', component: HomeComponent },\n *   { name: 'Text example', to: '/some-text', component: TextComponent },\n * ];\n *\n * @example\n * <PageControl base='/' routes={routes} />\n */\nclass PageControl extends Component {\n  /**\n   * A Route is a place where content/resources are located at and defines\n   * which `component` to load depending on the URL path.\n   *\n   * Children routes are optional and recursive.\n   *\n   * @typedef {Object} Route\n   * @property {String} name - Short descriptive name of the section to load\n   * @property {String} to - The path to the page it will go to\n   * @property {react~Component} component - The component it will load below the {@link Navigation}\n   * @property {Array<Route>} [children] - All nested routes\n   *\n   * @example\n   * {\n   *   name: 'Some name',\n   *   to: 'path/to/page',\n   *   component: SomeComponent,\n   *   children: [{\n   *     name: 'Nested component',\n   *     to: 'path/to/nested',\n   *     component: NestedComponent\n   *   }]\n   * }\n   */\n  /**\n   * @type {Object}\n   * @property {Array<Route>} routes - All possible routes available\n   * @property {Boolean} [useHash] - If set to `true` it enables the routing using the url hash `/#/path`\n   * @property {String} [base] - The base URL used in `Router`'s `basename` attribute: default is `/`\n   */\n  static propTypes = {\n    routes: PropTypes.array.isRequired,\n    useHash: PropTypes.bool,\n    base: PropTypes.string,\n  };\n\n  /**\n   * @ignore\n   */\n  static defaultProps = {\n    useHash: true,\n    base: '/',\n    routes: [],\n  };\n\n  /**\n   * @ignore\n   */\n  renderRoutes() {\n    const { routes } = this.props;\n    if (routes && routes.length) {\n      return Navigation.simplified(routes).map(page => (\n        <Route key={page.to} exact path={page.to} component={page.component} />\n      ));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  renderBrowserRouter() {\n    const Nav = withRouter(Navigation);\n    return (\n      <Router basename={this.props.base}>\n        <Nav routes={this.props.routes} />\n        {this.renderRoutes()}\n      </Router>\n    );\n  }\n\n  /**\n   * @ignore\n   */\n  renderHashRouter() {\n    const Nav = withRouter(Navigation);\n    return (\n      <HashRouter basename={this.props.base}>\n        <Nav routes={this.props.routes} />\n        {this.renderRoutes()}\n      </HashRouter>\n    );\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    if (this.props.useHash) {\n      return this.renderHashRouter();\n    }\n    return this.renderBrowserRouter();\n  }\n}\n\nexport default PageControl;\n",
+    "content": "import React, { Component } from 'react';\nimport PropTypes from 'prop-types';\nimport { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';\nimport Navigation from '../navigation/navigation.view';\n\n/**\n * @external {react~Component} https://reactjs.org/docs/react-component.html\n */\n\n/**\n * Controls navigations and routes\n *\n * #### SCSS import:\n * ```\n * @import \"~@orloxx/ui-core/scss/page-control\";\n * ```\n *\n * @example\n * const routes = [\n *   { name: 'Home', to: '/', component: HomeComponent },\n *   { name: 'Text example', to: '/some-text', component: TextComponent },\n * ];\n *\n * @example\n * <PageControl base='/' routes={routes} />\n */\nclass PageControl extends Component {\n  /**\n   * A Route is a place where content/resources are located at and defines\n   * which `component` to load depending on the URL path.\n   *\n   * Children routes are optional and recursive.\n   *\n   * @typedef {Object} Route\n   * @property {String} name - Short descriptive name of the section to load\n   * @property {String} to - The path to the page it will go to\n   * @property {react~Component} component - The component it will load below the {@link Navigation}\n   * @property {Array<Route>} [children] - All nested routes\n   *\n   * @example\n   * {\n   *   name: 'Some name',\n   *   to: 'path/to/page',\n   *   component: SomeComponent,\n   *   children: [{\n   *     name: 'Nested component',\n   *     to: 'path/to/nested',\n   *     component: NestedComponent\n   *   }]\n   * }\n   */\n  /**\n   * @type {Object}\n   * @property {String} base - The base URL used in `Router`'s `basename` attribute: default is `/`\n   * @property {Array<Route>} routes - All possible routes available\n   */\n  static propTypes = {\n    base: PropTypes.string,\n    routes: PropTypes.array,\n  };\n\n  /**\n   * @ignore\n   */\n  renderRoutes() {\n    const { routes } = this.props;\n    if (routes && routes.length) {\n      return Navigation.simplified(routes).map(page => (\n        <Route key={page.to} exact path={page.to} component={page.component} />\n      ));\n    }\n  }\n\n  /**\n   * @ignore\n   */\n  render() {\n    const Nav = withRouter(Navigation);\n    return (\n      <Router basename={this.props.base || '/'}>\n        <Nav routes={this.props.routes} />\n        {this.renderRoutes()}\n      </Router>\n    );\n  }\n}\n\nexport default PageControl;\n",
     "static": true,
     "longname": "/Users/ikertxu/Personal/ui-core/src/views/page-control/page-control.view.js",
     "access": "public",
@@ -3658,7 +2303,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 185,
+    "__docId__": 122,
     "kind": "external",
     "name": "react~Component",
     "externalLink": "https://reactjs.org/docs/react-component.html",
@@ -3669,7 +2314,7 @@
     "description": ""
   },
   {
-    "__docId__": 186,
+    "__docId__": 123,
     "kind": "class",
     "name": "PageControl",
     "memberof": "src/views/page-control/page-control.view.js",
@@ -3691,7 +2336,7 @@
     ]
   },
   {
-    "__docId__": 187,
+    "__docId__": 124,
     "kind": "typedef",
     "name": "Route",
     "memberof": "src/views/page-control/page-control.view.js~PageControl",
@@ -3753,7 +2398,7 @@
     }
   },
   {
-    "__docId__": 188,
+    "__docId__": 125,
     "kind": "member",
     "name": "propTypes",
     "memberof": "src/views/page-control/page-control.view.js~PageControl",
@@ -3761,8 +2406,18 @@
     "longname": "src/views/page-control/page-control.view.js~PageControl.propTypes",
     "access": "public",
     "description": "",
-    "lineNumber": 58,
+    "lineNumber": 57,
     "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "base",
+        "description": "The base URL used in `Router`'s `basename` attribute: default is `/`"
+      },
       {
         "nullable": null,
         "types": [
@@ -3772,26 +2427,6 @@
         "optional": false,
         "name": "routes",
         "description": "All possible routes available"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "Boolean"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "useHash",
-        "description": "If set to `true` it enables the routing using the url hash `/#/path`"
-      },
-      {
-        "nullable": null,
-        "types": [
-          "String"
-        ],
-        "spread": false,
-        "optional": true,
-        "name": "base",
-        "description": "The base URL used in `Router`'s `basename` attribute: default is `/`"
       }
     ],
     "type": {
@@ -3804,24 +2439,7 @@
     }
   },
   {
-    "__docId__": 189,
-    "kind": "member",
-    "name": "defaultProps",
-    "memberof": "src/views/page-control/page-control.view.js~PageControl",
-    "static": true,
-    "longname": "src/views/page-control/page-control.view.js~PageControl.defaultProps",
-    "access": "public",
-    "description": "",
-    "lineNumber": 67,
-    "ignore": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 190,
+    "__docId__": 126,
     "kind": "method",
     "name": "renderRoutes",
     "memberof": "src/views/page-control/page-control.view.js~PageControl",
@@ -3831,7 +2449,7 @@
     "longname": "src/views/page-control/page-control.view.js~PageControl#renderRoutes",
     "access": "public",
     "description": "",
-    "lineNumber": 76,
+    "lineNumber": 65,
     "ignore": true,
     "params": [],
     "return": {
@@ -3841,47 +2459,7 @@
     }
   },
   {
-    "__docId__": 191,
-    "kind": "method",
-    "name": "renderBrowserRouter",
-    "memberof": "src/views/page-control/page-control.view.js~PageControl",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/page-control/page-control.view.js~PageControl#renderBrowserRouter",
-    "access": "public",
-    "description": "",
-    "lineNumber": 88,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 192,
-    "kind": "method",
-    "name": "renderHashRouter",
-    "memberof": "src/views/page-control/page-control.view.js~PageControl",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/views/page-control/page-control.view.js~PageControl#renderHashRouter",
-    "access": "public",
-    "description": "",
-    "lineNumber": 101,
-    "ignore": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 193,
+    "__docId__": 127,
     "kind": "method",
     "name": "render",
     "memberof": "src/views/page-control/page-control.view.js~PageControl",
@@ -3891,7 +2469,7 @@
     "longname": "src/views/page-control/page-control.view.js~PageControl#render",
     "access": "public",
     "description": "",
-    "lineNumber": 114,
+    "lineNumber": 77,
     "ignore": true,
     "params": [],
     "return": {
