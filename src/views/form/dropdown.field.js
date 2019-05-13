@@ -55,18 +55,15 @@ class DropdownField extends Field {
    * @ignore
    */
   componentWillMount() {
+    const options = this.props.children.map(el => ({
+      id: el.props.value,
+      label: el.props.children,
+      selected: el.props.selected,
+    }));
+    const { selectedOption } = this.state;
     this.setState({
-      options: this.props.children.map(el => {
-        const option = {
-          id: el.props.value,
-          label: el.props.children,
-          selected: el.props.selected,
-        };
-        if (el.props.selected) {
-          this.setState({ selectedOption: option });
-        }
-        return option;
-      }),
+      options,
+      selectedOption: options.find(el => el.selected) || selectedOption,
     });
   }
 
