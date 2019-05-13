@@ -44,6 +44,7 @@ class Form extends Component {
    * @ignore
    */
   static defaultProps = {
+    children: [],
     method: 'GET',
   };
 
@@ -57,14 +58,27 @@ class Form extends Component {
      * @ignore
      */
     this.instances = {};
+  }
 
+  /**
+   * @ignore
+   */
+  componentWillMount() {
     /**
      * @ignore
      */
     this.children = this.props.children.map(el => React.cloneElement(el, {
-      key: el.props.id,
-      ref: inst => { this.instances[el.props.id] = inst; },
+      key: el.props.id || Math.random().toString(36).slice(-8),
+      ref: this.addChildInstance.bind(this, el),
     }));
+  }
+  /**
+   * @ignore
+   */
+  addChildInstance(el, instance) {
+    if (el.props.id && typeof el.type !== 'string') {
+      this.instances[el.props.id] = instance;
+    }
   }
 
   /**
