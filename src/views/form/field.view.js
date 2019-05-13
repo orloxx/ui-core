@@ -155,7 +155,8 @@ class Field extends Component {
           {this.props.patternError || 'Please enter correct format'}
         </em>);
       }
-    } else if (this.props.suggestion) {
+    }
+    if (this.props.suggestion) {
       return (<em className='field__msg'>{this.props.suggestion}</em>);
     }
   }
