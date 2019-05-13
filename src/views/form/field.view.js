@@ -131,7 +131,8 @@ class Field extends Component {
    */
   renderValidationIcon() {
     const { isValid, isPattern, isDirty } = this.state;
-    if (isDirty) {
+    const { required, pattern } = this.props;
+    if ((required || pattern) && isDirty) {
       return isValid && isPattern
         ? (<div className='field__icon field__icon--valid'>
           <FA icon={faCheckCircle} /></div>)

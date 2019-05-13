@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import Field from './field.view';
 
 // loader data
@@ -77,6 +79,13 @@ class TextareaField extends Field {
   /**
    * @ignore
    */
+  get fieldClasses() {
+    return super.fieldClasses || this.state.limitReached ? 'field--error' : '';
+  }
+
+  /**
+   * @ignore
+   */
   onChange() {
     if (this.props.maxChars) {
       const { current } = this.input;
@@ -88,6 +97,17 @@ class TextareaField extends Field {
       });
     }
     this.onBlur();
+  }
+
+  /**
+   * @ignore
+   */
+  renderValidationIcon() {
+    if (this.state.limitReached) {
+      return (<div className='field__icon field__icon--invalid'>
+        <FA icon={faTimesCircle} /></div>);
+    }
+    return super.renderValidationIcon();
   }
 
   /**
@@ -141,6 +161,7 @@ class TextareaField extends Field {
             required={required}
             onChange={() => this.onChange()}
             onBlur={() => this.onBlur()} />
+          {this.renderValidationIcon()}
           {this.renderCharLoader()}
         </div>
         {this.renderValidationMessages()}
