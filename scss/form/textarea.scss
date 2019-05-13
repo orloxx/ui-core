@@ -5,9 +5,6 @@
   }
 
   &__loader {
-    //position: absolute;
-    //bottom: 5px;
-    //right: 15px;
     transform: rotate(-90deg);
 
     &Back {
@@ -16,6 +13,14 @@
 
     &Front {
       color: $c-action;
+
+      &--warning {
+        color: $c-warning;
+      }
+
+      &--error {
+        color: $c-error;
+      }
     }
   }
 }

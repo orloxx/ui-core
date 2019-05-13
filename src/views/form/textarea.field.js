@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Field from './field.view';
 
+// loader data
 const RADIUS = 13;
 const STROKE = 3;
 const MAX_STROKE = 2 * Math.PI * RADIUS;
@@ -21,8 +22,14 @@ const MAX_SIZE = (RADIUS * 2) + (STROKE * 2);
  * <TextareaField id='email' name='email' label='Email' />
  */
 class TextareaField extends Field {
+  /**
+   * @type {Object}
+   * @property {number} [maxChars] - The maximum number of characters limit
+   * @property {String} [maxCharsError] - The error message when the number of characters has been reached
+   */
   static propTypes = Object.assign({}, Field.propTypes, {
     maxChars: PropTypes.number,
+    maxCharsError: PropTypes.string,
   });
 
   /**
@@ -36,6 +43,7 @@ class TextareaField extends Field {
      */
     this.state = Object.assign({}, this.state, {
       strokeDashoffset: MAX_STROKE,
+      limitReached: 0,
     });
   }
 
@@ -49,6 +57,20 @@ class TextareaField extends Field {
     };
   }
 
+  get loaderClass() {
+    const { current } = this.input;
+    if (current) {
+      const { maxChars } = this.props;
+      const offset = maxChars * 0.20;
+      if (this.state.limitReached) {
+        return 'textarea__loaderFront--error';
+      } else if (current.value.length > maxChars - offset) {
+        return 'textarea__loaderFront--warning';
+      }
+    }
+    return '';
+  }
+
   /**
    * @ignore
    */
@@ -57,9 +79,22 @@ class TextareaField extends Field {
       const { current } = this.input;
       const percentDone = current.value.length / this.props.maxChars;
       const strokeDashoffset = Math.max(0, MAX_STROKE - MAX_STROKE * percentDone);
-      this.setState({ strokeDashoffset });
+      this.setState({
+        strokeDashoffset,
+        limitReached: Math.max(0, current.value.length - this.props.maxChars),
+      });
     }
     this.onBlur();
+  }
+
+  renderValidationMessages() {
+    if (this.props.maxChars && this.state.limitReached) {
+      return (<em className='field__msg field__msg--error'>
+        {this.props.maxCharsError || 'You reached the maximum number of characters allowed'}
+        &nbsp;({-this.state.limitReached})
+      </em>);
+    }
+    return super.renderValidationMessages();
   }
 
   /**
@@ -75,7 +110,7 @@ class TextareaField extends Field {
               cx='50%' cy='50%' r={RADIUS} fill='none' stroke='currentColor'
               strokeWidth='1' />
             <circle
-              className='textarea__loaderFront'
+              className={`textarea__loaderFront ${this.loaderClass}`}
               cx='50%' cy='50%' r={RADIUS} fill='none' stroke='currentColor'
               strokeWidth={STROKE}
               style={this.loaderStyles} />
@@ -100,7 +135,6 @@ class TextareaField extends Field {
             required={required}
             onChange={() => this.onChange()}
             onBlur={() => this.onBlur()} />
-          {this.renderValidationIcon()}
           {this.renderCharLoader()}
         </div>
         {this.renderValidationMessages()}

@@ -24,7 +24,7 @@ export class Form extends Component {
             <option value='F'>Female</option>
           </DropdownField>
           <TextareaField id='comments' name='comments' label='Comments'
-                         maxChars='100' required />
+                         maxChars='1000' maxCharsError='Character limit reached' />
           <button type='button' className='button'>Cancel</button> <button className='button'>Save</button>
         </form>
       </section>
