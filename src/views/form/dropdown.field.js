@@ -26,12 +26,11 @@ import PropTypes from 'prop-types';
  */
 class DropdownField extends Field {
   /**
-   * @type {Object}
-   * @property {Array<HTMLOptionElement>} children - Elements to show in the dropdown list
+   * @ignore
    */
-  static propTypes = Object.assign({}, Field.propTypes, {
-    children: PropTypes.array.isRequired,
-  });
+  static defaultProps = {
+    children: [],
+  };
 
   /**
    * @ignore

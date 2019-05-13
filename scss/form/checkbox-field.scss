@@ -1,0 +1,17 @@
+.checkbox {
+  &__label {
+    cursor: pointer;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    align-content: center;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: $c-action;
+  }
+}

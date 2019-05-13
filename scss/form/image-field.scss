@@ -12,13 +12,6 @@
   }
 
   &__input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-
     &:focus + #{$this}__label {
       background: darken($c-action, 10);
     }

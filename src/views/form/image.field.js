@@ -106,7 +106,7 @@ class ImageField extends Field {
       <div className={`field imageField ${this.hasImageClassName}`}>
         <div className='field__inputWrapper'>
           <input
-            className='field__input imageField__input'
+            className='field__input imageField__input hideAccessible'
             id={id} name={name}
             type='file'
             required={this.props.required}

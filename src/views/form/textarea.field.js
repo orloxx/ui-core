@@ -15,7 +15,7 @@ const MAX_SIZE = (RADIUS * 2) + (STROKE * 2);
  *
  * #### SCSS Import
  * ```
- * @import "~@orloxx/ui-core/scss/form/textarea";
+ * @import "~@orloxx/ui-core/scss/form/textarea-field";
  * ```
  *
  * @extends {Field}

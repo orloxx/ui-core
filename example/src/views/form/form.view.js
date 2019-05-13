@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Field, ImageField, EmailField, DropdownField, TextareaField, Form
+  Field, ImageField, EmailField, DropdownField, TextareaField, Form, CheckboxField,
 } from '@orloxx/ui-core';
 
 export class FormView extends Component {
@@ -26,6 +26,9 @@ export class FormView extends Component {
           <TextareaField id='comments' name='comments' label='Comments'
                          suggestion='This field has a 100 character limit'
                          maxChars={100} maxCharsError='Character limit reached' />
+          <CheckboxField id='policy' name='policy' label='Policy' required>
+            Please accept the <a href='/' title='policy' target='_blank'>policy</a> to continue
+          </CheckboxField>
         </Form>
       </section>
     );
