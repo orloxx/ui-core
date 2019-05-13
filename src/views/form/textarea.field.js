@@ -27,11 +27,18 @@ class TextareaField extends Field {
   /**
    * @type {Object}
    * @property {number} [maxChars] - The maximum number of characters limit
-   * @property {String} [maxCharsError] - The error message when the number of characters has been reached
+   * @property {String} [maxCharsError='You reached the maximum number of characters allowed'] - The error message when the number of characters has been reached
    */
   static propTypes = Object.assign({}, Field.propTypes, {
     maxChars: PropTypes.number,
     maxCharsError: PropTypes.string,
+  });
+
+  /**
+   * @ignore
+   */
+  static defaultProps = Object.assign({}, Field.defaultProps, {
+    maxCharsError: 'You reached the maximum number of characters allowed',
   });
 
   /**
@@ -116,7 +123,7 @@ class TextareaField extends Field {
   renderValidationMessages() {
     if (this.props.maxChars && this.state.limitReached) {
       return (<em className='field__msg field__msg--error'>
-        {this.props.maxCharsError || 'You reached the maximum number of characters allowed'}
+        {this.props.maxCharsError}
         &nbsp;({-this.state.limitReached})
       </em>);
     }

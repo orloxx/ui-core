@@ -6,10 +6,19 @@ class Form extends Component {
    * @type {Object}
    * @property {Array<HTMLOptionElement>} children - Elements to show inside the form
    * @property {String} action - The form action attribute
+   * @property {String} [method='GET'] - The method to use when submitting the form
    */
   static propTypes = {
     children: PropTypes.array.isRequired,
     action: PropTypes.string.isRequired,
+    method: PropTypes.string,
+  };
+
+  /**
+   * @ignore
+   */
+  static defaultProps = {
+    method: 'GET',
   };
 
   /**
@@ -23,8 +32,9 @@ class Form extends Component {
    * @ignore
    */
   render() {
+    const { action, method } = this.props;
     return (
-      <form action={this.props.action} noValidate>
+      <form action={action} method={method} noValidate>
         {this.renderChildren()}
         <div className='buttonGroup'>
           <button className='button button--secondary' type='button'>Cancel</button>

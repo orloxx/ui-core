@@ -125,7 +125,7 @@ class ImageField extends Field {
               ref={this.input} value={this.imageSrc} />
             <FA className='imageField__noImageIcon' icon={faUpload} />
             <span className='field__labelSpan imageField__labelSpan'>
-              {label || 'Upload image'} {this.requiredLabel}
+              {label} {this.requiredLabel}
             </span>
           </label>
         </div>

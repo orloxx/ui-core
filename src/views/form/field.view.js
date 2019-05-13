@@ -30,8 +30,8 @@ class Field extends Component {
    * @property {String} [pattern] - The pattern to validate the input's value
    * @property {String} [placeholder] - Placeholder text
    * @property {String} [requiredLabel='(required)'] - The required label added to the input's label
-   * @property {String} [requiredError] - The error message when the required input is empty
-   * @property {String} [patternError] - The error message when the input's pattern is not matched
+   * @property {String} [requiredError='This field is required'] - The error message when the required input is empty
+   * @property {String} [patternError='Please enter correct format'] - The error message when the input's pattern is not matched
    * @property {String} [suggestion] - Suggestion text for the user
    */
   static propTypes = {
@@ -54,6 +54,8 @@ class Field extends Component {
   static defaultProps = {
     type: 'text',
     requiredLabel: '(required)',
+    requiredError: 'This field is required',
+    patternError: 'Please enter correct format',
   };
 
   /**
@@ -149,11 +151,11 @@ class Field extends Component {
     if (isDirty) {
       if (!isValid) {
         return (<em className='field__msg field__msg--error'>
-          {this.props.requiredError || 'This field is required'}
+          {this.props.requiredError}
         </em>);
       } else if (!isPattern) {
         return (<em className='field__msg field__msg--error'>
-          {this.props.patternError || 'Please enter correct format'}
+          {this.props.patternError}
         </em>);
       }
     }
