@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Field, ImageField, EmailField, DropdownField } from '@orloxx/ui-core';
+import {
+  Field, ImageField, EmailField, DropdownField, TextareaField,
+} from '@orloxx/ui-core';
 
 export class Form extends Component {
   render() {
@@ -21,6 +23,7 @@ export class Form extends Component {
             <option value='M'>Male</option>
             <option value='F'>Female</option>
           </DropdownField>
+          <TextareaField id='comments' name='comments' label='Comments' required />
           <button type='button' className='button'>Cancel</button> <button className='button'>Save</button>
         </form>
       </section>

@@ -21,11 +21,12 @@ $s-field-icon-size: 30px;
 
   &__input {
     margin: 0;
-    padding: 10px;
+    padding: 10px 40px 10px 10px;
     border: 1px solid $c-border;
     font-size: inherit;
     line-height: inherit;
     width: 100%;
+    display: block;
 
     &:hover,
     &:focus {
