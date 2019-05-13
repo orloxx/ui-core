@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/views/index.js | @orloxx/ui-core</title>
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/views/form/field.view.js | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -57,16 +57,197 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/views/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export Form from &apos;./form/form.view&apos;;
-export Field from &apos;./form/field.view&apos;;
-export DropdownField from &apos;./form/dropdown.field&apos;;
-export EmailField from &apos;./form/email.field&apos;;
-export ImageField from &apos;./form/image.field&apos;;
-export TextareaField from &apos;./form/textarea.field&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">src/views/form/field.view.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { Component } from &apos;react&apos;;
+import PropTypes from &apos;prop-types&apos;;
+import { FontAwesomeIcon as FA } from &apos;@fortawesome/react-fontawesome&apos;;
+import { faCheckCircle, faTimesCircle } from &apos;@fortawesome/free-solid-svg-icons&apos;;
 
-export GoogleMap from &apos;./google-map/google-map.view&apos;;
-export PageControl from &apos;./page-control/page-control.view&apos;;
+/**
+ * Base class for all form fields. It&apos;s supposed to be used as a super class
+ * but in case it&apos;s used as a component it renders an input type text
+ *
+ * #### SCSS Import
+ * ```
+ * @import &quot;~@orloxx/ui-core/scss/form/field&quot;;
+ * ```
+ *
+ * @example
+ * &lt;Field id=&apos;username&apos; name=&apos;username&apos;
+ *   label=&apos;Username&apos; placeholder=&apos;Enter your username&apos;
+ *   suggestion=&apos;Only accepts letters and numbers&apos;
+ *   patternError=&apos;Input format is wrong, only accepts letters and numbers&apos;
+ *   required pattern=&apos;^[a-zA-Z0-9]+$&apos; /&gt;
+ */
+class Field extends Component {
+  /**
+   * @type {Object}
+   * @property {String} id - The input element `id` attribute
+   * @property {String} name - The input element `name` attribute
+   * @property {String} label - The label attached to the input field
+   * @property {String} [type=&apos;text&apos;] - The input element `type` attribute
+   * @property {Boolean} [required] - The input element `required` attribute
+   * @property {String} [pattern] - The pattern to validate the input&apos;s value
+   * @property {String} [placeholder] - Placeholder text
+   * @property {String} [requiredLabel=&apos;(required)&apos;] - The required label added to the input&apos;s label
+   * @property {String} [requiredError=&apos;This field is required&apos;] - The error message when the required input is empty
+   * @property {String} [patternError=&apos;Please enter correct format&apos;] - The error message when the input&apos;s pattern is not matched
+   * @property {String} [suggestion] - Suggestion text for the user
+   */
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    required: PropTypes.bool,
+    pattern: PropTypes.string,
+    placeholder: PropTypes.string,
+    requiredLabel: PropTypes.string,
+    requiredError: PropTypes.string,
+    patternError: PropTypes.string,
+    suggestion: PropTypes.string,
+  };
+
+  /**
+   * @ignore
+   */
+  static defaultProps = {
+    type: &apos;text&apos;,
+    requiredLabel: &apos;(required)&apos;,
+    requiredError: &apos;This field is required&apos;,
+    patternError: &apos;Please enter correct format&apos;,
+  };
+
+  /**
+   * @ignore
+   */
+  constructor(props) {
+    super(props);
+
+    /**
+     * @ignore
+     */
+    this.input = React.createRef();
+
+    /**
+     * @ignore
+     */
+    this.state = { isValid: true, isPattern: true, isDirty: false };
+  }
+
+  /**
+   * @ignore
+   */
+  get isValid() {
+    const { required } = this.props;
+    if (required) {
+      const { current } = this.input;
+      return !!current.value;
+    }
+    return true;
+  }
+
+  /**
+   * @ignore
+   */
+  get isPattern() {
+    const { pattern } = this.props;
+    const { current } = this.input;
+    if (pattern &amp;&amp; current.value) {
+      const reg = new RegExp(pattern, &apos;g&apos;);
+      return reg.test(current.value);
+    }
+    return true;
+  }
+
+  /**
+   * @ignore
+   */
+  get fieldClasses() {
+    const { isValid, isPattern } = this.state;
+    return !isValid || !isPattern ? &apos;field--error&apos; : &apos;&apos;;
+  }
+
+  /**
+   * @ignore
+   */
+  get requiredLabel() {
+    if (this.props.required) {
+      return this.props.requiredLabel;
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  validate() {
+    this.setState({
+      isDirty: true,
+      isValid: this.isValid,
+      isPattern: this.isPattern,
+    });
+  }
+
+  /**
+   * @ignore
+   */
+  renderValidationIcon() {
+    const { isValid, isPattern, isDirty } = this.state;
+    const { required, pattern } = this.props;
+    if ((required || pattern) &amp;&amp; isDirty) {
+      return isValid &amp;&amp; isPattern
+        ? (&lt;div className=&apos;field__icon field__icon--valid&apos;&gt;
+          &lt;FA icon={faCheckCircle} /&gt;&lt;/div&gt;)
+        : (&lt;div className=&apos;field__icon field__icon--invalid&apos;&gt;
+          &lt;FA icon={faTimesCircle} /&gt;&lt;/div&gt;);
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  renderValidationMessages() {
+    const { isValid, isPattern, isDirty } = this.state;
+    if (isDirty) {
+      if (!isValid) {
+        return (&lt;em className=&apos;field__msg field__msg--error&apos;&gt;
+          {this.props.requiredError}
+        &lt;/em&gt;);
+      } else if (!isPattern) {
+        return (&lt;em className=&apos;field__msg field__msg--error&apos;&gt;
+          {this.props.patternError}
+        &lt;/em&gt;);
+      }
+    }
+    if (this.props.suggestion) {
+      return (&lt;em className=&apos;field__msg&apos;&gt;{this.props.suggestion}&lt;/em&gt;);
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  render() {
+    const { id, name, label, type, required, pattern, placeholder } = this.props;
+    return (
+      &lt;div className={`field ${this.fieldClasses}`}&gt;
+        &lt;label className=&apos;field__label&apos; htmlFor={id}&gt;{label} {this.requiredLabel}&lt;/label&gt;
+        &lt;div className=&apos;field__inputWrapper&apos;&gt;
+          &lt;input
+            className=&apos;field__input&apos; ref={this.input}
+            type={type} id={id} name={name}
+            placeholder={placeholder} title={placeholder}
+            required={required} pattern={pattern}
+            onBlur={() =&gt; this.validate()} /&gt;
+          {this.renderValidationIcon()}
+        &lt;/div&gt;
+        {this.renderValidationMessages()}
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default Field;
 </code></pre>
 
 </div>

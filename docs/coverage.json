@@ -1,7 +1,7 @@
 {
-  "coverage": "100%",
-  "expectCount": 55,
-  "actualCount": 55,
+  "coverage": "95.65%",
+  "expectCount": 115,
+  "actualCount": 110,
   "files": {
     "src/utils/geolocation.js": {
       "expectCount": 7,
@@ -18,6 +18,43 @@
       "actualCount": 2,
       "undocumentLines": []
     },
+    "src/views/form/dropdown.field.js": {
+      "expectCount": 11,
+      "actualCount": 11,
+      "undocumentLines": []
+    },
+    "src/views/form/email.field.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "src/views/form/field.view.js": {
+      "expectCount": 14,
+      "actualCount": 14,
+      "undocumentLines": []
+    },
+    "src/views/form/form.view.js": {
+      "expectCount": 11,
+      "actualCount": 10,
+      "undocumentLines": [
+        104
+      ]
+    },
+    "src/views/form/image.field.js": {
+      "expectCount": 10,
+      "actualCount": 10,
+      "undocumentLines": []
+    },
+    "src/views/form/textarea.field.js": {
+      "expectCount": 19,
+      "actualCount": 15,
+      "undocumentLines": [
+        8,
+        9,
+        10,
+        11
+      ]
+    },
     "src/views/google-map/google-map.model.js": {
       "expectCount": 11,
       "actualCount": 11,
@@ -28,14 +65,9 @@
       "actualCount": 8,
       "undocumentLines": []
     },
-    "src/views/image-uploader/image-uploader.view.js": {
-      "expectCount": 10,
-      "actualCount": 10,
-      "undocumentLines": []
-    },
     "src/views/navigation/navigation.view.js": {
-      "expectCount": 11,
-      "actualCount": 11,
+      "expectCount": 14,
+      "actualCount": 14,
       "undocumentLines": []
     },
     "src/views/page-control/page-control.view.js": {

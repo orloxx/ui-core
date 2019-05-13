@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/views/index.js | @orloxx/ui-core</title>
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/views/form/email.field.js | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -57,16 +57,28 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/views/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export Form from &apos;./form/form.view&apos;;
-export Field from &apos;./form/field.view&apos;;
-export DropdownField from &apos;./form/dropdown.field&apos;;
-export EmailField from &apos;./form/email.field&apos;;
-export ImageField from &apos;./form/image.field&apos;;
-export TextareaField from &apos;./form/textarea.field&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">src/views/form/email.field.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Field from &apos;./field.view&apos;;
 
-export GoogleMap from &apos;./google-map/google-map.view&apos;;
-export PageControl from &apos;./page-control/page-control.view&apos;;
+/**
+ * Controls input of type email
+ *
+ * @extends {Field}
+ *
+ * @example
+ * &lt;EmailField id=&apos;email&apos; name=&apos;email&apos; label=&apos;Email&apos; /&gt;
+ */
+class EmailField extends Field {
+  /**
+   * @ignore
+   */
+  static defaultProps = Object.assign({}, Field.defaultProps, {
+    type: &apos;email&apos;,
+    pattern: &apos;^(([^&lt;&gt;()[\\].,;:\\s@&quot;]+(\\.[^&lt;&gt;()[\\].,;:\\s@&quot;]+)*)|(&quot;.+&quot;))@(([^&lt;&gt;()[\\].,;:\\s@&quot;]+\\.)+[^&lt;&gt;()[\\].,;:\\s@&quot;]{2,})$&apos;,
+  });
+}
+
+export default EmailField;
 </code></pre>
 
 </div>

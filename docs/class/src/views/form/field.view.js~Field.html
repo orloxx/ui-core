@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">Navigation | @orloxx/ui-core</title>
+  <title data-ice="title">Field | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -58,24 +58,24 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Navigation from &apos;<span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">@orloxx/ui-core/src/views/navigation/navigation.view.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Field from &apos;<span><a href="file/src/views/form/field.view.js.html#lineNumber22">@orloxx/ui-core/src/views/form/field.view.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/views/form/field.view.js.html#lineNumber22">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
-  <h1 data-ice="name">Navigation</h1>
+  <h1 data-ice="name">Field</h1>
 
   
 
   
   
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; Navigation</div></div>
-  
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; Field</div></div>
+  <div class="flat-list" data-ice="directSubclass"><h4>Direct Subclass:</h4><div><span><a href="class/src/views/form/dropdown.field.js~DropdownField.html">DropdownField</a></span>, <span><a href="class/src/views/form/email.field.js~EmailField.html">EmailField</a></span>, <span><a href="class/src/views/form/image.field.js~ImageField.html">ImageField</a></span>, <span><a href="class/src/views/form/textarea.field.js~TextareaField.html">TextareaField</a></span></div></div>
   
   
   
@@ -84,9 +84,9 @@
 
   
   
-  <div class="description" data-ice="description"><p>Controls the navigation bar.
-Uses the same routes object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
-<h4 id="scss-import-">SCSS import:</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/navigation&quot;;</code>
+  <div class="description" data-ice="description"><p>Base class for all form fields. It&apos;s supposed to be used as a super class
+but in case it&apos;s used as a component it renders an input type text</p>
+<h4 id="scss-import">SCSS Import</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/form/field&quot;;</code>
 </code></pre></div>
   
 
@@ -97,11 +97,11 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
     
   <div class="example-doc" data-ice="exampleDoc">
       
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">const Nav = withRoute(Navigation);</code></pre>
-    </div>
-<div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;Nav routes={routes} /&gt;</code></pre>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;Field id=&apos;username&apos; name=&apos;username&apos;
+  label=&apos;Username&apos; placeholder=&apos;Enter your username&apos;
+  suggestion=&apos;Only accepts letters and numbers&apos;
+  patternError=&apos;Input format is wrong, only accepts letters and numbers&apos;
+  required pattern=&apos;^[a-zA-Z0-9]+$&apos; /&gt;</code></pre>
     </div>
 </div>
 
@@ -128,7 +128,7 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/views/form/field.view.js~Field.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
         </p>
       </div>
       <div>
@@ -166,7 +166,7 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber33">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/views/form/field.view.js.html#lineNumber37">source</a></span></span>
     </span>
   </h3>
 
@@ -186,17 +186,84 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">location</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="name" class="code" data-depth="0">id</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Comes from the <span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span> function</p>
+      <td data-ice="description"><p>The input element <code>id</code> attribute</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">routes</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="typedef/index.html#static-typedef-Route">Route</a></span>&gt;</td>
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Same <span><a href="typedef/index.html#static-typedef-Route">Route</a></span> object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
+      <td data-ice="description"><p>The input element <code>name</code> attribute</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">label</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>The label attached to the input field</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">type</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;text&apos;</li></ul></td>
+      <td data-ice="description"><p>The input element <code>type</code> attribute</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">required</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>The input element <code>required</code> attribute</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">pattern</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>The pattern to validate the input&apos;s value</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">placeholder</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>Placeholder text</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">requiredLabel</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;(required)&apos;</li></ul></td>
+      <td data-ice="description"><p>The required label added to the input&apos;s label</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">requiredError</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;This field is required&apos;</li></ul></td>
+      <td data-ice="description"><p>The error message when the required input is empty</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">patternError</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: &apos;Please enter correct format&apos;</li></ul></td>
+      <td data-ice="description"><p>The error message when the input&apos;s pattern is not matched</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">suggestion</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li></ul></td>
+      <td data-ice="description"><p>Suggestion text for the user</p>
 </td>
     </tr>
 </tbody>

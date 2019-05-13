@@ -35,13 +35,19 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Position">Position</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/PositionError">PositionError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-form">views/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/dropdown.field.js~DropdownField.html">DropdownField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/email.field.js~EmailField.html">EmailField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/field.view.js~Field.html">Field</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/form.view.js~Form.html">Form</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/image.field.js~ImageField.html">ImageField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/textarea.field.js~TextareaField.html">TextareaField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement">HTMLOptionElement</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-google-map">views/google-map</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/google-map/google-map.model.js~GoogleMapModel.html">GoogleMapModel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/google-map/google-map.view.js~GoogleMap.html">GoogleMap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/coordinates">google~LatLng</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/map">google~Map</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions">google~MapOptions</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-uploader">views/image-uploader</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html">ImageUploader</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-navigation">views/navigation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html">Navigation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-page-control">views/page-control</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></span></li>
@@ -108,7 +114,7 @@ class Navigation extends Component {
    */
   get currentTitle() {
     const { routes, location } = this.props;
-    const route = routes.find(item =&gt; item.to === location.pathname);
+    const route = Navigation.simplified(routes).find(item =&gt; item.to === location.pathname);
     return route ? route.name : &apos;Home&apos;;
   }
 
@@ -118,6 +124,20 @@ class Navigation extends Component {
   get routes() {
     const { routes } = this.props;
     return routes.filter(route =&gt; route.to &amp;&amp; route.to !== &apos;/&apos;);
+  }
+
+  /**
+   * @ignore
+   */
+  static simplified(routes) {
+    if (routes &amp;&amp; routes.length) {
+      return routes.reduce((previous, current) =&gt; [
+        ...previous,
+        current,
+        ...Navigation.simplified(current.children),
+      ], []);
+    }
+    return [];
   }
 
   /**
@@ -138,8 +158,16 @@ class Navigation extends Component {
   /**
    * @ignore
    */
+  isActiveClass(pathname) {
+    const { location } = this.props;
+    return location &amp;&amp; location.pathname === pathname ? &apos;isActive&apos; : &apos;&apos;;
+  }
+
+  /**
+   * @ignore
+   */
   renderMenuButton() {
-    const routes = this.routes;
+    const routes = Navigation.simplified(this.routes);
     if (routes &amp;&amp; routes.length) {
       return (
         &lt;button
@@ -154,16 +182,32 @@ class Navigation extends Component {
   /**
    * @ignore
    */
+  renderNested(routes) {
+    if (routes &amp;&amp; routes.length) {
+      const links = routes.map(route =&gt; (
+        &lt;li
+          key={route.to}
+          className=&apos;navigation__menuItem&apos;&gt;
+          &lt;Link
+            className={`navigation__menuLink ${this.isActiveClass(route.to)}`}
+            to={route.to}
+            onClick={() =&gt; this.closeMenu()}&gt;{route.name}&lt;/Link&gt;
+          {this.renderNested(route.children)}
+        &lt;/li&gt;
+      ));
+      return (
+        &lt;ul className=&apos;navigation__menuList&apos;&gt;{links}&lt;/ul&gt;
+      );
+    }
+  }
+
+  /**
+   * @ignore
+   */
   renderMenu() {
     const { isMenuOpen } = this.state;
     if (isMenuOpen) {
-      return this.routes.map(route =&gt; (
-        &lt;li key={route.to} className=&apos;navigation__menuItem&apos;&gt;
-          &lt;Link
-            className=&apos;navigation__menuLink&apos; to={route.to}
-            onClick={() =&gt; this.closeMenu()}&gt;{route.name}&lt;/Link&gt;
-        &lt;/li&gt;
-      ));
+      return this.renderNested(this.routes);
     }
   }
 
@@ -187,7 +231,7 @@ class Navigation extends Component {
           &lt;/div&gt;
         &lt;/section&gt;
         &lt;section className=&apos;navigation__menu&apos;&gt;
-          &lt;ul className=&apos;navigation__menuList&apos;&gt;{this.renderMenu()}&lt;/ul&gt;
+          {this.renderMenu()}
         &lt;/section&gt;
       &lt;/nav&gt;
     );

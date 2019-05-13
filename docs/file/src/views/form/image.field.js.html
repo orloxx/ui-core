@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/views/index.js | @orloxx/ui-core</title>
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/views/form/image.field.js | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -57,16 +57,145 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/views/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export Form from &apos;./form/form.view&apos;;
-export Field from &apos;./form/field.view&apos;;
-export DropdownField from &apos;./form/dropdown.field&apos;;
-export EmailField from &apos;./form/email.field&apos;;
-export ImageField from &apos;./form/image.field&apos;;
-export TextareaField from &apos;./form/textarea.field&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">src/views/form/image.field.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import PropTypes from &apos;prop-types&apos;;
+import { FontAwesomeIcon as FA } from &apos;@fortawesome/react-fontawesome&apos;;
+import { faUpload } from &apos;@fortawesome/free-solid-svg-icons&apos;;
+import { ImageUtils } from &apos;../../utils&apos;;
+import Field from &apos;./field.view&apos;;
 
-export GoogleMap from &apos;./google-map/google-map.view&apos;;
-export PageControl from &apos;./page-control/page-control.view&apos;;
+/**
+ * Controls an input file element that shows a preview of the selected image
+ *
+ * #### SCSS import:
+ * ```
+ * @import &quot;~@orloxx/ui-core/scss/form/image-field&quot;;
+ * ```
+ *
+ * @extends {Field}
+ *
+ * @example
+ * &lt;ImageField id=&apos;image&apos; name=&apos;image&apos; label=&apos;Choose from computer&apos; /&gt;
+ */
+class ImageField extends Field {
+  /**
+   * @type {Object}
+   * @property {String} [src] - Default image path when nothing is selected
+   * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted
+   */
+  static propTypes = Object.assign({}, Field.propTypes, {
+    src: PropTypes.string,
+    fileSize: PropTypes.number,
+  });
+
+  /**
+   * @ignore
+   */
+  static defaultProps = Object.assign({}, Field.defaultProps, {
+    src: &apos;&apos;,
+    fileSize: 256,
+  });
+
+  /**
+   * @ignore
+   */
+  constructor(props) {
+    super(props);
+
+    /**
+     * @ignore
+     */
+    this.state = Object.assign({}, this.state, {
+      imageData: null,
+    });
+  }
+
+  /**
+   * @ignore
+   */
+  get hasImageClassName() {
+    return this.imageSrc ? &apos;imageField--hasImage&apos; : &apos;&apos;;
+  }
+
+  /**
+   * @ignore
+   */
+  get imageSrc() {
+    const { imageData } = this.state;
+    const { src } = this.props;
+    return imageData || src;
+  }
+
+  /**
+   * @ignore
+   */
+  setImage(e) {
+    const file = e.target.files[0];
+    const maxKb = this.props.fileSize;
+    const maxSize = maxKb * 1024;
+
+    if (file &amp;&amp; file.size &gt; maxSize) {
+      alert(`File cannot be greater than ${maxKb}Kb. Image will be removed.`);
+      e.target.value = null;
+      this.setState({ imageData: null });
+      return;
+    }
+    this.setImageData(file);
+  }
+
+  /**
+   * @ignore
+   */
+  setImageData(file) {
+    if (file) {
+      ImageUtils.getFileData(file)
+        .then((imageData) =&gt; {
+          this.setState({ imageData });
+          this.validate();
+        });
+    }
+  }
+
+  /**
+   * @ignore
+   */
+  render() {
+    const { id, name, label } = this.props;
+    return (
+      &lt;div className={`field imageField ${this.hasImageClassName}`}&gt;
+        &lt;div className=&apos;field__inputWrapper&apos;&gt;
+          &lt;input
+            className=&apos;field__input imageField__input&apos;
+            id={id} name={name}
+            type=&apos;file&apos;
+            required={this.props.required}
+            accept=&apos;image/*&apos;
+            onBlur={() =&gt; this.validate()}
+            onChange={e =&gt; this.setImage(e)}
+          /&gt;
+          &lt;label className=&apos;button field__label imageField__label&apos; htmlFor={id}&gt;
+            &lt;img
+              className=&apos;imageField__image&apos;
+              src={this.imageSrc}
+              alt=&apos;Upload&apos;
+            /&gt;
+            &lt;input
+              type=&apos;hidden&apos; id={`${id}-value`} name={`${name}-value`}
+              ref={this.input} value={this.imageSrc} /&gt;
+            &lt;FA className=&apos;imageField__noImageIcon&apos; icon={faUpload} /&gt;
+            &lt;span className=&apos;field__labelSpan imageField__labelSpan&apos;&gt;
+              {label} {this.requiredLabel}
+            &lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+        {this.renderValidationMessages()}
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default ImageField;
 </code></pre>
 
 </div>

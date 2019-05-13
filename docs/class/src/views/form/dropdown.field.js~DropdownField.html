@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">ImageUploader | @orloxx/ui-core</title>
+  <title data-ice="title">DropdownField | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -35,13 +35,19 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Position">Position</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/PositionError">PositionError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-form">views/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/dropdown.field.js~DropdownField.html">DropdownField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/email.field.js~EmailField.html">EmailField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/field.view.js~Field.html">Field</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/form.view.js~Form.html">Form</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/image.field.js~ImageField.html">ImageField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/textarea.field.js~TextareaField.html">TextareaField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement">HTMLOptionElement</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-google-map">views/google-map</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/google-map/google-map.model.js~GoogleMapModel.html">GoogleMapModel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/google-map/google-map.view.js~GoogleMap.html">GoogleMap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/coordinates">google~LatLng</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/map">google~Map</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions">google~MapOptions</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-uploader">views/image-uploader</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html">ImageUploader</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-navigation">views/navigation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html">Navigation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-page-control">views/page-control</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></span></li>
@@ -52,23 +58,23 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import ImageUploader from &apos;<span><a href="file/src/views/image-uploader/image-uploader.view.js.html#lineNumber18">@orloxx/ui-core/src/views/image-uploader/image-uploader.view.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import DropdownField from &apos;<span><a href="file/src/views/form/dropdown.field.js.html#lineNumber27">@orloxx/ui-core/src/views/form/dropdown.field.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/views/image-uploader/image-uploader.view.js.html#lineNumber18">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/views/form/dropdown.field.js.html#lineNumber27">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
-  <h1 data-ice="name">ImageUploader</h1>
+  <h1 data-ice="name">DropdownField</h1>
 
   
 
   
   
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; ImageUploader</div></div>
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; <span><a href="class/src/views/form/field.view.js~Field.html">Field</a></span> &#x2192; DropdownField</div></div>
   
   
   
@@ -78,8 +84,8 @@
 
   
   
-  <div class="description" data-ice="description"><p>Controls an input file element that shows a preview of the selected image</p>
-<h4 id="scss-import-">SCSS import:</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/image-uploader&quot;;</code>
+  <div class="description" data-ice="description"><p>Controls a dropdown type of input</p>
+<h4 id="scss-import-">SCSS import:</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/form/dropdown-field&quot;;</code>
 </code></pre></div>
   
 
@@ -90,7 +96,10 @@
     
   <div class="example-doc" data-ice="exampleDoc">
       
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;ImageUploader id=&apos;image&apos; name=&apos;image&apos; /&gt;</code></pre>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;DropdownField id=&apos;sex&apos; name=&apos;sex&apos; label=&apos;Sex&apos;&gt;
+  &lt;option value=&apos;M&apos;&gt;Male&lt;/option&gt;
+  &lt;option value=&apos;F&apos;&gt;Female&lt;/option&gt;
+&lt;/DropdownField&gt;</code></pre>
     </div>
 </div>
 
@@ -117,7 +126,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/views/form/dropdown.field.js~DropdownField.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
         </p>
       </div>
       <div>
@@ -139,7 +148,41 @@
 
 
 
-
+<div class="inherited-summary" data-ice="inheritedSummary"><h2>Inherited Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3"><span class="toggle closed"></span> From class <span><a href="class/src/views/form/field.view.js~Field.html">Field</a></span></td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/views/form/field.view.js~Field.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
 
 <div data-ice="staticMemberDetails"><h2 data-ice="title">Static Public Members</h2>
 
@@ -155,7 +198,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/views/image-uploader/image-uploader.view.js.html#lineNumber27">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/views/form/dropdown.field.js.html#lineNumber32">source</a></span></span>
     </span>
   </h3>
 
@@ -164,7 +207,7 @@
   
   
 
-  
+  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/views/form/field.view.js~Field.html#static-member-propTypes">Field#propTypes</a></span></div>
 
   <div data-ice="properties"><div data-ice="properties">
   <h4 data-ice="title">Properties:</h4>
@@ -175,39 +218,10 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">id</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="name" class="code" data-depth="0">children</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement">HTMLOptionElement</a></span>&gt;</td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>The same <code>id</code> added to the input field</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">name</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>The same <code>name</code> added to the input field</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">caption</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
-      <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>Caption text added at the bottom of the field</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">src</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
-      <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>Default image path when nothing is selected</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">fileSize</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
-      <td data-ice="appendix"><ul><li>optional</li>
-<li>default: 256Kb</li></ul></td>
-      <td data-ice="description"><p>Maximum file size (Kb) accepted</p>
+      <td data-ice="description"><p>Elements to show in the dropdown list</p>
 </td>
     </tr>
 </tbody>

@@ -35,13 +35,19 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Position">Position</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/PositionError">PositionError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/File">File</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-form">views/form</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/dropdown.field.js~DropdownField.html">DropdownField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/email.field.js~EmailField.html">EmailField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/field.view.js~Field.html">Field</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/form.view.js~Form.html">Form</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/image.field.js~ImageField.html">ImageField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/form/textarea.field.js~TextareaField.html">TextareaField</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement">HTMLOptionElement</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-google-map">views/google-map</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/google-map/google-map.model.js~GoogleMapModel.html">GoogleMapModel</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/google-map/google-map.view.js~GoogleMap.html">GoogleMap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/coordinates">google~LatLng</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/map">google~Map</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions">google~MapOptions</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-image-uploader">views/image-uploader</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/image-uploader/image-uploader.view.js~ImageUploader.html">ImageUploader</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-navigation">views/navigation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html">Navigation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-external">E</span><span data-ice="name"><span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#views-page-control">views/page-control</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></span></li>
@@ -80,13 +86,28 @@ import Navigation from &apos;../navigation/navigation.view&apos;;
  */
 class PageControl extends Component {
   /**
+   * A Route is a place where content/resources are located at and defines
+   * which `component` to load depending on the URL path.
+   *
+   * Children routes are optional and recursive.
+   *
    * @typedef {Object} Route
-   * @property {String} name - The name of the section to load. It will appear in the header of navigation
+   * @property {String} name - Short descriptive name of the section to load
    * @property {String} to - The path to the page it will go to
    * @property {react~Component} component - The component it will load below the {@link Navigation}
+   * @property {Array&lt;Route&gt;} [children] - All nested routes
    *
    * @example
-   * { name: &apos;Some name&apos;, to: &apos;path/to/page&apos;, component: SomeComponent }
+   * {
+   *   name: &apos;Some name&apos;,
+   *   to: &apos;path/to/page&apos;,
+   *   component: SomeComponent,
+   *   children: [{
+   *     name: &apos;Nested component&apos;,
+   *     to: &apos;path/to/nested&apos;,
+   *     component: NestedComponent
+   *   }]
+   * }
    */
   /**
    * @type {Object}
@@ -104,7 +125,7 @@ class PageControl extends Component {
   renderRoutes() {
     const { routes } = this.props;
     if (routes &amp;&amp; routes.length) {
-      return routes.map(page =&gt; (
+      return Navigation.simplified(routes).map(page =&gt; (
         &lt;Route key={page.to} exact path={page.to} component={page.component} /&gt;
       ));
     }
