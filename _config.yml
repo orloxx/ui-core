@@ -1,4 +1,8 @@
 plugins:
   - jekyll-redirect-from
+whitelist:
+  - jekyll-redirect-from
 redirect_from:
-  - "/ui-core/"
+  - "/ui-core/form"
+redirect_to:
+  - "/ui-core"
