@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {
-  Field, ImageField, EmailField, DropdownField, TextareaField,
+  Field, ImageField, EmailField, DropdownField, TextareaField, Form
 } from '@orloxx/ui-core';
 
-export class Form extends Component {
+export class FormView extends Component {
   render() {
     return (
       <section className='form container'>
         <h1>Form</h1>
-        <form className='form' action=''>
+        <Form action='http://someaction.example.com/'>
           <ImageField id='avatar' name='avatar' label='Avatar' />
           <Field id='username' name='username'
                  label='Username' placeholder='Enter your username'
@@ -25,9 +25,8 @@ export class Form extends Component {
           </DropdownField>
           <TextareaField id='comments' name='comments' label='Comments'
                          suggestion='This field has a 100 character limit'
-                         maxChars='100' maxCharsError='Character limit reached' />
-          <button type='button' className='button'>Cancel</button> <button className='button'>Save</button>
-        </form>
+                         maxChars={100} maxCharsError='Character limit reached' />
+        </Form>
       </section>
     );
   }

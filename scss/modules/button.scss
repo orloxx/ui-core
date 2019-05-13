@@ -1,5 +1,7 @@
 @mixin button() {
   .button {
+    $this: &;
+
     padding: 10px;
     margin: 0;
     border: 0;
@@ -14,6 +16,17 @@
     &:hover,
     &:focus {
       background: darken($c-action, 10);
+    }
+
+    &--secondary {
+      background: $c-action-secondary;
+
+      &--isPressed,
+      &:active,
+      &:hover,
+      &:focus {
+        background: darken($c-action-secondary, 10);
+      }
     }
 
     &Group {
