@@ -25,7 +25,7 @@ export class FormView extends Component {
           </DropdownField>
           <TextareaField id='comments' name='comments' label='Comments'
                          suggestion='This field has a 100 character limit'
-                         maxChars={10} maxCharsError='Character limit reached' />
+                         maxChars={100} maxCharsError='Character limit reached' />
         </Form>
       </section>
     );

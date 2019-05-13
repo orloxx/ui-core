@@ -93,6 +93,22 @@ class TextareaField extends Field {
   /**
    * @ignore
    */
+  get isValid() {
+    return super.isValid && !this.state.extraChars;
+  }
+
+  /**
+   * @ignore
+   */
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.extraChars !== this.state.extraChars) {
+      this.validate();
+    }
+  }
+
+  /**
+   * @ignore
+   */
   onChange() {
     if (this.props.maxChars) {
       const { current } = this.input;
