@@ -1,7 +1,7 @@
 {
-  "coverage": "95.65%",
-  "expectCount": 115,
-  "actualCount": 110,
+  "coverage": "95.76%",
+  "expectCount": 118,
+  "actualCount": 113,
   "files": {
     "src/utils/geolocation.js": {
       "expectCount": 7,
@@ -71,8 +71,8 @@
       "undocumentLines": []
     },
     "src/views/page-control/page-control.view.js": {
-      "expectCount": 4,
-      "actualCount": 4,
+      "expectCount": 7,
+      "actualCount": 7,
       "undocumentLines": []
     }
   }

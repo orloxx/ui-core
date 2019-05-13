@@ -60,7 +60,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/views/page-control/page-control.view.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React, { Component } from &apos;react&apos;;
 import PropTypes from &apos;prop-types&apos;;
-import { BrowserRouter as Router, Route, withRouter } from &apos;react-router-dom&apos;;
+import { BrowserRouter as Router, HashRouter, Route, withRouter } from &apos;react-router-dom&apos;;
 import Navigation from &apos;../navigation/navigation.view&apos;;
 
 /**
@@ -111,12 +111,23 @@ class PageControl extends Component {
    */
   /**
    * @type {Object}
-   * @property {String} base - The base URL used in `Router`&apos;s `basename` attribute: default is `/`
    * @property {Array&lt;Route&gt;} routes - All possible routes available
+   * @property {Boolean} [useHash] - If set to `true` it enables the routing using the url hash `/#/path`
+   * @property {String} [base] - The base URL used in `Router`&apos;s `basename` attribute: default is `/`
    */
   static propTypes = {
+    routes: PropTypes.array.isRequired,
+    useHash: PropTypes.bool,
     base: PropTypes.string,
-    routes: PropTypes.array,
+  };
+
+  /**
+   * @ignore
+   */
+  static defaultProps = {
+    useHash: true,
+    base: &apos;/&apos;,
+    routes: [],
   };
 
   /**
@@ -134,14 +145,37 @@ class PageControl extends Component {
   /**
    * @ignore
    */
-  render() {
+  renderBrowserRouter() {
     const Nav = withRouter(Navigation);
     return (
-      &lt;Router basename={this.props.base || &apos;/&apos;}&gt;
+      &lt;Router basename={this.props.base}&gt;
         &lt;Nav routes={this.props.routes} /&gt;
         {this.renderRoutes()}
       &lt;/Router&gt;
     );
+  }
+
+  /**
+   * @ignore
+   */
+  renderHashRouter() {
+    const Nav = withRouter(Navigation);
+    return (
+      &lt;HashRouter basename={this.props.base}&gt;
+        &lt;Nav routes={this.props.routes} /&gt;
+        {this.renderRoutes()}
+      &lt;/HashRouter&gt;
+    );
+  }
+
+  /**
+   * @ignore
+   */
+  render() {
+    if (this.props.useHash) {
+      return this.renderHashRouter();
+    }
+    return this.renderBrowserRouter();
   }
 }
 
