@@ -65,9 +65,9 @@ class PageControl extends Component {
    * @ignore
    */
   static defaultProps = {
+    routes: [],
     useHash: true,
     base: '/',
-    routes: [],
   };
 
   /**
