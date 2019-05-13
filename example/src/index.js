@@ -29,5 +29,5 @@ const routes = [
   { name: 'Text example4', to: '/text4', component: Text },
 ];
 
-ReactDOM.render(<PageControl base='/ui-core' routes={routes} />,
+ReactDOM.render(<PageControl routes={routes} />,
   document.getElementById('root'));

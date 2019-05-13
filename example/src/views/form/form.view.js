@@ -8,7 +8,7 @@ export class FormView extends Component {
     return (
       <section className='form container'>
         <h1>Form</h1>
-        <Form action='http://someaction.example.com/' onSubmit={() => console.log('SUBMIT!')}>
+        <Form action='https://someaction.example.com/' onSubmit={() => console.log('SUBMIT!')}>
           <ImageField id='avatar' name='avatar' label='Avatar' />
           <Field id='username' name='username'
                  label='Username' placeholder='Enter your username'

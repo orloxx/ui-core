@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, HashRouter, Route, withRouter } from 'react-router-dom';
 import Navigation from '../navigation/navigation.view';
 
 /**
@@ -51,12 +51,23 @@ class PageControl extends Component {
    */
   /**
    * @type {Object}
-   * @property {String} base - The base URL used in `Router`'s `basename` attribute: default is `/`
    * @property {Array<Route>} routes - All possible routes available
+   * @property {Boolean} [useHash] - If set to `true` it enables the routing using the url hash `/#/path`
+   * @property {String} [base] - The base URL used in `Router`'s `basename` attribute: default is `/`
    */
   static propTypes = {
+    routes: PropTypes.array.isRequired,
+    useHash: PropTypes.bool,
     base: PropTypes.string,
-    routes: PropTypes.array,
+  };
+
+  /**
+   * @ignore
+   */
+  static defaultProps = {
+    useHash: true,
+    base: '/',
+    routes: [],
   };
 
   /**
@@ -74,14 +85,37 @@ class PageControl extends Component {
   /**
    * @ignore
    */
-  render() {
+  renderBrowserRouter() {
     const Nav = withRouter(Navigation);
     return (
-      <Router basename={this.props.base || '/'}>
+      <Router basename={this.props.base}>
         <Nav routes={this.props.routes} />
         {this.renderRoutes()}
       </Router>
     );
+  }
+
+  /**
+   * @ignore
+   */
+  renderHashRouter() {
+    const Nav = withRouter(Navigation);
+    return (
+      <HashRouter basename={this.props.base}>
+        <Nav routes={this.props.routes} />
+        {this.renderRoutes()}
+      </HashRouter>
+    );
+  }
+
+  /**
+   * @ignore
+   */
+  render() {
+    if (this.props.useHash) {
+      return this.renderHashRouter();
+    }
+    return this.renderBrowserRouter();
   }
 }
 
