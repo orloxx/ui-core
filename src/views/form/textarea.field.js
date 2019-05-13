@@ -52,7 +52,7 @@ class TextareaField extends Field {
      */
     this.state = Object.assign({}, this.state, {
       strokeDashoffset: MAX_STROKE,
-      limitReached: 0,
+      extraChars: 0,
     });
   }
 
@@ -74,7 +74,7 @@ class TextareaField extends Field {
     if (current) {
       const { maxChars } = this.props;
       const offset = maxChars * 0.20;
-      if (this.state.limitReached) {
+      if (this.state.extraChars) {
         return 'textarea__loaderFront--error';
       } else if (current.value.length > maxChars - offset) {
         return 'textarea__loaderFront--warning';
@@ -87,7 +87,7 @@ class TextareaField extends Field {
    * @ignore
    */
   get fieldClasses() {
-    return super.fieldClasses || this.state.limitReached ? 'field--error' : '';
+    return super.fieldClasses || this.state.extraChars ? 'field--error' : '';
   }
 
   /**
@@ -100,7 +100,7 @@ class TextareaField extends Field {
       const strokeDashoffset = Math.max(0, MAX_STROKE - MAX_STROKE * percentDone);
       this.setState({
         strokeDashoffset,
-        limitReached: Math.max(0, current.value.length - this.props.maxChars),
+        extraChars: Math.max(0, current.value.length - this.props.maxChars),
       });
     }
     this.validate();
@@ -110,7 +110,7 @@ class TextareaField extends Field {
    * @ignore
    */
   renderValidationIcon() {
-    if (this.state.limitReached) {
+    if (this.state.extraChars) {
       return (<div className='field__icon field__icon--invalid'>
         <FA icon={faTimesCircle} /></div>);
     }
@@ -121,10 +121,10 @@ class TextareaField extends Field {
    * @ignore
    */
   renderValidationMessages() {
-    if (this.props.maxChars && this.state.limitReached) {
+    if (this.props.maxChars && this.state.extraChars) {
       return (<em className='field__msg field__msg--error'>
         {this.props.maxCharsError}
-        &nbsp;({-this.state.limitReached})
+        &nbsp;({-this.state.extraChars})
       </em>);
     }
     return super.renderValidationMessages();
@@ -166,8 +166,7 @@ class TextareaField extends Field {
             className='field__input textarea__input' ref={this.input}
             id={id} name={name}
             required={required}
-            onChange={() => this.onChange()}
-            onBlur={() => this.validate()} />
+            onChange={() => this.onChange()} />
           {this.renderValidationIcon()}
           {this.renderCharLoader()}
         </div>
