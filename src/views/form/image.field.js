@@ -24,7 +24,7 @@ class ImageField extends Field {
    * @property {String} [src] - Default image path when nothing is selected
    * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted
    */
-  static propTypes = Object.assign(Field.propTypes, {
+  static propTypes = Object.assign({}, Field.propTypes, {
     src: PropTypes.string,
     fileSize: PropTypes.number,
   });
@@ -32,7 +32,7 @@ class ImageField extends Field {
   /**
    * @ignore
    */
-  static defaultProps = Object.assign(Field.defaultProps, {
+  static defaultProps = Object.assign({}, Field.defaultProps, {
     src: '',
     fileSize: 256,
   });

@@ -29,7 +29,7 @@ class DropdownField extends Field {
    * @type {Object}
    * @property {Array<HTMLOptionElement>} children - Elements to show in the dropdown list
    */
-  static propTypes = Object.assign(Field.propTypes, {
+  static propTypes = Object.assign({}, Field.propTypes, {
     children: PropTypes.array.isRequired,
   });
 

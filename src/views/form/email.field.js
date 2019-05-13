@@ -12,7 +12,7 @@ class EmailField extends Field {
   /**
    * @ignore
    */
-  static defaultProps = Object.assign(Field.defaultProps, {
+  static defaultProps = Object.assign({}, Field.defaultProps, {
     type: 'email',
     pattern: '^(([^<>()[\\].,;:\\s@"]+(\\.[^<>()[\\].,;:\\s@"]+)*)|(".+"))@(([^<>()[\\].,;:\\s@"]+\\.)+[^<>()[\\].,;:\\s@"]{2,})$',
   });
