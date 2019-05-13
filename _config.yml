@@ -1,0 +1,4 @@
+plugins:
+  - jekyll-redirect-from
+redirect_from:
+  - "/ui-core/"
