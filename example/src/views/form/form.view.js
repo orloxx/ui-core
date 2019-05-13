@@ -8,7 +8,7 @@ export class FormView extends Component {
     return (
       <section className='form container'>
         <h1>Form</h1>
-        <Form action='http://someaction.example.com/'>
+        <Form action='http://someaction.example.com/' onSubmit={() => console.log('SUBMIT!')}>
           <ImageField id='avatar' name='avatar' label='Avatar' />
           <Field id='username' name='username'
                  label='Username' placeholder='Enter your username'
@@ -25,7 +25,7 @@ export class FormView extends Component {
           </DropdownField>
           <TextareaField id='comments' name='comments' label='Comments'
                          suggestion='This field has a 100 character limit'
-                         maxChars={100} maxCharsError='Character limit reached' />
+                         maxChars={10} maxCharsError='Character limit reached' />
         </Form>
       </section>
     );

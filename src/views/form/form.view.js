@@ -32,11 +32,15 @@ class Form extends Component {
    * @type {Object}
    * @property {Array<HTMLOptionElement>} children - Elements to show inside the form
    * @property {String} action - The form action attribute
+   * @property {Function} onSubmit - Triggers when the user submits a valid form
+   * @property {Function} [onCancel] - Triggers when the user clicks the cancel button
    * @property {String} [method='GET'] - The method to use when submitting the form
    */
   static propTypes = {
     children: PropTypes.array.isRequired,
     action: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onCancel: PropTypes.func,
     method: PropTypes.string,
   };
 
@@ -91,8 +95,16 @@ class Form extends Component {
       component.onBlur();
       return !component.isValid;
     });
-    if (!invalidFields.length) {
-      console.log('SUBMIT!');
+    const { onSubmit } = this.props;
+    if (onSubmit && !invalidFields.length) {
+      onSubmit(e);
+    }
+  }
+
+  onCancel() {
+    const { onCancel } = this.props;
+    if (onCancel) {
+      onCancel();
     }
   }
 
@@ -108,7 +120,9 @@ class Form extends Component {
         noValidate>
         {this.children}
         <div className='buttonGroup'>
-          <button className='button button--secondary' type='button'>Cancel</button>
+          <button
+            className='button button--secondary' type='button'
+            onClick={() => this.onCancel()}>Cancel</button>
           <button className='button' type='submit'>Save</button>
         </div>
       </form>
