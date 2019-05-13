@@ -92,7 +92,7 @@ class Form extends Component {
     e.preventDefault();
     const invalidFields = Object.keys(this.instances).filter((key) => {
       const component = this.instances[key];
-      component.onBlur();
+      component.validate();
       return !component.isValid;
     });
     const { onSubmit } = this.props;

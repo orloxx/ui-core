@@ -120,7 +120,7 @@ class Field extends Component {
   /**
    * @ignore
    */
-  onBlur() {
+  validate() {
     this.setState({
       isDirty: true,
       isValid: this.isValid,
@@ -178,7 +178,7 @@ class Field extends Component {
             type={type} id={id} name={name}
             placeholder={placeholder} title={placeholder}
             required={required} pattern={pattern}
-            onBlur={() => this.onBlur()} />
+            onBlur={() => this.validate()} />
           {this.renderValidationIcon()}
         </div>
         {this.renderValidationMessages()}

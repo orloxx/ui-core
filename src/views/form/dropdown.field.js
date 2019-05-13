@@ -75,7 +75,7 @@ class DropdownField extends Field {
    */
   componentDidUpdate(prevProps, prevState) {
     if (prevState.isFocused && !this.state.isFocused) {
-      this.onBlur();
+      this.validate();
     }
   }
 

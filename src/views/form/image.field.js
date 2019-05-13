@@ -92,7 +92,7 @@ class ImageField extends Field {
       ImageUtils.getFileData(file)
         .then((imageData) => {
           this.setState({ imageData });
-          this.onBlur();
+          this.validate();
         });
     }
   }
@@ -111,7 +111,7 @@ class ImageField extends Field {
             type='file'
             required={this.props.required}
             accept='image/*'
-            onBlur={() => this.onBlur()}
+            onBlur={() => this.validate()}
             onChange={e => this.setImage(e)}
           />
           <label className='button field__label imageField__label' htmlFor={id}>

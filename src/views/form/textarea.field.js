@@ -103,7 +103,7 @@ class TextareaField extends Field {
         limitReached: Math.max(0, current.value.length - this.props.maxChars),
       });
     }
-    this.onBlur();
+    this.validate();
   }
 
   /**
@@ -167,7 +167,7 @@ class TextareaField extends Field {
             id={id} name={name}
             required={required}
             onChange={() => this.onChange()}
-            onBlur={() => this.onBlur()} />
+            onBlur={() => this.validate()} />
           {this.renderValidationIcon()}
           {this.renderCharLoader()}
         </div>
