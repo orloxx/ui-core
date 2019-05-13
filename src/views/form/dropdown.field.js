@@ -116,6 +116,7 @@ class DropdownField extends Field {
         <li className='dropdown__item' key={option.id}>
           <a
             className='dropdown__link' href='' title={option.label}
+            onTouchEnd={e => this.onSelect(e, option)}
             onClick={e => this.onSelect(e, option)}>{option.label}</a>
         </li>
       ));
