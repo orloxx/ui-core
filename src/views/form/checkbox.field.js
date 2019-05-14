@@ -23,9 +23,11 @@ class CheckboxField extends Field {
   /**
    *
    * @type {Object}
+   * @property {Array<HTMLOptionElement>} children - The checkbox HTML text
    * @property {Boolean} [checked] - If the checkbox is checked or not
    */
   static propTypes = Object.assign({}, Field.propTypes, {
+    children: PropTypes.array.isRequired,
     checked: PropTypes.bool,
   });
 

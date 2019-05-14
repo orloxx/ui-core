@@ -20,7 +20,7 @@ import { faCircle, faDotCircle } from '@fortawesome/free-solid-svg-icons';
  *   <option value='2'>Mrs.</option>
  * </RadioField>
  */
-class CheckboxField extends Field {
+class RadioField extends Field {
   /**
    * @type {Object}
    * @property {Array<HTMLOptionElement>} children - Elements to show in the radiobutton list
@@ -109,6 +109,9 @@ class CheckboxField extends Field {
     return (<FA icon={faCircle} />);
   }
 
+  /**
+   * @ignore
+   */
   renderInputs() {
     const { name, required } = this.props;
     return this.props.children.map(child => (
@@ -146,4 +149,4 @@ class CheckboxField extends Field {
   }
 }
 
-export default CheckboxField;
+export default RadioField;
