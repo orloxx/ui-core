@@ -1,0 +1,78 @@
+$s-field-padding: 10px;
+
+.field {
+  $this: &;
+
+  position: relative;
+
+  &,
+  &__label,
+  &__labelSpan {
+    display: block;
+  }
+
+  & {
+    margin-bottom: 15px;
+  }
+
+  &__label {
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    margin: 0;
+    padding: $s-field-padding
+      ($s-field-padding + $s-field-icon-size)
+      $s-field-padding
+      $s-field-padding;
+    border: 1px solid $c-border;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%;
+    display: block;
+
+    &:hover,
+    &:focus {
+      border-color: $c-action;
+    }
+
+    #{$this}--error & {
+      border-color: $c-error;
+    }
+
+    &Wrapper {
+      position: relative;
+      margin-bottom: 3px;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    width: $s-field-icon-size;
+    height: $s-field-icon-size;
+    top: calc(50% - #{($s-field-icon-size / 2)});
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $c-action;
+    font-size: 1.2rem;
+
+    &--valid {
+      color: $c-ok;
+    }
+
+    &--invalid {
+      color: $c-error;
+    }
+  }
+
+  &__msg {
+    font-style: italic;
+    font-size: 0.9rem;
+
+    &--error {
+      color: $c-error;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.textarea {
+  &__input {
+    resize: none;
+    min-height: 100px;
+  }
+
+  &__loader {
+    transform: rotate(-90deg);
+
+    &Back {
+      color: $c-border;
+    }
+
+    &Front {
+      color: $c-action;
+
+      &--warning {
+        color: $c-warning;
+      }
+
+      &--error {
+        color: $c-error;
+      }
+    }
+  }
+}

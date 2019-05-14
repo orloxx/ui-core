@@ -1,44 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon as FA } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { ImageUtils } from '../../utils';
+import Field from './field.view';
 
 /**
  * Controls an input file element that shows a preview of the selected image
  *
  * #### SCSS import:
  * ```
- * @import "~@orloxx/ui-core/scss/image-uploader";
+ * @import "~@orloxx/ui-core/scss/form/image-field";
  * ```
  *
+ * @extends {Field}
+ *
  * @example
- * <ImageUploader id='image' name='image' />
+ * <ImageField id='image' name='image' label='Choose from computer' />
  */
-class ImageUploader extends Component {
+class ImageField extends Field {
   /**
    * @type {Object}
-   * @property {String} id - The same `id` added to the input field
-   * @property {String} name - The same `name` added to the input field
-   * @property {String} [caption] - Caption text added at the bottom of the field
    * @property {String} [src] - Default image path when nothing is selected
    * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted
    */
-  static propTypes = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    caption: PropTypes.string,
+  static propTypes = Object.assign({}, Field.propTypes, {
     src: PropTypes.string,
     fileSize: PropTypes.number,
-  };
+  });
 
   /**
    * @ignore
    */
-  static defaultProps = {
+  static defaultProps = Object.assign({}, Field.defaultProps, {
     src: '',
     fileSize: 256,
-  };
+  });
 
   /**
    * @ignore
@@ -49,16 +46,16 @@ class ImageUploader extends Component {
     /**
      * @ignore
      */
-    this.state = {
+    this.state = Object.assign({}, this.state, {
       imageData: null,
-    };
+    });
   }
 
   /**
    * @ignore
    */
   get hasImageClassName() {
-    return this.imageSrc ? 'imageUploader--hasImage' : '';
+    return this.imageSrc ? 'imageField--hasImage' : '';
   }
 
   /**
@@ -92,7 +89,11 @@ class ImageUploader extends Component {
    */
   setImageData(file) {
     if (file) {
-      ImageUtils.getFileData(file).then(imageData => this.setState({ imageData }));
+      ImageUtils.getFileData(file)
+        .then((imageData) => {
+          this.setState({ imageData });
+          this.validate();
+        });
     }
   }
 
@@ -100,30 +101,38 @@ class ImageUploader extends Component {
    * @ignore
    */
   render() {
-    const { id, name, caption } = this.props;
+    const { id, name, label } = this.props;
     return (
-      <div className={`imageUploader ${this.hasImageClassName}`}>
-        <label className='button imageUploader__label' htmlFor={id}>
-          <img
-            className='imageUploader__image'
-            src={this.imageSrc}
-            alt='Upload'
-          />
-          <input type='hidden' name={name} value={this.imageSrc} />
+      <div className={`field imageField ${this.hasImageClassName}`}>
+        <div className='field__inputWrapper'>
           <input
-            className='imageUploader__input'
-            id={id}
-            name='image-uploader-file'
+            className='field__input imageField__input hideAccessible'
+            id={id} name={name}
             type='file'
+            required={this.props.required}
             accept='image/*'
+            onBlur={() => this.validate()}
             onChange={e => this.setImage(e)}
           />
-          <FA className='imageUploader__noImageIcon' icon={faUpload} />
-          {caption || 'Upload image'}
-        </label>
+          <label className='button field__label imageField__label' htmlFor={id}>
+            <img
+              className='imageField__image'
+              src={this.imageSrc}
+              alt='Upload'
+            />
+            <input
+              type='hidden' id={`${id}-value`} name={`${name}-value`}
+              ref={this.input} value={this.imageSrc} />
+            <FA className='imageField__noImageIcon' icon={faUpload} />
+            <span className='field__labelSpan imageField__labelSpan'>
+              {label} {this.requiredLabel}
+            </span>
+          </label>
+        </div>
+        {this.renderValidationMessages()}
       </div>
     );
   }
 }
 
-export default ImageUploader;
+export default ImageField;

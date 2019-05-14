@@ -2,5 +2,14 @@
 
 @include all;
 
-@import "~@orloxx/ui-core/scss/image-uploader";
+@import "~@orloxx/ui-core/scss/form/field";
+@import "~@orloxx/ui-core/scss/form/checkbox-field";
+@import "~@orloxx/ui-core/scss/form/dropdown-field";
+@import "~@orloxx/ui-core/scss/form/image-field";
+@import "~@orloxx/ui-core/scss/form/radio-field";
+@import "~@orloxx/ui-core/scss/form/textarea-field";
 @import "~@orloxx/ui-core/scss/page-control";
+
+.form {
+  max-width: 625px;
+}
