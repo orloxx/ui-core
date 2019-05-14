@@ -15,7 +15,7 @@ import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
  * @extends {Field}
  *
  * @example
- * <CheckboxField id='policy' name='policy' label='Policy' />
+ * <CheckboxField id='policy' name='policy' label='Policy'>
  *   Please accept the <a href="/policy">policy</a> to continue
  * </CheckboxField>
  */
@@ -104,7 +104,8 @@ class CheckboxField extends Field {
             id={id} name={name}
             title={label} required={required}
             checked={this.state.isChecked}
-            onChange={() => this.onChange()} />
+            onChange={() => this.onChange()}
+            onBlur={() => this.validate()} />
           <div className='checkbox__wrapper'>
             <div className='checkbox__icon'>{this.renderCheckbox()}</div>
             <div className='checkbox__text'>{this.label}</div>

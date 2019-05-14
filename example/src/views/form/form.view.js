@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Field, ImageField, EmailField, DropdownField, TextareaField, Form, CheckboxField,
+  Field, ImageField, EmailField, DropdownField,
+  TextareaField, Form, CheckboxField, RadioField,
 } from '@orloxx/ui-core';
 
 export class FormView extends Component {
@@ -10,6 +11,11 @@ export class FormView extends Component {
         <h1>Form</h1>
         <Form action='https://someaction.example.com/' onSubmit={() => console.log('SUBMIT!')}>
           <ImageField id='avatar' name='avatar' label='Avatar' />
+          <RadioField id='salutation-1' name='salutation' label='Salutation' required>
+            <option value='1'>Mr.</option>
+            <option value='2'>Mrs.</option>
+            <option value='3'>Miss.</option>
+          </RadioField>
           <Field id='username' name='username'
                  label='Username' placeholder='Enter your username'
                  suggestion='Only accepts letters and numbers'
