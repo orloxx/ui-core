@@ -116,7 +116,7 @@ class CheckboxField extends Field {
         className='radio__label' key={this.getRadioId(child)}
         htmlFor={this.getRadioId(child)}>
         <input
-          className='field__input hideAccessible' ref={this.input}
+          className='field__input radio__input hideAccessible'
           type='radio' id={this.getRadioId(child)} name={name}
           title={this.getLabel(child.props.children)} required={required}
           onChange={() => this.selectRadio(child)}

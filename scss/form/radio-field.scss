@@ -4,6 +4,10 @@
     display: inline-block;
   }
 
+  &__input {
+    width: auto;
+  }
+
   &__wrapper {
     display: flex;
     align-items: center;
