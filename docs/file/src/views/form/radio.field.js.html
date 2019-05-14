@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">Navigation | @orloxx/ui-core</title>
+  <title data-ice="title">src/views/form/radio.field.js | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -59,174 +59,160 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Navigation from &apos;<span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">@orloxx/ui-core/src/views/navigation/navigation.view.js</a></span>&apos;</code></pre></div>
-  <span data-ice="access">public</span>
-  <span data-ice="kind">class</span>
-  
-  
-  
-  <span data-ice="source">| <span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">source</a></span></span>
-</div>
+<div class="content" data-ice="content"><h1 data-ice="title">src/views/form/radio.field.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import PropTypes from &apos;prop-types&apos;;
+import Field from &apos;./field.view&apos;;
+import { FontAwesomeIcon as FA } from &apos;@fortawesome/react-fontawesome&apos;;
+import { faCircle, faDotCircle } from &apos;@fortawesome/free-solid-svg-icons&apos;;
 
-<div class="self-detail detail">
-  <h1 data-ice="name">Navigation</h1>
+/**
+ * Controls input of type radio
+ *
+ * #### SCSS Import
+ * ```
+ * @import &quot;~@orloxx/ui-core/scss/form/radio-field&quot;;
+ * ```
+ *
+ * @extends {Field}
+ *
+ * @example
+ * &lt;RadioField id=&apos;salutation-1&apos; name=&apos;salutation&apos; label=&apos;Salutation&apos;&gt;
+ *   &lt;option value=&apos;1&apos; selected&gt;Mr.&lt;/option&gt;
+ *   &lt;option value=&apos;2&apos;&gt;Mrs.&lt;/option&gt;
+ * &lt;/RadioField&gt;
+ */
+class RadioField extends Field {
+  /**
+   * @type {Object}
+   * @property {Array&lt;HTMLOptionElement&gt;} children - Elements to show in the radiobutton list
+   */
+  static propTypes = Object.assign({}, Field.propTypes, {
+    children: PropTypes.array.isRequired,
+  });
 
-  
+  /**
+   * @ignore
+   */
+  static defaultProps = Object.assign({}, Field.defaultProps, {
+    children: [],
+  });
 
-  
-  
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; Navigation</div></div>
-  
-  
-  
-  
-  
-  
+  /**
+   * @ignore
+   */
+  constructor(props) {
+    super(props);
 
-  
-  
-  <div class="description" data-ice="description"><p>Controls the navigation bar.
-Uses the same routes object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
-<h4 id="scss-import-">SCSS import:</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/navigation&quot;;</code>
-</code></pre></div>
-  
+    /**
+     * @ignore
+     */
+    this.state = {
+      selectedId: this.getRadioId(props.children.find(child =&gt; child.props.selected)),
+    };
+  }
 
-  
+  /**
+   * @ignore
+   */
+  get isValid() {
+    const { required } = this.props;
+    if (required) {
+      return !!this.state.selectedId;
+    }
+    return true;
+  }
 
-  <div data-ice="exampleDocs">
-    <h4>Example:</h4>
-    
-  <div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">const Nav = withRoute(Navigation);</code></pre>
-    </div>
-<div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;Nav routes={routes} /&gt;</code></pre>
-    </div>
-</div>
+  /**
+   * @ignore
+   */
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selectedId !== this.state.selectedId) {
+      this.validate();
+    }
+  }
 
-  
+  /**
+   * @ignore
+   */
+  getLabel(children) {
+    const { label } = this.props;
+    return children.length ? children : label;
+  }
 
-  
-</div>
+  /**
+   * @ignore
+   */
+  getRadioId(child) {
+    const { id } = this.props;
+    if (child) {
+      return `${id}-${child.props.value}`;
+    }
+    return null;
+  }
 
-<div data-ice="staticMemberSummary"><h2>Static Member Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Static Public Members</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      <span data-ice="static">static</span>
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
+  /**
+   * @ignore
+   */
+  selectRadio(radio) {
+    this.setState({
+      selectedId: this.getRadioId(radio),
+    });
+  }
 
+  /**
+   * @ignore
+   */
+  renderRadioButton(radio) {
+    const { selectedId } = this.state;
+    if (selectedId === this.getRadioId(radio)) {
+      return (&lt;FA icon={faDotCircle} /&gt;);
+    }
+    return (&lt;FA icon={faCircle} /&gt;);
+  }
 
+  /**
+   * @ignore
+   */
+  renderInputs() {
+    const { name, required } = this.props;
+    return this.props.children.map(child =&gt; (
+      &lt;label
+        className=&apos;radio__label&apos; key={this.getRadioId(child)}
+        htmlFor={this.getRadioId(child)}&gt;
+        &lt;input
+          className=&apos;field__input radio__input hideAccessible&apos;
+          type=&apos;radio&apos; id={this.getRadioId(child)} name={name}
+          title={this.getLabel(child.props.children)} required={required}
+          onChange={() =&gt; this.selectRadio(child)}
+          onBlur={() =&gt; this.validate()} /&gt;
+        &lt;div className=&apos;radio__wrapper&apos;&gt;
+          &lt;div className=&apos;radio__icon&apos;&gt;{this.renderRadioButton(child)}&lt;/div&gt;
+          &lt;div className=&apos;radio__text&apos;&gt;{this.getLabel(child.props.children)}&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/label&gt;
+    ));
+  }
 
+  /**
+   * @ignore
+   */
+  render() {
+    const { label } = this.props;
+    return (
+      &lt;div className={`field radio ${this.fieldClasses}`}&gt;
+        &lt;label className=&apos;field__label&apos;&gt;{label}&lt;/label&gt;
+        {this.renderInputs()}
+        &lt;div className=&apos;radio__validation&apos;&gt;
+          {this.renderValidationMessages()}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+}
 
-
-
-
-<div data-ice="staticMemberDetails"><h2 data-ice="title">Static Public Members</h2>
-
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-member-propTypes">
-    <span class="access" data-ice="access">public</span>
-    <span data-ice="static">static</span>
-    
-    
-    
-    
-    <span class="code" data-ice="name">propTypes</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber33">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Properties:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">location</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Comes from the <span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span> function</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">routes</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="typedef/index.html#static-typedef-Route">Route</a></span>&gt;</td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Same <span><a href="typedef/index.html#static-typedef-Route">Route</a></span> object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-</div>
-
-
-
+export default RadioField;
+</code></pre>
 
 </div>
 

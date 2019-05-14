@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">Navigation | @orloxx/ui-core</title>
+  <title data-ice="title">src/views/form/dropdown.field.js | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -59,174 +59,178 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Navigation from &apos;<span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">@orloxx/ui-core/src/views/navigation/navigation.view.js</a></span>&apos;</code></pre></div>
-  <span data-ice="access">public</span>
-  <span data-ice="kind">class</span>
-  
-  
-  
-  <span data-ice="source">| <span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">source</a></span></span>
-</div>
+<div class="content" data-ice="content"><h1 data-ice="title">src/views/form/dropdown.field.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import { FontAwesomeIcon as FA } from &apos;@fortawesome/react-fontawesome&apos;;
+import { faChevronDown, faChevronUp } from &apos;@fortawesome/free-solid-svg-icons&apos;;
+import Field from &apos;./field.view&apos;;
+import PropTypes from &apos;prop-types&apos;;
 
-<div class="self-detail detail">
-  <h1 data-ice="name">Navigation</h1>
+/**
+ * @external {HTMLOptionElement} https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement
+ */
 
-  
+/**
+ * Controls a dropdown type of input
+ *
+ * #### SCSS import:
+ * ```
+ * @import &quot;~@orloxx/ui-core/scss/form/dropdown-field&quot;;
+ * ```
+ *
+ * @extends {Field}
+ *
+ * @example
+ * &lt;DropdownField id=&apos;sex&apos; name=&apos;sex&apos; label=&apos;Sex&apos;&gt;
+ *   &lt;option value=&apos;M&apos;&gt;Male&lt;/option&gt;
+ *   &lt;option value=&apos;F&apos;&gt;Female&lt;/option&gt;
+ * &lt;/DropdownField&gt;
+ */
+class DropdownField extends Field {
+  /**
+   * @type {Object}
+   * @property {Array&lt;HTMLOptionElement&gt;} children - Elements to show in the dropdown list
+   */
+  static propTypes = Object.assign({}, Field.propTypes, {
+    children: PropTypes.array.isRequired,
+  });
 
-  
-  
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; Navigation</div></div>
-  
-  
-  
-  
-  
-  
+  /**
+   * @ignore
+   */
+  static defaultProps = Object.assign({}, Field.defaultProps, {
+    children: [],
+  });
 
-  
-  
-  <div class="description" data-ice="description"><p>Controls the navigation bar.
-Uses the same routes object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
-<h4 id="scss-import-">SCSS import:</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/navigation&quot;;</code>
-</code></pre></div>
-  
+  /**
+   * @ignore
+   */
+  constructor(props) {
+    super(props);
 
-  
+    /**
+     * @ignore
+     */
+    this.state = Object.assign({}, this.state, {
+      isFocused: false,
+      options: [],
+      selectedOption: {
+        id: &apos;&apos;, label: &apos;&apos;,
+      },
+    });
+  }
 
-  <div data-ice="exampleDocs">
-    <h4>Example:</h4>
-    
-  <div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">const Nav = withRoute(Navigation);</code></pre>
-    </div>
-<div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;Nav routes={routes} /&gt;</code></pre>
-    </div>
-</div>
+  /**
+   * @ignore
+   */
+  componentWillMount() {
+    const options = this.props.children.map(el =&gt; ({
+      id: el.props.value,
+      label: el.props.children,
+      selected: el.props.selected,
+    }));
+    const { selectedOption } = this.state;
+    this.setState({
+      options,
+      selectedOption: options.find(el =&gt; el.selected) || selectedOption,
+    });
+  }
 
-  
+  /**
+   * @ignore
+   */
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isFocused &amp;&amp; !this.state.isFocused) {
+      this.validate();
+    }
+  }
 
-  
-</div>
+  /**
+   * @ignore
+   */
+  onSelect(e, option) {
+    e.preventDefault();
+    this.setState({ selectedOption: option, isFocused: false });
+  }
 
-<div data-ice="staticMemberSummary"><h2>Static Member Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Static Public Members</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      <span data-ice="static">static</span>
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
+  /**
+   * @ignore
+   */
+  handleFocus({ relatedTarget }) {
+    const isFocused = relatedTarget &amp;&amp;
+      (relatedTarget.classList.contains(&apos;dropdown__link&apos;) ||
+        relatedTarget.classList.contains(&apos;dropdown__input&apos;) ||
+        relatedTarget.classList.contains(&apos;field__icon&apos;));
+    this.setState({ isFocused: !!isFocused });
+  }
 
+  /**
+   * @ignore
+   */
+  renderIcon() {
+    return this.state.isFocused
+      ? (&lt;FA icon={faChevronUp} /&gt;)
+      : (&lt;FA icon={faChevronDown} /&gt;);
+  }
 
+  /**
+   * @ignore
+   */
+  renderOptions() {
+    if (this.state.isFocused) {
+      return this.state.options.map(option =&gt; (
+        &lt;li className=&apos;dropdown__item&apos; key={option.id}&gt;
+          &lt;a
+            className=&apos;dropdown__link&apos; href=&apos;&apos; title={option.label}
+            onTouchEnd={e =&gt; this.onSelect(e, option)}
+            onClick={e =&gt; this.onSelect(e, option)}&gt;{option.label}&lt;/a&gt;
+        &lt;/li&gt;
+      ));
+    }
+    return null;
+  }
 
+  /**
+   * @ignore
+   */
+  render() {
+    const { id, label, name, placeholder, required } = this.props;
+    const { selectedOption, isFocused } = this.state;
+    return (
+      &lt;div className={`field dropdown ${this.fieldClasses}`} onBlur={e =&gt; this.handleFocus(e)}&gt;
+        &lt;label className=&apos;field__label&apos; htmlFor={id}&gt;
+          {label} {this.requiredLabel}
+        &lt;/label&gt;
+        &lt;div className=&apos;field__inputWrapper&apos;&gt;
+          &lt;input
+            type=&apos;hidden&apos; id={`${id}-value`}
+            name={`${name}-value`} value={selectedOption.id} /&gt;
+          &lt;input
+            className=&apos;field__input dropdown__input&apos; type=&apos;text&apos;
+            id={id} name={name} ref={this.input}
+            placeholder={placeholder} title={placeholder}
+            required={required}
+            value={selectedOption.label} readOnly
+            onFocus={() =&gt; this.setState({ isFocused: true })} /&gt;
+          &lt;button
+            type=&apos;button&apos; className=&apos;field__icon&apos;
+            title={`Toggle ${label} dropdown`}
+            onClick={() =&gt; this.setState({ isFocused: !isFocused })}&gt;
+            {this.renderIcon()}
+          &lt;/button&gt;
+          {this.renderValidationIcon()}
+        &lt;/div&gt;
+        &lt;ul className=&apos;dropdown__list&apos;&gt;
+          {this.renderOptions()}
+        &lt;/ul&gt;
+        {this.renderValidationMessages()}
+      &lt;/div&gt;
+    );
+  }
+}
 
-
-
-
-<div data-ice="staticMemberDetails"><h2 data-ice="title">Static Public Members</h2>
-
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-member-propTypes">
-    <span class="access" data-ice="access">public</span>
-    <span data-ice="static">static</span>
-    
-    
-    
-    
-    <span class="code" data-ice="name">propTypes</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber33">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Properties:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">location</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Comes from the <span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span> function</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">routes</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="typedef/index.html#static-typedef-Route">Route</a></span>&gt;</td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Same <span><a href="typedef/index.html#static-typedef-Route">Route</a></span> object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-</div>
-
-
-
+export default DropdownField;
+</code></pre>
 
 </div>
 

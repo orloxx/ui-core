@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">Navigation | @orloxx/ui-core</title>
+  <title data-ice="title">RadioField | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -60,23 +60,23 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Navigation from &apos;<span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">@orloxx/ui-core/src/views/navigation/navigation.view.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import RadioField from &apos;<span><a href="file/src/views/form/radio.field.js.html#lineNumber23">@orloxx/ui-core/src/views/form/radio.field.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/views/form/radio.field.js.html#lineNumber23">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
-  <h1 data-ice="name">Navigation</h1>
+  <h1 data-ice="name">RadioField</h1>
 
   
 
   
   
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; Navigation</div></div>
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; <span><a href="class/src/views/form/field.view.js~Field.html">Field</a></span> &#x2192; RadioField</div></div>
   
   
   
@@ -86,9 +86,8 @@
 
   
   
-  <div class="description" data-ice="description"><p>Controls the navigation bar.
-Uses the same routes object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
-<h4 id="scss-import-">SCSS import:</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/navigation&quot;;</code>
+  <div class="description" data-ice="description"><p>Controls input of type radio</p>
+<h4 id="scss-import">SCSS Import</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/form/radio-field&quot;;</code>
 </code></pre></div>
   
 
@@ -99,11 +98,10 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
     
   <div class="example-doc" data-ice="exampleDoc">
       
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">const Nav = withRoute(Navigation);</code></pre>
-    </div>
-<div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;Nav routes={routes} /&gt;</code></pre>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;RadioField id=&apos;salutation-1&apos; name=&apos;salutation&apos; label=&apos;Salutation&apos;&gt;
+  &lt;option value=&apos;1&apos; selected&gt;Mr.&lt;/option&gt;
+  &lt;option value=&apos;2&apos;&gt;Mrs.&lt;/option&gt;
+&lt;/RadioField&gt;</code></pre>
     </div>
 </div>
 
@@ -130,7 +128,7 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/views/form/radio.field.js~RadioField.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
         </p>
       </div>
       <div>
@@ -152,7 +150,41 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
 
 
 
-
+<div class="inherited-summary" data-ice="inheritedSummary"><h2>Inherited Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3"><span class="toggle closed"></span> From class <span><a href="class/src/views/form/field.view.js~Field.html">Field</a></span></td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      <span data-ice="static">static</span>
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/views/form/field.view.js~Field.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
 
 <div data-ice="staticMemberDetails"><h2 data-ice="title">Static Public Members</h2>
 
@@ -168,7 +200,7 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber33">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/views/form/radio.field.js.html#lineNumber28">source</a></span></span>
     </span>
   </h3>
 
@@ -177,7 +209,7 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
   
   
 
-  
+  <div data-ice="override"><h4>Override:</h4><span><a href="class/src/views/form/field.view.js~Field.html#static-member-propTypes">Field#propTypes</a></span></div>
 
   <div data-ice="properties"><div data-ice="properties">
   <h4 data-ice="title">Properties:</h4>
@@ -188,17 +220,10 @@ Uses the same routes object defined in <span><a href="class/src/views/page-contr
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">location</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+      <td data-ice="name" class="code" data-depth="0">children</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLOptionElement">HTMLOptionElement</a></span>&gt;</td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Comes from the <span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span> function</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">routes</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="typedef/index.html#static-typedef-Route">Route</a></span>&gt;</td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Same <span><a href="typedef/index.html#static-typedef-Route">Route</a></span> object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
+      <td data-ice="description"><p>Elements to show in the radiobutton list</p>
 </td>
     </tr>
 </tbody>

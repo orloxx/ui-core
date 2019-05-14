@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">Navigation | @orloxx/ui-core</title>
+  <title data-ice="title">src/views/form/image.field.js | @orloxx/ui-core</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -59,174 +59,146 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Navigation from &apos;<span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">@orloxx/ui-core/src/views/navigation/navigation.view.js</a></span>&apos;</code></pre></div>
-  <span data-ice="access">public</span>
-  <span data-ice="kind">class</span>
-  
-  
-  
-  <span data-ice="source">| <span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber26">source</a></span></span>
-</div>
+<div class="content" data-ice="content"><h1 data-ice="title">src/views/form/image.field.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import PropTypes from &apos;prop-types&apos;;
+import { FontAwesomeIcon as FA } from &apos;@fortawesome/react-fontawesome&apos;;
+import { faUpload } from &apos;@fortawesome/free-solid-svg-icons&apos;;
+import { ImageUtils } from &apos;../../utils&apos;;
+import Field from &apos;./field.view&apos;;
 
-<div class="self-detail detail">
-  <h1 data-ice="name">Navigation</h1>
+/**
+ * Controls an input file element that shows a preview of the selected image
+ *
+ * #### SCSS import:
+ * ```
+ * @import &quot;~@orloxx/ui-core/scss/form/image-field&quot;;
+ * ```
+ *
+ * @extends {Field}
+ *
+ * @example
+ * &lt;ImageField id=&apos;image&apos; name=&apos;image&apos; label=&apos;Choose from computer&apos; /&gt;
+ */
+class ImageField extends Field {
+  /**
+   * @type {Object}
+   * @property {String} [src] - Default image path when nothing is selected
+   * @property {number} [fileSize=256Kb] - Maximum file size (Kb) accepted
+   */
+  static propTypes = Object.assign({}, Field.propTypes, {
+    src: PropTypes.string,
+    fileSize: PropTypes.number,
+  });
 
-  
+  /**
+   * @ignore
+   */
+  static defaultProps = Object.assign({}, Field.defaultProps, {
+    src: &apos;&apos;,
+    fileSize: 256,
+  });
 
-  
-  
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span><a href="https://reactjs.org/docs/react-component.html">react~Component</a></span> &#x2192; Navigation</div></div>
-  
-  
-  
-  
-  
-  
+  /**
+   * @ignore
+   */
+  constructor(props) {
+    super(props);
 
-  
-  
-  <div class="description" data-ice="description"><p>Controls the navigation bar.
-Uses the same routes object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
-<h4 id="scss-import-">SCSS import:</h4><pre><code><code class="source-code prettyprint">@import &quot;~@orloxx/ui-core/scss/navigation&quot;;</code>
-</code></pre></div>
-  
+    /**
+     * @ignore
+     */
+    this.state = Object.assign({}, this.state, {
+      imageData: null,
+    });
+  }
 
-  
+  /**
+   * @ignore
+   */
+  get hasImageClassName() {
+    return this.imageSrc ? &apos;imageField--hasImage&apos; : &apos;&apos;;
+  }
 
-  <div data-ice="exampleDocs">
-    <h4>Example:</h4>
-    
-  <div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">const Nav = withRoute(Navigation);</code></pre>
-    </div>
-<div class="example-doc" data-ice="exampleDoc">
-      
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">&lt;Nav routes={routes} /&gt;</code></pre>
-    </div>
-</div>
+  /**
+   * @ignore
+   */
+  get imageSrc() {
+    const { imageData } = this.state;
+    const { src } = this.props;
+    return imageData || src;
+  }
 
-  
+  /**
+   * @ignore
+   */
+  setImage(e) {
+    const file = e.target.files[0];
+    const maxKb = this.props.fileSize;
+    const maxSize = maxKb * 1024;
 
-  
-</div>
+    if (file &amp;&amp; file.size &gt; maxSize) {
+      alert(`File cannot be greater than ${maxKb}Kb. Image will be removed.`);
+      e.target.value = null;
+      this.setState({ imageData: null });
+      return;
+    }
+    this.setImageData(file);
+  }
 
-<div data-ice="staticMemberSummary"><h2>Static Member Summary</h2><table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Static Public Members</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      <span data-ice="static">static</span>
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/views/navigation/navigation.view.js~Navigation.html#static-member-propTypes">propTypes</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-</div>
+  /**
+   * @ignore
+   */
+  setImageData(file) {
+    if (file) {
+      ImageUtils.getFileData(file)
+        .then((imageData) =&gt; {
+          this.setState({ imageData });
+          this.validate();
+        });
+    }
+  }
 
+  /**
+   * @ignore
+   */
+  render() {
+    const { id, name, label } = this.props;
+    return (
+      &lt;div className={`field imageField ${this.hasImageClassName}`}&gt;
+        &lt;div className=&apos;field__inputWrapper&apos;&gt;
+          &lt;input
+            className=&apos;field__input imageField__input hideAccessible&apos;
+            id={id} name={name}
+            type=&apos;file&apos;
+            required={this.props.required}
+            accept=&apos;image/*&apos;
+            onBlur={() =&gt; this.validate()}
+            onChange={e =&gt; this.setImage(e)}
+          /&gt;
+          &lt;label className=&apos;button field__label imageField__label&apos; htmlFor={id}&gt;
+            &lt;img
+              className=&apos;imageField__image&apos;
+              src={this.imageSrc}
+              alt=&apos;Upload&apos;
+            /&gt;
+            &lt;input
+              type=&apos;hidden&apos; id={`${id}-value`} name={`${name}-value`}
+              ref={this.input} value={this.imageSrc} /&gt;
+            &lt;FA className=&apos;imageField__noImageIcon&apos; icon={faUpload} /&gt;
+            &lt;span className=&apos;field__labelSpan imageField__labelSpan&apos;&gt;
+              {label} {this.requiredLabel}
+            &lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/div&gt;
+        {this.renderValidationMessages()}
+      &lt;/div&gt;
+    );
+  }
+}
 
-
-
-
-
-
-<div data-ice="staticMemberDetails"><h2 data-ice="title">Static Public Members</h2>
-
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-member-propTypes">
-    <span class="access" data-ice="access">public</span>
-    <span data-ice="static">static</span>
-    
-    
-    
-    
-    <span class="code" data-ice="name">propTypes</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/views/navigation/navigation.view.js.html#lineNumber33">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Properties:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">location</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Comes from the <span><a href="https://reacttraining.com/react-router/web/api/withRouter">react-router-dom~withRouter</a></span> function</p>
-</td>
-    </tr>
-<tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">routes</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></span>&lt;<span><a href="typedef/index.html#static-typedef-Route">Route</a></span>&gt;</td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Same <span><a href="typedef/index.html#static-typedef-Route">Route</a></span> object defined in <span><a href="class/src/views/page-control/page-control.view.js~PageControl.html">PageControl</a></span></p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-</div>
-
-
-
+export default ImageField;
+</code></pre>
 
 </div>
 
